@@ -11,6 +11,7 @@ class ForumsCard extends Component {
             {estates.map((estate, index) => (
                 <section  key = {estate.id} className= "index-forumscard-estate">
                     <Link to = {"/estate/" + estate.name} className="index-forumscard-estate-item">
+                    <img src= {estate.img} alt={estate.name}/>
                     {estate.name}
                     </Link>
                     <section className="index-forumscard-houses">

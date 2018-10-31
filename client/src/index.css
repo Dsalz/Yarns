@@ -1,5 +1,5 @@
 body{
-  border: 2px solid #ff9a1a;
+  border: 2px solid #ff7f00;
   border-radius: 5px;
 }
 
@@ -11,8 +11,9 @@ body{
   padding: 25px 5%;
   top: 0;
   left: 0;
-  box-shadow: 1px 4px 4px -5px rgba(0,0,0, .5);
-  border: 2px solid #ff9a1a;
+  z-index: 1000;
+  /* box-shadow: 1px 4px 4px -5px rgba(0,0,0, .5); */
+  border: 2px solid #ff7f00;
   border-bottom: none;
 }
 
@@ -21,7 +22,7 @@ body{
 }
 
 .index-brand svg{
-  fill:#ff9a1a;
+  fill:#ff7f00;
   height: 50px;
   transform: scale(1.4);
   width: 50%;
@@ -35,18 +36,18 @@ body{
 .index-navlinks a{
   padding: 10px;
   text-transform: uppercase;
-  color: #ff9a1a !important;
+  color: #ff7f00 !important;
 }
 
 .index-login{
   background: #fff;
-  border: 2px solid #ff9a1a;
+  border: 2px solid #ff7f00;
   margin-right: 10px;
   border-radius: 5px;
 }
 
 .index-signup{
-  background: #000;
+  background: #001514;
   border: none;
   border-radius: 5px;
 }
@@ -70,19 +71,19 @@ body{
 }
 
 .index-header .cls-2{
-  fill:#ff9a1a;
+  fill:#ff7f00;
 }
 
 .index-forumscard{
   width: 70%;
-  background: #fff;
+  background: #fbfffe;
   box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
   margin: 10px auto;
 }
 
 .index-forumscard h3{
-  color: #ff9a1a;
-  border-bottom: 3px solid #ff9a1a;
+  color: #ff7f00;
+  border-bottom: 3px solid #ff7f00;
   width:fit-content;
   margin: 10px auto 5px;
   padding: 15px 0 2px;
@@ -95,11 +96,15 @@ body{
 
 .index-forumscard-estate-item{
   padding: 20px 0;
-  background: #000;
-  color: #ff9a1a !important ;
+  background: #001514;
+  color: #ff7f00 !important ;
   /* height: 60px; */
   width: 180px;
   text-align: center;
+}
+
+.index-forumscard-estate-item img{
+  margin: 0 10px 0 -15px;
 }
 
 .index-forumscard-houses{
@@ -111,7 +116,7 @@ body{
 }
 
 .index-forumscard-house{
-  color: #ff9a1a !important;
+  color: #ff7f00 !important;
   text-align: center;
   padding: 20px 10px;
 }
@@ -124,8 +129,8 @@ body{
 }
 
 .index-latestrooms h3{
-  color: #ff9a1a;
-  border-bottom: 3px solid #ff9a1a;
+  color: #ff7f00;
+  border-bottom: 3px solid #ff7f00;
   width:fit-content;
   margin: 10px auto 5px;
   padding: 15px 0 2px;
@@ -140,22 +145,22 @@ body{
 }
 
 .index-latestrooms-house{
-  background: #000;
+  background: #001514;
   width: 25%;
   padding: 10px 0;
-  color: #ff9a1a !important;
+  color: #ff7f00 !important;
 }
 
 .index-latestrooms-room{
-  background: #fff;
+  background: #fbfffe;
   width: 75%;
   padding: 10px 0;
-  color: #ff9a1a !important;
+  color: #ff7f00 !important;
 }
 
 .footer{
-  background: #ff9a1a;
-  color: #000;
+  background: #ff7f00;
+  color: #001514;
   text-align: center;
   width: 100%;
   height: 250px;
@@ -166,13 +171,13 @@ body{
 .footer svg{
   width: 80px;
   height: 80px;
-  fill: #000;
+  fill: #001514;
   margin-bottom: 30px;
 }
 
 .footer a{
-  border-bottom: 2px solid #000;
-  color: #000 !important
+  border-bottom: 2px solid #001514;
+  color: #001514 !important
 }
 
 .footer-copyright{
@@ -185,13 +190,13 @@ body{
 }
 
 .loginsection h2{
-  color: #000;
+  color: #001514;
   text-align: center;
   margin: 0 0 30px;
 }
 
 .loginsection-yarns{
-  color: #ff9a1a;
+  color: #ff7f00;
 }
 
 .loginsection form{
@@ -202,22 +207,120 @@ body{
 
 .loginsection input{
   border: none;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #001514;
   margin: 20px 10px;
   width: 80%;
 }
 
 .loginsection input:focus {
-  border-bottom: 2px solid #ff9a1a;
+  border-bottom: 2px solid #ff7f00;
   outline: none;
 }
 
 .loginsection button {
-  background: #000;
-  color: #ff9a1a;
+  background: #001514;
+  color: #ff7f00;
   margin: 20px auto;
   padding: 10px 15px;
   font-size:20px;
   border: none;
   border-radius: 5px;
 }
+
+.estatedetails-section {
+  padding-top: 150px;
+}
+
+.estatedetails-section-header{
+    display: flex;
+    padding: 10px 80px;
+    justify-content: space-between;
+}
+
+.estatedetails-section-header-estate{
+  width: fit-content;
+  height: 300px;
+  background-color: #ff7f00;
+  border-radius: 10px;
+  text-align: center;
+  padding: 180px 60px 0 15px;
+}
+
+.estatedetails-section-header-estate h2{
+  font-size: 50px;
+  color: #001514;
+}
+
+.estatedetails-section-header-houses {
+  width: 70%;
+  /* box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2); */
+  background: #fbfffe;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.estatedetails-section-header-houses h3{
+  width: 80%;
+  text-align: center;
+  border-bottom: 1px solid #ff7f00;
+  margin: 20px auto 15px;
+  font-size: 30px;
+  color: #ff7f00;
+}
+
+.estatedetails-section-header-houses-section {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10%;
+}
+
+.estatedetails-section-header-houses-section-link{
+  color: #ff7f00;
+  font-size: 20px;
+  padding: 10px 15px;
+}
+
+.estatedetails-section-rooms{
+  width: 100%;
+  margin-top: 40px;
+  position: relative;
+  text-align: center;
+  padding: 0 80px;
+}
+
+.estatedetails-section-rooms h2{
+  color: #ff7f00;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.estatedetails-section-rooms-toggle{
+  position: absolute;
+  top: 20px;
+  right: 80px;
+  display: flex;
+}
+
+.estatedetails-section-room-toggle-btn{
+  color: #ff7f00;
+  background: #001514;
+  border: none;
+}
+
+.estatedetails-section-room-toggle-btn-active{
+  background: #fbfffe;
+  color: #ff7f00;
+  border: none;
+}
+
+.estatedetails-section-room-item{
+  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+  padding: 10px 0;
+  text-align: center;
+  background: #fbfffe;
+  color: #ff7f00;
+  display: inline-block;
+  width: 100%;
+  margin: 10px 0;
+}
+
