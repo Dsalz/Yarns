@@ -1,6 +1,15 @@
+@font-face{
+  font-family: "YatraOne";
+  src: url('/fonts/YatraOne-Regular.ttf');
+  src: url('/fonts/YatraOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body{
   border: 2px solid #ff7f00;
   border-radius: 5px;
+  font-family: "YatraOne", sans-serif !important;
 }
 
 .index-nav{
@@ -105,6 +114,7 @@ body{
 
 .index-forumscard-estate-item img{
   margin: 0 10px 0 -15px;
+  width: 25px;
 }
 
 .index-forumscard-houses{
@@ -242,12 +252,17 @@ body{
   height: 300px;
   background-color: #ff7f00;
   border-radius: 10px;
-  text-align: center;
-  padding: 180px 60px 0 15px;
+  /* text-align: center; */
+  padding: 90px 60px 0 15px;
+}
+
+.estatedetails-section-header-estate img{
+  width: 120px;
+  margin-bottom: 10px;
 }
 
 .estatedetails-section-header-estate h2{
-  font-size: 50px;
+  font-size: 55px;
   color: #001514;
 }
 
@@ -265,7 +280,7 @@ body{
   border-bottom: 1px solid #ff7f00;
   margin: 20px auto 15px;
   font-size: 30px;
-  color: #ff7f00;
+  color: #ff7f00 !important;
 }
 
 .estatedetails-section-header-houses-section {
@@ -275,7 +290,7 @@ body{
 }
 
 .estatedetails-section-header-houses-section-link{
-  color: #ff7f00;
+  color: #ff7f00 !important;
   font-size: 20px;
   padding: 10px 15px;
 }
@@ -289,7 +304,7 @@ body{
 }
 
 .estatedetails-section-rooms h2{
-  color: #ff7f00;
+  color: #ff7f00 !important;
   font-size: 40px;
   margin-bottom: 30px;
 }
@@ -305,12 +320,14 @@ body{
   color: #ff7f00;
   background: #001514;
   border: none;
+  cursor: pointer;
 }
 
 .estatedetails-section-room-toggle-btn-active{
   background: #fbfffe;
   color: #ff7f00;
   border: none;
+  cursor: pointer;
 }
 
 .estatedetails-section-room-item{
@@ -318,7 +335,7 @@ body{
   padding: 10px 0;
   text-align: center;
   background: #fbfffe;
-  color: #ff7f00;
+  color: #ff7f00 !important;
   display: inline-block;
   width: 100%;
   margin: 10px 0;

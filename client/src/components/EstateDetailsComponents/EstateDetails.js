@@ -10,7 +10,7 @@ class EstateDetails extends Component{
             <section className="estatedetails-section">
                 <header className = "estatedetails-section-header">
                     <div className = "estatedetails-section-header-estate">
-                        <img src={estate.img} alt= {estate.name} /><br />
+                        <img src={estate.maxImg} alt= {estate.name} /><br />
                         <h2>
                             {estate.name}
                         </h2>
@@ -41,7 +41,7 @@ class EstateDetails extends Component{
                     </div>
 
                     { rooms.map( room => (
-                        <a className="estatedetails-section-room-item" href={"/room/" + room.name} key={room.id}>
+                        <a className="estatedetails-section-room-item" href={"/room/" + room.id} key={room.id}>
                             {room.name}
                         </a>
                     ))}
