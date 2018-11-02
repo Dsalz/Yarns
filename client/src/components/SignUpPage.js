@@ -37,6 +37,7 @@ class SignUpPage extends Component{
     }
 
     render(){
+        console.log(this.props);
         const { isLoggedIn } = this.props;
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">

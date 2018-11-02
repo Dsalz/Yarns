@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import{ Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
@@ -20,9 +21,9 @@ class EstateDetails extends Component{
 
                         <div className="estatedetails-section-header-houses-section">
                         { houses.map(house => (
-                            <a className="estatedetails-section-header-houses-section-link" href={"/house/" + house.name} key={house.name}>
+                            <Link className="estatedetails-section-header-houses-section-link" to ={"/house/" + house.name} key={house.name}>
                                 {house.name}
-                            </a>
+                            </Link>
                         ))}
                         </div>
                     </div>
@@ -41,9 +42,9 @@ class EstateDetails extends Component{
                     </div>
 
                     { rooms.map( room => (
-                        <a className="estatedetails-section-room-item" href={"/room/" + room.id} key={room.id}>
+                        <Link className="estatedetails-section-room-item" to={"/room/" + room.id} key={room.id}>
                             {room.name}
-                        </a>
+                        </Link>
                     ))}
 
 

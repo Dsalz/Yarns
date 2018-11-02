@@ -17,7 +17,7 @@ const SignedInLinks = ({ user, logout }) =>{
             </button>
 
             <button className = "index-logout">      
-                        <a href="#" onClick = {logout}to = '/notifications'>
+                        <a onClick = {logout}>
                                 Logout
                         </a>
             </button>

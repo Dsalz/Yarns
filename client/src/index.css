@@ -45,20 +45,27 @@ body{
 .index-navlinks a{
   padding: 10px;
   text-transform: uppercase;
-  color: #ff7f00 !important;
 }
 
 .index-login{
-  background: #fff;
+  background: #fbfffe;
   border: 2px solid #ff7f00;
   margin-right: 10px;
   border-radius: 5px;
 }
 
+.index-login a{
+  color: #ff7f00 !important;
+}
+
 .index-signup{
-  background: #001514;
+  background: #ff7f00;
   border: none;
   border-radius: 5px;
+}
+
+.index-signup a{
+  color: #fbfffe !important;
 }
 
 .index-header{
@@ -228,8 +235,8 @@ body{
 }
 
 .loginsection button {
-  background: #001514;
-  color: #ff7f00;
+  background: #ff7f00;
+  color: #fbfffe;
   margin: 20px auto;
   padding: 10px 15px;
   font-size:20px;
@@ -340,4 +347,304 @@ body{
   width: 100%;
   margin: 10px 0;
 }
+
+.houseDetails{
+  margin-top: 100px;
+  position: relative;
+}
+
+.houseDetails-Header{
+  background: #ff7f00;
+  width: 100%;
+  height: 300px;
+  color: #fbfffe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.houseDetails-Header-Name{
+  position: relative;
+  width:fit-content;
+}
+
+.houseDetails-Header-Name hr{
+  position: absolute;
+  width:100%;
+  border: 2px solid #fbfffe;
+  left: 0;
+}
+
+.houseDetails-Header-Name h2{
+  font-size: 50px;
+}
+
+.houseDetails-Header-Name-FirstLine{
+  top: -20px;
+}
+
+.houseDetails-Header-Name-SecondLine{
+  bottom: -7px;
+}
+
+.houseDetails-Main{
+  width: 100%;
+}
+
+.houseDetails-Rooms{
+  padding: 40px 0;
+  height: 290px;
+  position: relative;
+  top: -50px;
+  width: 70%;
+  margin: 0 auto;
+  background: #fbfffe;
+  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);  
+}
+
+.houseDetails-Rooms-Item{
+  display: inline-block;
+  position: relative;
+  width: 90%;
+  margin: 8px 5%;
+  padding: 5px 0;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  text-align: center;
+}
+
+.houseDetails-Rooms-Item-Title{
+  background: #fbfffe;
+  color:#ff7f00;
+}
+
+.houseDetails-Rooms-Item-Comments{
+    width: 50px;
+    padding: 5px;
+    color: white;
+    background: #ff7f00;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+
+.houseDetails-addroom{
+    text-decoration: none !important;
+    color: white !important;
+    background: #ff7f00;
+    border: none;
+    position: fixed;
+    bottom: 20vh;
+    right: 7vw;
+    border-radius: 50%;
+    font-size: 35px;
+    height: 50px;
+    width: 50px;
+    transform: scale(1.5);
+    text-align: center;
+    cursor:pointer;
+}
+
+.houseDetails-addroom:hover {
+box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
+}
+
+.roomdetails-section{
+  margin-top: 100px;
+}
+
+.roomdetails-section header{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: #ff7f00;
+  height:200px;
+}
+
+.roomdetails-section-commenttitle{
+  font-size: 50px;
+  color:#fbfffe;
+  width: 100%;
+  text-align: center;
+}
+
+.roomdetails-section-commentno{
+  color: #001514;
+  background: #fbfffe;
+  border-radius: 30px;
+  padding: 5px;
+  margin-top: -90px;
+}
+
+.roomdetails-section main {
+  width: 100%;
+  padding: 0 10%;
+}
+
+.roomdetails-section .comment{
+  display: flex;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+}
+
+.roomdetails-section .comment .comment-details{
+  background: #ff7f00;
+  width: 25%;
+  color: #fbfffe;
+  padding: 10px;
+  text-align: center;
+  font-size:20px;
+  border-radius: 5px 0 0 5px;
+  position: relative;
+}
+
+.roomdetails-section .comment .comment-details .comment-details-user{
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: #fbfffe;
+  display: block;
+}
+
+.roomdetails-section .comment .comment-details .comment-accolades{
+  color: #001514;
+  background: #fbfffe;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.roomdetails-section .comment .comment-details .comment-timecreated-time{
+  margin-bottom: 0px;
+  display: block;
+}
+
+.roomdetails-section .comment .comment-details .comment-timecreated-date{
+  margin-bottom: 30px;
+  display: block;
+}
+
+.roomdetails-section .comment .comment-details .comment-repliestoggle{
+  color: #fbfffe !important;
+  position: absolute;
+  bottom: 10px;
+  left:0;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.roomdetails-section .comment .comment-message{
+  width: 75%;
+  background: #fbfffe;
+  color: #001514;
+  padding: 10px;
+  font-size: 20px;
+  position: relative;
+}
+
+.roomdetails-section .comment .comment-message .comment-message-image{
+  width: 80%;
+  margin-top: 30px;
+  max-height: 300px;
+  text-align: center;
+}
+
+.roomdetails-section .comment .comment-message .comment-buttons{
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+  font-size: 40px;
+}
+
+.roomdetails-section .comment .comment-message .comment-buttons button{
+    border-radius: 50%;
+    background: #ff7f00;
+    color: #fbfffe;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+}
+
+.roomdetails-section .comment .comment-message .comment-buttons button:hover{
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+}
+
+.roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades{
+  margin-right: 10px;
+}
+
+.roomdetails-section .comment-replies{
+  width:90%;
+  margin-right: auto;
+  margin-top:10px;
+}
+
+.roomdetails-section .comment-replies .reply{
+  display:flex;
+  margin: 5px 0;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+}
+
+.roomdetails-section .comment-replies .reply-info{
+  width: 25%;
+  background: #ff7f00;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+  padding: 10px;
+}
+
+.roomdetails-section .comment-replies .reply-info a{
+  color: #fbfffe !important;
+}
+
+.roomdetails-section .comment-replies .reply-message{
+  color: #001514;
+  background: #fbfffe;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.comment-reply-form{
+  width: 70%;
+  background: #fbfffe;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  margin: 0 auto;
+  margin-top: 10px;
+  padding:  5%;
+  text-align: center;
+}
+
+.comment-reply-textarea{
+  width: 100%;
+  height: 100px;
+  border: none;
+  border: 1px solid rgba(0,0,0, 0.2);
+  border-radius: 5px;
+  outline: none;
+}
+
+.comment-reply-textarea:focus{
+  border: 1px solid #ff7f00;
+}
+
+.comment-reply-btn{
+    border-radius: 5px;
+    background: #ff7f00;
+    color: #fbfffe;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    width:100%;
+}
+
+.comment-reply-btn:hover{
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
+}
+
 

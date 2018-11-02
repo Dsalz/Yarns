@@ -1,6 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const ReplySchema = new Schema({
+    message: {
+        type: String,
+        required: true
+    },
+
+    authorName: {
+        type: String,
+        required: true
+    },
+
+    authorId: {
+        type:String,
+        required: true
+    },
+
+    timeCreated: {
+        type: Date,
+        default: Date.now
+    }
+})
 
 const commentSchema = new Schema({
     message: {
@@ -11,6 +32,10 @@ const commentSchema = new Schema({
         type: String,
         required: false
     },
+    accolades : {
+        type: Number,
+        default: 0
+    },
     roomId:{
         type: String,
         required: true
@@ -19,11 +44,11 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    userId : {
+    authorId : {
         type: String,
         required: true
     },
-    userName : {
+    authorName : {
         type: String,
         required: true
     },
@@ -35,19 +60,7 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    replies: {
-        type: Number,
-        default: 0
-    },
-    isReply: {
-        type: Boolean,
-        default: true
-    },
-    origComment: {
-        type: String,
-        required: true
-    }
-
+    replies: [ ReplySchema ]
 })
 
 module.exports = comment = mongoose.model('comment', commentSchema);
