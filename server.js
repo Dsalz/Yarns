@@ -15,11 +15,13 @@ mongoose.connect(db, { useNewUrlParser: true })
 .catch(() => console.log("Mongo Db Not Connected"));
 
 const userRouter = require('./routes/api/users');
+const roomRouter = require('./routes/api/rooms');
 
 app.use('/api/v1/users' , userRouter);
+app.use('/api/v1/rooms' , roomRouter);
 
 //Setting up Port
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; 
 
-app.listen(port, ()=> console.log(`Now serving at port ${port}`))
- 
+app.listen(port, ()=> console.log(`Now serving at port ${port}`)) 
+

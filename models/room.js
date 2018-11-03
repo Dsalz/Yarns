@@ -7,10 +7,6 @@ const roomSchema = new Schema({
         type: String,
         required: true
     },
-    houseId: {
-        type: String,
-        required: true
-    },
     houseName: {
         type: String,
         required: true
@@ -33,7 +29,7 @@ const roomSchema = new Schema({
     },
     commentNo: {
        type: Number,
-       default: 0 
+       default: 1 
     }
 })
 

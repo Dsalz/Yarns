@@ -27,19 +27,22 @@ class LoginPage extends Component{
     }
 
     render(){
-        const {isLoggedIn , userExists } = this.props;
+        const {isLoggedIn , userExists , loggingIn} = this.props;
 
-        if(!userExists && this.state.submitted){
-            alert("Invalid Email/Password");
+        if(userExists === false && this.state.submitted){
+            alert("Invalid Email/Username/Password");
         }
 
+        console.log(this.props);
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">
-
+                {loggingIn && (<div className="logging-in-svg">
+                                <span>Loading</span>
+                              </div>) }
                 <h2>Login to <span className="loginsection-yarns">Yarns</span></h2>
 
                 <form onSubmit= {this.handleSubmit}>
-                    <input type="email" id="email" name="email" placeholder="Email" onChange = { this.handleChange }/><br/>
+                    <input type="text" id="email" name="email" placeholder="Email/Username" onChange = { this.handleChange }/><br/>
                     <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange }/><br />
                     <button type="submit">LOGIN</button>
                 </form>
@@ -49,9 +52,13 @@ class LoginPage extends Component{
 }
 
 const mapStateToProps = (state) => {
+
+    const { isLoggedIn , userExists , loggingIn} = state.user;
+
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        userExists: state.user.userExists
+        isLoggedIn,
+        userExists,
+        loggingIn
     }
 }
 

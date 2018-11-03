@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Reply = ({message, authorName}) =>{
+const Reply = ({id, message, authorName, currentusername, deleteReply}) =>{
     return(
         <div className="reply">
             <div className="reply-info">
@@ -10,6 +10,7 @@ const Reply = ({message, authorName}) =>{
             <div className="reply-message">
                 {message}
             </div>
+            {currentusername === authorName && <button onClick={() => deleteReply(id)} className="reply-delete">&times;</button>}
         </div>
     )
 }

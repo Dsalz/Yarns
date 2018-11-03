@@ -1,11 +1,17 @@
-const jwt = require('jsonwebtokens');
+const jwt = require('jsonwebtoken');
 
 const secretKey = process.env.SECRET_KEY || "The secretest";
 
 module.exports = {
-    createToken: (user) => {
-        jwt.sign(user , secretKey ,(authData) =>{
-            
+    createSignUpToken: (user, res ) => {
+        jwt.sign({ user } , secretKey ,(err, token) =>{
+           return res.json({ user , token });
+        })
+    },
+
+    createLoginToken: (user, res ) => {
+        jwt.sign({ user } , secretKey ,(err, token) =>{
+           return res.json({ user , token , validUser : true});
         })
     },
 

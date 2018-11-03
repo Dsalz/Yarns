@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addReply, deleteReply, deleteComment} from '../../actions/commentActions';
 import Reply from './Reply';
 
 class Comment extends Component {
@@ -32,13 +34,21 @@ class Comment extends Component {
 
     addReply = (e) =>{
         e.preventDefault();
-        alert(this.state.reply);
+        this.props.addReply(this.state.reply , this.props.id);
+    }
+
+    deleteComment = (id) =>{
+        this.props.deleteComment(id);
+    }
+
+    deleteReply = (id) => {
+        this.props.deleteReply(id, this.props.id)
     }
 
 
 
     render(){
-        const { message , userName, timeCreated, imageUrl, roomName, accolades, replies} = this.props;
+        const { id, message , userName, timeCreated, imageUrl, roomName, accolades, replies, isLoggedIn, currentusername} = this.props;
         return(
             <React.Fragment>
             <div className="comment">
@@ -46,16 +56,16 @@ class Comment extends Component {
                 <Link className="comment-details-user" to={"/users/" + userName}>
                     {userName}
                 </Link>
-                <span className="comment-accolades">{(accolades !== 1) ? accolades + " accolades" : accolades + " accolade"}</span>
+               { accolades > 0 && <span className="comment-accolades">{(accolades !== 1) ? accolades + " accolades" : accolades + " accolade"}</span>} 
                 <span className="comment-timecreated-time">{timeCreated.toLocaleTimeString()}</span>                
-                <span className="comment-timecreated-date">{timeCreated.getDate() + '-' + timeCreated.getMonth() + "-" + String(Number(timeCreated.getYear()) + 1900)}</span>
+                <span className="comment-timecreated-date">{timeCreated.getDate() + '-' + String(Number(timeCreated.getMonth()) + 1) + "-" + String(Number(timeCreated.getYear()) + 1900)}</span>
                 {(replies.length > 0 && !this.state.showReplies) && <a href="/" className="comment-repliestoggle" onClick={this.toggleReplies}>Show Replies</a>}
                 {(replies.length > 0 && this.state.showReplies) && <a href="/" className="comment-repliestoggle" onClick={this.toggleReplies}>Hide Replies</a>}
                 </div>
                 <div className="comment-message">
                     {message}
                     {imageUrl && <div className="comment-message-image" ><img src={imageUrl} alt={roomName + " Image"} /></div>}
-                    <div className="comment-buttons">
+                    {isLoggedIn && (<div className="comment-buttons">
                         <button className="comment-button-accolades">
                             &times;
                         </button>
@@ -63,11 +73,12 @@ class Comment extends Component {
                         <button onClick={this.toggleAddReplyBox} className="comment-button-reply">
                             &copy;
                         </button>
-                    </div>
+                    </div>)}
+                    {(currentusername === userName) && <button onClick={() => this.deleteComment(id)} className="comment-button-delete">x</button>}
                 </div>
             </div>
             {(replies.length > 0 && this.state.showReplies) && (<div className="comment-replies">
-                                                        {replies.map( reply => <Reply {...reply} key={reply.id}/>)}
+                                                        {replies.map( reply => <Reply {...reply} key={reply.id} currentusername = {this.props.currentusername} deleteReply = {this.deleteReply}/>)}
                                                     </div>)}
             {this.state.showaddReplyBox && (
                 <form  className="comment-reply-form" onSubmit={this.addReply}>
@@ -81,4 +92,19 @@ class Comment extends Component {
     }
 }
 
-export default Comment;
+const mapStateToProps = (state) => {
+    return{
+        isLoggedIn : state.user.isLoggedIn,
+        currentusername : state.user.user.username
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        addReply: (reply, commentId) => dispatch(addReply(reply, commentId)),
+        deleteComment: (id) => dispatch(deleteComment(id)),
+        deleteReply: (id, commentId) => dispatch(deleteReply(id, commentId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comment);

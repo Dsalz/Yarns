@@ -17,9 +17,9 @@ const SignedInLinks = ({ user, logout }) =>{
             </button>
 
             <button className = "index-logout">      
-                        <a onClick = {logout}>
+                        <Link to="/login" onClick = {logout}>
                                 Logout
-                        </a>
+                        </Link>
             </button>
         </React.Fragment>
     )

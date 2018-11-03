@@ -8,6 +8,7 @@ import SignUpPage from './SignUpPage';
 import EstateDetailsPage from './EstateDetailsComponents/EstateDetails';
 import HouseDetailsPage from './HouseDetailsComponents/HouseDetails';
 import RoomDetailsPage from './RoomComponents/RoomDetails';
+import AddRoomPage from'./RoomComponents/AddRoom';
 
 class App extends Component {
   render() {
@@ -21,8 +22,8 @@ class App extends Component {
       <Route path = "/signup" component = {SignUpPage}/>
       <Route exact path = "/estate/:estateName" component = {EstateDetailsPage}/>
       <Route exact path = "/house/:houseName" component={HouseDetailsPage} />
-      <Route path = "/house/:houseName/add" component={SignUpPage} />
       <Route path = "/room/:roomName" component={RoomDetailsPage} />
+      <Route path = "/house/:houseName/add" component={AddRoomPage} />
       </Switch>
       <Footer />
       </React.Fragment>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signUpAction } from '../actions/userActions'; 
+import { signUpAction , checkUsernameAvailability, resetUsernameAvailability } from '../actions/userActions'; 
 import { Redirect } from 'react-router-dom';
 
 class SignUpPage extends Component{
@@ -10,10 +10,13 @@ class SignUpPage extends Component{
         name : "",
         username : "",
         age: "",
-        DOB: "",
+        dob: "",
         password: "",
-        confirmpassword : "",
-        isActive: true
+        confirmpassword : ""
+    }
+
+    componentDidMount(){
+        this.props.resetUsernameAvailability();
     }
 
     handleChange = (e) =>{
@@ -22,23 +25,35 @@ class SignUpPage extends Component{
         })
     }
 
+    checkUsernameAvailability = (e) =>{
+        if(e.target.value.trim().length > 0){
+            this.props.checkUsernameAvailability(this.state.username);
+        }else{
+            this.props.resetUsernameAvailability()
+        }
+    }
+
     handleSubmit = (e) =>{
         e.preventDefault();
 
         const { password, confirmpassword} = this.state;
-        if(password === confirmpassword){
-            this.props.signUp(this.state);
-        }
-        else{
-            alert("Password and Confirm Password not equal")
+        if(this.props.usernameAvailable){
+
+            if(password === confirmpassword){
+                this.props.signUp(this.state);
+            }
+            else{
+                alert("Password and Confirm Password not equal")
+            }
+        }else{
+            alert("UserName not Available")
         }
 
 
     }
 
     render(){
-        console.log(this.props);
-        const { isLoggedIn } = this.props;
+        const { isLoggedIn, usernameAvailable } = this.props;
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">
 
@@ -47,9 +62,9 @@ class SignUpPage extends Component{
                 <form onSubmit= {this.handleSubmit}>
                     <input type="text" id="name" name="name" placeholder="Name" onChange = { this.handleChange } required/><br/>
                     <input type="email" id="email" name="email" placeholder="Email" onChange = { this.handleChange } required/><br/>
-                    <input type="text" id="username" name="username" placeholder="Username" onChange = { this.handleChange } required/><br/>
+                    <input type="text" id="username" name="username" placeholder="Username" onChange = { this.handleChange } onKeyUp={ this.checkUsernameAvailability } required/>{(usernameAvailable === "loading") ? <span>Checking Availability</span> :(usernameAvailable === null)? <span></span> : (usernameAvailable === true)? <span>Username is Available</span> : <span>Username is Not Available</span> }<br/>
                     <input type="number" id="age" name="age" placeholder="Age" onChange = { this.handleChange } required/><br/>
-                    <input type="text" id="DOB" name="DOB" placeholder="Date of Birth (format: dd/mmm/yyyy)" onChange = { this.handleChange }/><br/>                    
+                    <input type="text" id="dob" name="dob" placeholder="Date of Birth (format: dd/mmm/yyyy)" onChange = { this.handleChange }/><br/>                    
                     <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange } required/><br />
                     <input type="password" id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } required/><br />
                     <button type="submit">SIGN UP</button>
@@ -60,14 +75,18 @@ class SignUpPage extends Component{
 }
 
 const mapStateToProps = (state) =>{
+    const { isLoggedIn , usernameAvailable } = state.user;
     return{
-        isLoggedIn : state.user.isLoggedIn
+        isLoggedIn,
+        usernameAvailable
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        signUp : (user) => dispatch(signUpAction(user))
+        signUp : (user) => dispatch(signUpAction(user)),
+        checkUsernameAvailability : (username) => dispatch(checkUsernameAvailability(username)),
+        resetUsernameAvailability: () => dispatch(resetUsernameAvailability())
     }
 }
 
