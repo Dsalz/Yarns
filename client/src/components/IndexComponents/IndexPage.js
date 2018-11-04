@@ -13,6 +13,7 @@ class IndexPage extends Component {
     }
 
     render(){
+        document.title = "Home | Yarns";
         const { estates, houses, latestrooms } = this.props
         return(
             <React.Fragment>

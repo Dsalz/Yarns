@@ -13,6 +13,18 @@ const Comment = require('../../models/comment');
 
 // })
 
+router.get('/getLatest', (req, res) => {
+    Room.find()
+    .then(rooms => res.json({ rooms }))
+    .catch(err => console.log(err))
+})
+
+router.get('/:roomName', (req, res) => {
+    Room.find({name: req.params.roomName})
+    .then(room => res.json({ room }))
+    .catch(err => console.log(err));
+})
+
 router.post('/add', (req, res) => {
     
     const {name, houseName, creatorId, creatorName} = req.body.roomDto;

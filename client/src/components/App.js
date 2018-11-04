@@ -9,8 +9,15 @@ import EstateDetailsPage from './EstateDetailsComponents/EstateDetails';
 import HouseDetailsPage from './HouseDetailsComponents/HouseDetails';
 import RoomDetailsPage from './RoomComponents/RoomDetails';
 import AddRoomPage from'./RoomComponents/AddRoom';
+// import { connect } from 'react-redux';
+
 
 class App extends Component {
+
+  // componentDidMount(){
+  //   this.props.checkLoginStatus()
+  // }
+
   render() {
     return (
       <BrowserRouter>

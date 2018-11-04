@@ -15,19 +15,21 @@ module.exports = {
         })
     },
 
-    verifyToken: (req, res)=>{
-        const authorization = req.headers["Authorization"] || null;
+    verifyToken: (req, res, next)=>{
+        const authorization = req.headers["authorization"] || null;
 
         if(!authorization){
             return res.status(403).json({message: "not signed in"})
         }
 
-        jwt.verifyToken(authorization.split(' ')[0], secretKey).then( (data) => {
+
+        
+        jwt.verify(authorization.split(' ')[1], secretKey , (err, data) => {
+            if(err){
+                return res.status(403).json({message: "invalid token"})
+            }
             req.user = data.user;
-            return next();
-        }).catch( (err) => {
-            return res.status(403).json({message: "invalid token"})
+            next();
         })
     }
-
 }

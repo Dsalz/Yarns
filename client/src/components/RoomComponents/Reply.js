@@ -1,18 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const Reply = ({id, message, authorName, currentusername, deleteReply}) =>{
-    return(
-        <div className="reply">
-            <div className="reply-info">
-               <Link to = {'/user/' + authorName}>{authorName}</Link> 
+class Reply extends Component {
+
+    state = {
+        showDeleteReply: false
+    }
+
+    showDeleteReply = () =>{
+        this.setState({
+            showDeleteReply: true
+        })
+    }
+
+    hideDeleteReply = () =>{
+        this.setState({
+            showDeleteReply: false
+        })
+    }
+
+    render() {
+        const {id, message, authorName, currentusername, deleteReply} = this.props;
+        return(
+            <div className="reply" onMouseEnter={this.showDeleteReply} onMouseLeave={this.hideDeleteReply}>
+                <div className="reply-info">
+                   <Link to = {'/user/' + authorName}>{authorName}</Link> 
+                </div>
+                <div className="reply-message">
+                    {message}
+                {(currentusername === authorName && this.state.showDeleteReply) && <button onClick={() => deleteReply(id)} className="reply-delete">x</button>}
+                </div>
             </div>
-            <div className="reply-message">
-                {message}
-            </div>
-            {currentusername === authorName && <button onClick={() => deleteReply(id)} className="reply-delete">&times;</button>}
-        </div>
-    )
+        )
+    }
 }
 
 export default Reply;

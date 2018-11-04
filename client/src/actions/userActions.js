@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+export const toggleNightMode = () => {
+    return{
+        type: "TOGGLE_NIGHT_MODE"
+    }
+}
+
 export const loginAction = (user) => {
     return(dispatch, getState)=> {
         dispatch({ type : "LOGGING_IN"});

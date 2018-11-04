@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signUpAction , checkUsernameAvailability, resetUsernameAvailability } from '../actions/userActions'; 
 import { Redirect } from 'react-router-dom';
+import Modal from './Modal';
 
 class SignUpPage extends Component{
 
@@ -12,7 +13,8 @@ class SignUpPage extends Component{
         age: "",
         dob: "",
         password: "",
-        confirmpassword : ""
+        confirmpassword : "",
+        modalText : null
     }
 
     componentDidMount(){
@@ -43,21 +45,32 @@ class SignUpPage extends Component{
                 this.props.signUp(this.state);
             }
             else{
-                alert("Password and Confirm Password not equal")
+                this.setState({
+                    modalText: "Password and Confirm Password not equal"
+                })
             }
         }else{
-            alert("UserName not Available")
+            this.setState({
+                modalText: "UserName not Available"
+            })
         }
 
 
     }
 
+    closeModal = () => {
+        this.setState({
+            modalText: null
+        })
+    }
+
     render(){
+        document.title = "Sign Up | Yarns";
         const { isLoggedIn, usernameAvailable } = this.props;
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">
-
-                <h2>Sign up for <span className="loginsection-yarns">Yarns</span></h2>
+                {this.state.modalText && <Modal info={this.state.modalText} title="Error" close={this.closeModal} />}
+                <h2 className="loginsection-header">Sign up for <span className="loginsection-yarns">Yarns</span></h2>
 
                 <form onSubmit= {this.handleSubmit}>
                     <input type="text" id="name" name="name" placeholder="Name" onChange = { this.handleChange } required/><br/>
@@ -67,7 +80,7 @@ class SignUpPage extends Component{
                     <input type="text" id="dob" name="dob" placeholder="Date of Birth (format: dd/mmm/yyyy)" onChange = { this.handleChange }/><br/>                    
                     <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange } required/><br />
                     <input type="password" id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } required/><br />
-                    <button type="submit">SIGN UP</button>
+                    <button className="login-section-btn" type="submit">SIGN UP</button>
                 </form>
             </section>
         )

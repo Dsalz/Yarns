@@ -58,7 +58,7 @@ const commentSchema = new Schema({
     },
     timeCreated: {
         type: Date,
-        default: Date.now
+        default: new Date()
     },
     replies: [ ReplySchema ]
 })

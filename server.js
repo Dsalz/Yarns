@@ -16,9 +16,12 @@ mongoose.connect(db, { useNewUrlParser: true })
 
 const userRouter = require('./routes/api/users');
 const roomRouter = require('./routes/api/rooms');
+const commentRouter = require('./routes/api/comments');
+
 
 app.use('/api/v1/users' , userRouter);
 app.use('/api/v1/rooms' , roomRouter);
+app.use('/api/v1/comments' , commentRouter);
 
 //Setting up Port
 const port = process.env.PORT || 5000; 

@@ -1,30 +1,52 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getRoom } from '../../actions/roomActions';
+import { getComments } from '../../actions/commentActions';
 
 class RoomDetails extends Component{
-    state = {
-        comments:[
-            {id: "1", message: "First Comment Yipee!" , userName: "Hypnoguy", timeCreated: new Date(), imageUrl:'/images/careerImgmax.png', roomName: "Delilah", accolades: 2, replies:[{ id: 1 ,message: "First Reply yayyy", authorName: "Undertaker"}, {id: 2 , message: "Second Reply yayyy", authorName: "Undertaker"}]},
-            {id: "2", message: "First Comt Yipee!" , userName: "Hypnguy", timeCreated: new Date(), imageUrl:null, roomName: "Delilah", accolades: 0, replies:[{id: 3 ,message: "Second Reply yayyy", authorName: "Undertaker"}]},
-            {id: "3", message: "First omment Yipee!" , userName: "Hpnoguy", timeCreated: new Date(), imageUrl:null, roomName: "Delilah", accolades: 2, replies:[]},
-            {id: "4", message: "Fi Comment Yipee!" , userName: "Hypnguy", timeCreated: new Date(), imageUrl:null, roomName: "Delilah", accolades: 20, replies:[]},
-            {id: "5", message: "Fist Cmment Yee!" , userName: "Hyguy", timeCreated: new Date(), imageUrl:null, roomName: "Delilah", accolades: 2, replies:[{id: 4 ,message: "First Reply yayyy", authorName: "Undertaker"}, {id: 5 ,message: "Second Reply yayyy", authorName: "Undertaker"}]},
-        ]
-    }
 
+    componentDidMount(){
+        const { roomName } = this.props.match.params;
+        this.props.getRoom(roomName);
+        this.props.getComments(roomName);
+    }
+    
     render(){
+        const { roomName } = this.props.match.params;
+        const { comments } = this.props;
+        document.title = `${roomName} | Yarns`;
         return(
             <section className="roomdetails-section">
             <header>
-                <h2 className="roomdetails-section-commenttitle" tabIndex="0">Delilah</h2>
-                <span className="roomdetails-section-commentno" tabIndex="0">0 Comments</span>
+                <h2 className="roomdetails-section-commenttitle" tabIndex="0">{roomName}</h2>
+                <span className="roomdetails-section-commentno" tabIndex="0">{comments.length === 1 ? "1 Comment" : comments.length + " Comments"}</span>
             </header>
             <main>
-                {this.state.comments.map(comment => <Comment {...comment} key={comment.id}/>)}
+                    <Link to={"/comment/" + roomName + "/add"} className="roomDetails-addcommenttop">
+                        +
+                    </Link>
+                {comments.map(comment => <Comment {...comment} key={comment._id}/>)}
             </main>
             </section>
         )
     }
 }
 
-export default RoomDetails;
+const mapStateToProps = (state, ownProps) =>{
+    console.log(state.comment.comments);
+    const comments = state.comment.comments.filter(comment => comment.roomName === ownProps.match.params.roomName).sort((a, b) => new Date(a.timeCreated) - new Date(b.timeCreated));
+    return{
+        comments
+    }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        getRoom : (id) => dispatch(getRoom(id)),
+        getComments: (roomId) => dispatch(getComments(roomId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomDetails);

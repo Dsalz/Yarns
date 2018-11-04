@@ -4,7 +4,8 @@ const initState = {
     usernameAvailable : null,
     token : "",
     loggingIn : false,
-    user: {}
+    user: {},
+    nightMode: false
 };
 
 
@@ -13,7 +14,6 @@ const userReducer = (state = initState , action) => {
     switch(action.type){
         
         case "SIGNUP_USER":
-        console.log(action)
         return{
             ...state,
             user: action.payload.user,
@@ -26,6 +26,12 @@ const userReducer = (state = initState , action) => {
         return{
             ...state,
             usernameAvailable: "loading"
+        }
+
+        case "TOGGLE_NIGHT_MODE":
+        return{
+            ...state,
+            nightMode: !state.nightMode
         }
 
         case "USERNAME_AVAILABILITY":
@@ -43,7 +49,8 @@ const userReducer = (state = initState , action) => {
         case "LOGGING_IN" :{
             return{
                 ...state,
-                loggingIn: true
+                loggingIn: true,
+                userExists: null
             }
         }
 

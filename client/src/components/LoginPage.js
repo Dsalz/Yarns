@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { loginAction } from '../actions/userActions';
 import { Redirect } from 'react-router-dom';
 
+import Modal from './Modal';
+
 class LoginPage extends Component{
 
     state = {
@@ -26,25 +28,28 @@ class LoginPage extends Component{
         })
     }
 
+    closeModal = () => {
+        this.setState({
+            submitted: false
+        })
+    }
+
     render(){
+        document.title = "Login | Yarns";
         const {isLoggedIn , userExists , loggingIn} = this.props;
 
-        if(userExists === false && this.state.submitted){
-            alert("Invalid Email/Username/Password");
-        }
-
-        console.log(this.props);
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">
+                {(userExists === false && this.state.submitted) && <Modal info="Invalid Credentials" title="Error" close={this.closeModal} />}
                 {loggingIn && (<div className="logging-in-svg">
                                 <span>Loading</span>
                               </div>) }
-                <h2>Login to <span className="loginsection-yarns">Yarns</span></h2>
+                <h2 className="loginsection-header">Login to <span className="loginsection-yarns">Yarns</span></h2>
 
                 <form onSubmit= {this.handleSubmit}>
-                    <input type="text" id="email" name="email" placeholder="Email/Username" onChange = { this.handleChange }/><br/>
-                    <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange }/><br />
-                    <button type="submit">LOGIN</button>
+                    <input type="text" id="email" name="email" placeholder="Email/Username" onChange = { this.handleChange } required/><br/>
+                    <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange } required/><br />
+                    <button className="login-section-btn" type="submit">LOGIN</button>
                 </form>
             </section>
         )

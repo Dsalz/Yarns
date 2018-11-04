@@ -6,21 +6,15 @@ import { addRoom } from '../../actions/roomActions';
 class AddRoom extends Component{
 
     state = {
-
-        forminfo : {
-            name : "",
-            commentText: "",
-            imageUrl: null
-        },
-
+        name : "",
+        commentText: "",
+        imageUrl: null,
         submitted: false
     }
 
     handleChange =(e) => {
         this.setState({
-            forminfo:{
             [e.target.name] : e.target.value
-            }
         })
     }
 
@@ -34,16 +28,17 @@ class AddRoom extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addRoom(this.state, this.props.houseName);
+        this.props.addRoom(this.state, this.props.match.params.houseName);
         this.setState({
             submitted: true
         })
     }
 
     render(){
+        document.title = "Add Room | Yarns";
         const { houseName } = this.props.match.params;
         const {isLoggedIn , newRoom } = this.props;
-        return(!isLoggedIn) ? <Redirect to="/login"/> : (newRoom && this.state.submitted) ? <Redirect to= {"/rooms/" + newRoom}/> : (
+        return(!isLoggedIn) ? <Redirect to="/login"/> : (newRoom && this.state.submitted) ? <Redirect to= {"/room/" + newRoom}/> : (
             <section className="addroom-section">
                 <header>
                     <h2>Add New Room</h2>

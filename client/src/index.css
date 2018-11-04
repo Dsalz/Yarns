@@ -1,3 +1,18 @@
+:root{
+  --orange-color: #ff7f00;
+  --black-color: #001514;
+  --white-color: #fbfffe;
+  --large-box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+  --small-box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2) ; 
+}
+
+/* 
+
+var(--black-color , #001514)
+var(--orange-color, #ff7f00)
+var(--white-color , #fbfffe) 
+
+*/
 
 @font-face{
   font-family: "Condi";
@@ -8,14 +23,15 @@
 }
 
 body{
-  border: 2px solid #ff7f00;
+  border: 1px solid var(--orange-color, #ff7f00);
   border-radius: 5px;
   font-family: "Condi", sans-serif !important;
+  background: var(--white-color , #fbfffe) !important;
 }
 
 
 button:hover{
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);  
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;  
   cursor: pointer;
 }
 
@@ -23,9 +39,74 @@ input:focus, textarea:focus {
   outline: none;
 }
 
+input, textarea{
+  background: transparent;
+  color: var(--black-color , #001514);
+}
+
+.yarns-modal-container{
+  width:100vw;
+  height:100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+}
+
+.yarns-modal-backdrop{
+  background: var(--orange-color, #ff7f00);
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+.yarns-actualmodal{
+  width: 40%;
+  min-width: 320px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30vh;
+  bottom: 0;
+  margin: 0 auto;
+}
+
+.yarns-actualmodal-header{
+  background: var(--orange-color, #ff7f00);
+  color: var(--black-color , #001514);
+  text-align: center;
+  position: relative;
+  padding: 10px 0;
+}
+
+.yarns-actualmodal-header h2{
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+.yarns-actualmodal-header button{
+  border:none;
+  background: transparent;
+  color: var(--black-color , #001514);
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 30px;
+}
+
+.yarns-actualmodal-body{
+  background: var(--white-color , #fbfffe) ;
+  color: var(--black-color , #001514);
+  display:flex;
+  align-items: center;
+  justify-content: center;  
+  min-height: 200px;
+  font-size: 25px;
+}
+
 .index-nav{
   display: flex;
-  background: #fff;
+  background: var(--white-color , #fbfffe);
   position: fixed;
   width: 100%;
   padding: 25px 5%;
@@ -33,7 +114,7 @@ input:focus, textarea:focus {
   left: 0;
   z-index: 1000;
   /* box-shadow: 1px 4px 4px -5px rgba(0,0,0, .5); */
-  border: 2px solid #ff7f00;
+  border: 1px solid var(--orange-color, #ff7f00);
   border-bottom: none;
 }
 
@@ -42,7 +123,7 @@ input:focus, textarea:focus {
 }
 
 .index-brand svg{
-  fill:#ff7f00;
+  fill:var(--orange-color, #ff7f00);
   height: 50px;
   transform: scale(1.4);
   width: 50%;
@@ -60,28 +141,44 @@ input:focus, textarea:focus {
 }
 
 .index-login{
-  background: #fbfffe;
-  border: 2px solid #ff7f00;
+  background: var(--white-color , #fbfffe);
+  border: 2px solid var(--orange-color, #ff7f00);
   margin-right: 10px;
   border-radius: 5px;
 }
 
 .index-login a{
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
 }
 
 .index-signup{
-  background: #ff7f00;
+  background: var(--orange-color, #ff7f00);
   border: none;
   border-radius: 5px;
 }
 
 .index-signup a{
-  color: #fbfffe !important;
+  color: var(--white-color , #fbfffe) !important;
 }
 
 .index-profile a, .index-notifications a, .index-logout a {
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
+}
+
+.index-profile, .index-notifications, .index-logout{
+  border: none;
+  background: transparent;
+}
+
+.index-nav-night-toggle{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
 .index-header{
@@ -91,6 +188,7 @@ input:focus, textarea:focus {
   font-size: 35px;
   margin-top: 100px;
   padding: 120px 0;
+  color: var(--black-color , #001514);
 }
 
 .index-header svg{
@@ -99,23 +197,23 @@ input:focus, textarea:focus {
 }
 
 .index-header .cls-1{
-  fill:#3a3b3b;
+  fill:var(--black-color , #001514);
 }
 
 .index-header .cls-2{
-  fill:#ff7f00;
+  fill:var(--orange-color, #ff7f00);
 }
 
 .index-forumscard{
   width: 70%;
-  background: #fbfffe;
-  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+  background: var(--white-color , #fbfffe);
+  box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
   margin: 10px auto;
 }
 
 .index-forumscard h3{
-  color: #ff7f00;
-  border-bottom: 3px solid #ff7f00;
+  color: var(--orange-color, #ff7f00);
+  border-bottom: 3px solid var(--orange-color, #ff7f00);
   width:fit-content;
   margin: 10px auto 5px;
   padding: 15px 0 2px;
@@ -128,8 +226,8 @@ input:focus, textarea:focus {
 
 .index-forumscard-estate-item{
   padding: 20px 0;
-  background: #001514;
-  color: #ff7f00 !important ;
+  background: var(--black-color , #001514);
+  color: var(--orange-color, #ff7f00) !important ;
   /* height: 60px; */
   width: 180px;
   text-align: center;
@@ -149,7 +247,7 @@ input:focus, textarea:focus {
 }
 
 .index-forumscard-house{
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
   text-align: center;
   padding: 20px 10px;
 }
@@ -162,8 +260,8 @@ input:focus, textarea:focus {
 }
 
 .index-latestrooms h3{
-  color: #ff7f00;
-  border-bottom: 3px solid #ff7f00;
+  color: var(--orange-color, #ff7f00);
+  border-bottom: 3px solid var(--orange-color, #ff7f00);
   width:fit-content;
   margin: 10px auto 5px;
   padding: 15px 0 2px;
@@ -171,29 +269,29 @@ input:focus, textarea:focus {
 
 .index-latestrooms-item {
   display: flex;
-  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+  box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
   font-size: 15px;
   width: 70%;
   margin: 30px auto;
 }
 
 .index-latestrooms-house{
-  background: #001514;
+  background: var(--black-color , #001514);
   width: 25%;
   padding: 10px 0;
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
 }
 
 .index-latestrooms-room{
-  background: #fbfffe;
+  background: var(--white-color , #fbfffe);
   width: 75%;
   padding: 10px 0;
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
 }
 
 .footer{
-  background: #ff7f00;
-  color: #001514;
+  background: var(--orange-color, #ff7f00);
+  color: var(--black-color , #001514);
   text-align: center;
   width: 100%;
   height: 250px;
@@ -204,13 +302,13 @@ input:focus, textarea:focus {
 .footer svg{
   width: 80px;
   height: 80px;
-  fill: #001514;
+  fill: var(--black-color , #001514);
   margin-bottom: 30px;
 }
 
 .footer a{
-  border-bottom: 2px solid #001514;
-  color: #001514 !important
+  border-bottom: 2px solid var(--black-color , #001514);
+  color: var(--black-color , #001514) !important
 }
 
 .footer-copyright{
@@ -222,37 +320,37 @@ input:focus, textarea:focus {
   margin: 170px auto 70px;
 }
 
-.loginsection h2{
-  color: #001514;
+.loginsection-header{
+  color: var(--black-color , #001514);
   text-align: center;
   margin: 0 0 30px;
 }
 
 .loginsection-yarns{
-  color: #ff7f00;
+  color: var(--orange-color, #ff7f00);
 }
 
 .loginsection form{
-  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+  box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
   text-align: center;  
   padding: 40px 0 0;
 }
 
 .loginsection input{
   border: none;
-  border-bottom: 2px solid #001514;
+  border-bottom: 2px solid var(--black-color , #001514);
   margin: 20px 10px;
   width: 80%;
 }
 
 .loginsection input:focus {
-  border-bottom: 2px solid #ff7f00;
+  border-bottom: 2px solid var(--orange-color, #ff7f00);
   outline: none;
 }
 
-.loginsection button {
-  background: #ff7f00;
-  color: #fbfffe;
+.login-section-btn {
+  background: var(--orange-color, #ff7f00);
+  color: var(--white-color , #fbfffe);
   margin: 20px auto 0;
   padding: 10px 15px;
   width: 100%;
@@ -267,7 +365,7 @@ input:focus, textarea:focus {
   top:0;
   left:0;
   background: rgba(0,0,0, 0.5);
-  color: #ff7f00;
+  color: var(--orange-color, #ff7f00);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -286,7 +384,7 @@ input:focus, textarea:focus {
 .estatedetails-section-header-estate{
   width: fit-content;
   height: 300px;
-  background-color: #ff7f00;
+  background-color: var(--orange-color, #ff7f00);
   border-radius: 10px;
   /* text-align: center; */
   padding: 90px 60px 0 15px;
@@ -304,8 +402,8 @@ input:focus, textarea:focus {
 
 .estatedetails-section-header-houses {
   width: 70%;
-  /* box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2); */
-  background: #fbfffe;
+  /* box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2)); */
+  background: var(--white-color , #fbfffe);
   text-align: center;
   border-radius: 10px;
 }
@@ -313,10 +411,10 @@ input:focus, textarea:focus {
 .estatedetails-section-header-houses h3{
   width: 80%;
   text-align: center;
-  border-bottom: 1px solid #ff7f00;
+  border-bottom: 1px solid var(--orange-color, #ff7f00);
   margin: 20px auto 15px;
   font-size: 30px;
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
 }
 
 .estatedetails-section-header-houses-section {
@@ -326,7 +424,7 @@ input:focus, textarea:focus {
 }
 
 .estatedetails-section-header-houses-section-link{
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
   font-size: 20px;
   padding: 10px 15px;
 }
@@ -340,7 +438,7 @@ input:focus, textarea:focus {
 }
 
 .estatedetails-section-rooms h2{
-  color: #ff7f00 !important;
+  color: var(--orange-color, #ff7f00) !important;
   font-size: 40px;
   margin-bottom: 30px;
 }
@@ -353,25 +451,25 @@ input:focus, textarea:focus {
 }
 
 .estatedetails-section-room-toggle-btn{
-  color: #ff7f00;
-  background: #001514;
+  color: var(--orange-color, #ff7f00);
+  background: var(--black-color , #001514);
   border: none;
   cursor: pointer;
 }
 
 .estatedetails-section-room-toggle-btn-active{
-  background: #fbfffe;
-  color: #ff7f00;
+  background: var(--white-color , #fbfffe);
+  color: var(--orange-color, #ff7f00);
   border: none;
   cursor: pointer;
 }
 
 .estatedetails-section-room-item{
-  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);
+  box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
   padding: 10px 0;
   text-align: center;
-  background: #fbfffe;
-  color: #ff7f00 !important;
+  background: var(--white-color , #fbfffe);
+  color: var(--orange-color, #ff7f00) !important;
   display: inline-block;
   width: 100%;
   margin: 10px 0;
@@ -383,13 +481,14 @@ input:focus, textarea:focus {
 }
 
 .houseDetails-Header{
-  background: #ff7f00;
+  background: var(--orange-color, #ff7f00);
   width: 100%;
   height: 300px;
-  color: #fbfffe;
+  color: var(--white-color , #fbfffe);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 0 70px 0;
 }
 
 .houseDetails-Header-Name{
@@ -400,7 +499,7 @@ input:focus, textarea:focus {
 .houseDetails-Header-Name hr{
   position: absolute;
   width:100%;
-  border: 2px solid #fbfffe;
+  border: 2px solid var(--white-color , #fbfffe);
   left: 0;
 }
 
@@ -417,18 +516,20 @@ input:focus, textarea:focus {
 }
 
 .houseDetails-Main{
+  position: relative;
   width: 100%;
 }
 
 .houseDetails-Rooms{
-  padding: 40px 0;
+  padding: 60px 0;
   height: 290px;
   position: relative;
   top: -50px;
   width: 70%;
   margin: 0 auto;
-  background: #fbfffe;
-  box-shadow: 0px 0px 15px 2px rgba(0,0,0, 0.2);  
+  background: var(--white-color , #fbfffe);
+  box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2)); 
+  z-index: 200; 
 }
 
 .houseDetails-Rooms-Item{
@@ -437,20 +538,20 @@ input:focus, textarea:focus {
   width: 90%;
   margin: 8px 5%;
   padding: 5px 0;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
   text-align: center;
 }
 
 .houseDetails-Rooms-Item-Title{
-  background: #fbfffe;
-  color:#ff7f00;
+  background: var(--white-color , #fbfffe);
+  color:var(--orange-color, #ff7f00);
 }
 
 .houseDetails-Rooms-Item-Comments{
     width: 50px;
     padding: 5px;
     color: white;
-    background: #ff7f00;
+    background: var(--orange-color, #ff7f00);
     position: absolute;
     right: 0;
     top:0;
@@ -458,23 +559,28 @@ input:focus, textarea:focus {
 
 .houseDetails-addroom{
     text-decoration: none !important;
-    color: white !important;
-    background: #ff7f00;
+    color: var(--white-color , #fbfffe) !important;
+    background: var(--orange-color, #ff7f00);
     border: none;
-    position: fixed;
-    bottom: 20vh;
-    right: 7vw;
+    position: absolute;
+    top: -75px;
+    right: 0;
+    left: 0;
+    z-index: 201;
+    margin: 0 auto;
     border-radius: 50%;
-    font-size: 35px;
+    font-size: 33px;
+    font-family: monospace;
     height: 50px;
     width: 50px;
     transform: scale(1.5);
     text-align: center;
     cursor:pointer;
+    border: 1px solid var(--white-color , #fbfffe);
 }
 
 .houseDetails-addroom:hover {
-box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
+box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
 
 .roomdetails-section{
@@ -488,20 +594,20 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  background: #ff7f00;
+  background: var(--orange-color, #ff7f00);
   height:200px;
 }
 
 .roomdetails-section-commenttitle{
   font-size: 50px;
-  color:#fbfffe;
+  color:var(--white-color , #fbfffe);
   width: 100%;
   text-align: center;
 }
 
 .roomdetails-section-commentno{
-  color: #001514;
-  background: #fbfffe;
+  color: var(--black-color , #001514);
+  background: var(--white-color , #fbfffe);
   border-radius: 30px;
   padding: 5px;
   margin-top: -90px;
@@ -509,37 +615,62 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 
 .roomdetails-section main {
   width: 100%;
-  padding: 0 10%;
+  padding: 30px 0;
+  position: relative;
+  z-index: 200;
+}
+
+.roomdetails-section .roomDetails-addcommenttop{
+    text-decoration: none !important;
+    color: var(--white-color , #fbfffe) !important;
+    background: var(--orange-color, #ff7f00);
+    border: none;
+    position: absolute;
+    top: -27px;
+    right: 0;
+    left: 0;
+    z-index: 201;
+    margin: 0 auto;
+    border-radius: 50%;
+    font-size: 33px;
+    font-family: monospace;
+    height: 50px;
+    width: 50px;
+    transform: scale(1.5);
+    text-align: center;
+    cursor:pointer;
+    border: 1px solid var(--white-color , #fbfffe);
 }
 
 .roomdetails-section .comment{
   display: flex;
-  margin: 10px 0;
+  width: 80%;
+  margin: 10px auto;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
 .roomdetails-section .comment .comment-details{
-  background: #ff7f00;
-  width: 25%;
-  color: #fbfffe;
+  background: var(--orange-color, #ff7f00);
+  width: 20%;
+  color: var(--white-color , #fbfffe);
   padding: 10px;
   text-align: center;
-  font-size:20px;
+  font-size:15px;
   border-radius: 5px 0 0 5px;
   position: relative;
 }
 
 .roomdetails-section .comment .comment-details .comment-details-user{
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 10px;
-  color: #fbfffe;
+  color: var(--white-color , #fbfffe);
   display: block;
 }
 
 .roomdetails-section .comment .comment-details .comment-accolades{
-  color: #001514;
-  background: #fbfffe;
+  color: var(--black-color , #001514);
+  background: var(--white-color , #fbfffe);
   padding: 0 10px;
   margin-bottom: 10px;
   display: inline-block;
@@ -556,7 +687,7 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 }
 
 .roomdetails-section .comment .comment-details .comment-repliestoggle{
-  color: #fbfffe !important;
+  color: var(--white-color , #fbfffe) !important;
   position: absolute;
   bottom: 10px;
   left:0;
@@ -566,9 +697,9 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 }
 
 .roomdetails-section .comment .comment-message{
-  width: 75%;
-  background: #fbfffe;
-  color: #001514;
+  width: 80%;
+  background: var(--white-color , #fbfffe);
+  color: var(--black-color , #001514);
   padding: 10px;
   font-size: 20px;
   position: relative;
@@ -590,8 +721,8 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 
 .roomdetails-section .comment .comment-message .comment-buttons button{
     border-radius: 50%;
-    background: #ff7f00;
-    color: #fbfffe;
+    background: var(--orange-color, #ff7f00);
+    color: var(--white-color , #fbfffe);
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -599,8 +730,14 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
     outline: none;
 }
 
+.comment-button-img{
+  width: 75%;
+  height: 70%;
+  margin-bottom: 25%;
+}
+
 .roomdetails-section .comment .comment-message .comment-buttons button:hover{
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
 .roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades{
@@ -612,8 +749,8 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
   top: 0px;
   right: 0px;
   font-size: 20px;
-  background: red;
-  color: #fbfffe;
+  background: var(--orange-color, #ff7f00);
+  color: var(--white-color , #fbfffe);
   cursor: pointer;
   outline: none;
   border: none;
@@ -629,36 +766,49 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 .roomdetails-section .comment-replies .reply{
   display:flex;
   margin: 5px 0;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
 .roomdetails-section .comment-replies .reply-info{
-  width: 25%;
-  background: #ff7f00;
+  width: 20%;
+  background: var(--orange-color, #ff7f00);
   text-align: center;
   border-radius: 5px 0 0 5px;
   padding: 10px;
 }
 
 .roomdetails-section .comment-replies .reply-info a{
-  color: #fbfffe !important;
+  color: var(--white-color , #fbfffe) !important;
 }
 
 .roomdetails-section .comment-replies .reply-message{
-  color: #001514;
-  background: #fbfffe;
+  color: var(--black-color , #001514);
+  background: var(--white-color , #fbfffe);
   border-radius: 5px;
   font-size: 18px;
   padding: 10px;
+  position: relative;
+  width: 80%;
+}
+
+.roomdetails-section .comment-replies .reply-message .reply-delete{
+
+position: absolute;
+top: 0;
+right: 0;
+background: var(--orange-color, #ff7f00);
+border: none;
+padding: 0 15px;
+color: var(--white-color , #fbfffe);
 }
 
 .comment-reply-form{
   width: 100%;
-  background: #fbfffe;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2); 
+  background: var(--white-color , #fbfffe);
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
   margin: 0 auto;
   margin-top: 10px;
-  padding:  5%;
+  padding:  0;
   text-align: center;
 }
 
@@ -666,27 +816,30 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
   width: 100%;
   height: 100px;
   border: none;
-  border: 1px solid rgba(0,0,0, 0.2);
-  border-radius: 5px;
   outline: none;
+  padding: 10px;
+  font-size: 20px;
 }
 
 .comment-reply-textarea:focus{
-  border: 1px solid #ff7f00;
+  border: 1px solid var(--orange-color, #ff7f00);
 }
 
 .comment-reply-btn{
-    background: #ff7f00;
-    color: #fbfffe;
+    background: var(--orange-color, #ff7f00);
+    color: var(--white-color , #fbfffe);
     cursor: pointer;
     padding: 10px;
     border: none;
     width:100%;
+    font-size: 25px;
 }
 
 .comment-reply-btn:hover{
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
+
+
 
 .addroom-section{
   margin-top: 120px;
@@ -696,13 +849,13 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 }
 
 .addroom-section h2{
-  color: #001514;
+  color: var(--black-color , #001514);
   margin-bottom: 5px;
   font-size: 40px;
 }
 
 .addroom-section p{
-  color: #001514;
+  color: var(--black-color , #001514);
   margin: 0 auto;
   margin-bottom: 15px;
   width: 80%;
@@ -711,15 +864,15 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 .addroom-section form{
   width: 70%;
   margin: 0 auto;
-  background: #fbfffe;
+  background: var(--white-color , #fbfffe);
   padding: 30px 0 0;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
 
 .addroom-section input{
   width: 70%;
   border:none;
-  border-bottom: 2px solid #001514;
+  border-bottom: 2px solid var(--black-color , #001514);
   margin: 10px 0;
   background: transparent;
 }
@@ -727,17 +880,18 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 .addroom-section label{
   width: 10%;
   text-align: left;
+  color: var(--black-color , #001514);
 }
 
 .addroom-section input:focus{
-  border-bottom: 2px solid #ff7f00;
+  border-bottom: 2px solid var(--orange-color, #ff7f00);
 }
 
 .addroom-section textarea{
   width: 80%;
   height: 150px;
   border:none;
-  border: 2px solid #001514;
+  border: 2px solid var(--black-color , #001514);
   margin: 30px 0 0;
   background: transparent;
   border-radius: 5px;
@@ -745,22 +899,22 @@ box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
 }
 
 .addroom-section textarea:focus{
-  border: 2px solid #ff7f00;
+  border: 2px solid var(--orange-color, #ff7f00);
 }
 
 
 .addroom-section-form-submitbtn{
   width: 100%;
-  background: #ff7f00;
-  color: #fbfffe;
+  background: var(--orange-color, #ff7f00);
+  color: var(--white-color , #fbfffe);
   padding: 10px 0;
   border: none;
 }
 
 .addroom-section-form-addImageBtn{
     border-radius: 50%;
-    background: #ff7f00;
-    color: #fbfffe;
+    background: var(--orange-color, #ff7f00);
+    color: var(--white-color , #fbfffe);
     cursor: pointer;
     width: 50px;
     height: 50px;

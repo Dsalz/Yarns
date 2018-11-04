@@ -7,6 +7,7 @@ class EstateDetails extends Component{
 
     render(){
         const { estate , houses, rooms} = this.props;
+        document.title = `${estate.name} Estate | Yarns`;
         return(
             <section className="estatedetails-section">
                 <header className = "estatedetails-section-header">

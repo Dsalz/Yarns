@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 export const getLatestRoomsAction = () =>{
-    return{
-        type: "GET_LATEST_ROOMS"
+    return(dispatch, getState)=>{
+        axios.get('/api/v1/rooms/getLatest')
+        .then(resp => dispatch({type: "GET_LATEST_ROOMS", payload:resp.data.rooms}))
+        .catch(err => dispatch({type: "DIDNT_GET_LATEST_ROOMS"}))
     }
 }
 
@@ -24,9 +26,16 @@ export const addRoom = (room, houseName) => {
         const data ={ roomDto , comment}
         axios.post('/api/v1/rooms/add' , data)
         .then(resp => {
-            dispatch({type: "COMMENT_ADDED_SUCCESS", payload: resp.data.comment})
             dispatch({type: "ROOM_ADDED_SUCCESS", payload: resp.data.room})
         })
         .catch(err => dispatch({type: "ROOM_ADDED_FAILED"}))
+    }
+}
+
+export const getRoom = (name) =>{
+    return(dispatch) => {
+        axios.get('/api/v1/rooms/' + name)
+        .then(resp => dispatch({type: "GOT_ROOM" , payload: resp.data.room}) )
+        .catch(err=> dispatch({type: "DIDNT_GET_ROOM"}))
     }
 }

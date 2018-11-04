@@ -6,11 +6,11 @@ const LatestRooms = ({rooms}) =>{
         <section className = "index-latestrooms">
             <h3>Latest Rooms</h3>
             { rooms.map( room => (
-                <section key = {room.id} className = "index-latestrooms-item">
+                <section key = {room._id} className = "index-latestrooms-item">
                     <Link to= { "/house/" + room.houseName } className = "index-latestrooms-house">
                         {room.houseName}
                     </Link>
-                    <Link to = {"/room/" + room.id} className = "index-latestrooms-room">
+                    <Link to = {"/room/" + room.name} className = "index-latestrooms-room">
                      {room.name}
                     </Link>
                 </section>
