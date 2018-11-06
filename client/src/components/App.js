@@ -9,6 +9,7 @@ import EstateDetailsPage from './EstateDetailsComponents/EstateDetails';
 import HouseDetailsPage from './HouseDetailsComponents/HouseDetails';
 import RoomDetailsPage from './RoomComponents/RoomDetails';
 import AddRoomPage from'./RoomComponents/AddRoom';
+import AddCommentPage from './RoomComponents/AddComment';
 // import { connect } from 'react-redux';
 
 
@@ -29,8 +30,9 @@ class App extends Component {
       <Route path = "/signup" component = {SignUpPage}/>
       <Route exact path = "/estate/:estateName" component = {EstateDetailsPage}/>
       <Route exact path = "/house/:houseName" component={HouseDetailsPage} />
-      <Route path = "/room/:roomName" component={RoomDetailsPage} />
+      <Route exact path = "/room/:roomName" component={RoomDetailsPage} />
       <Route path = "/house/:houseName/add" component={AddRoomPage} />
+      <Route path = "/room/:roomName/add" component={AddCommentPage} />
       </Switch>
       <Footer />
       </React.Fragment>

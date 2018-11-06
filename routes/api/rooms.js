@@ -44,8 +44,7 @@ router.post('/add', (req, res) => {
             roomName,
             authorId,
             authorName,
-            replies: [],
-            roomId: room._id
+            replies: []
         })
 
         comment.save().then((comment) => res.json({room, comment}))

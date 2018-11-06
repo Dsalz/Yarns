@@ -36,10 +36,6 @@ const commentSchema = new Schema({
         type: Number,
         default: 0
     },
-    roomId:{
-        type: String,
-        required: true
-    },
     roomName:{
         type: String,
         required: true

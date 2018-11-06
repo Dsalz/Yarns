@@ -8,11 +8,12 @@ export const getComments = (roomName) =>{
     }
 }
 
-export const addComment = (comment) => {
+export const addComment = (comment, roomName) => {
     return(dispatch, getStore) => {
         const store = getStore();
-        axios.post('/api/v1/comments/addComment', comment, setupToken(store))
-        .then(resp => dispatch({type: "ADD_COMMENT_SUCCESS", payload: comment }))
+
+        axios.post('/api/v1/comments/addComment', { comment, roomName }, setupToken(store))
+        .then(resp => dispatch({type: "ADD_COMMENT_SUCCESS", payload: resp.data.savedComment }))
         .catch(err => dispatch({type: "ADD_COMMENT_FAILED"}))
     }
 }
@@ -51,8 +52,14 @@ export const resetReplyAddedAction = () => {
     }
 }
 
+export const resetCommentAddedAction = () => {
+    return{
+        type: "RESET_COMMENT_ADDED"
+    }
+}
+
 const setupToken = (store) =>{
-    const token = store.user.token;
+    let token = store.user.token;
         return {
             headers:{
                 Authorization: "Bearer " + token

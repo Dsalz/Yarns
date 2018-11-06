@@ -19,12 +19,12 @@ class RoomDetails extends Component{
         document.title = `${roomName} | Yarns`;
         return(
             <section className="roomdetails-section">
-            <header>
+            <header className="roomdetails-section-header">
                 <h2 className="roomdetails-section-commenttitle" tabIndex="0">{roomName}</h2>
                 <span className="roomdetails-section-commentno" tabIndex="0">{comments.length === 1 ? "1 Comment" : comments.length + " Comments"}</span>
             </header>
             <main>
-                    <Link to={"/comment/" + roomName + "/add"} className="roomDetails-addcommenttop">
+                    <Link to={"/room/" + roomName + "/add"} className="roomDetails-addcommenttop">
                         +
                     </Link>
                 {comments.map(comment => <Comment {...comment} key={comment._id}/>)}
@@ -44,8 +44,8 @@ const mapStateToProps = (state, ownProps) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        getRoom : (id) => dispatch(getRoom(id)),
-        getComments: (roomId) => dispatch(getComments(roomId))
+        getRoom : (name) => dispatch(getRoom(name)),
+        getComments: (roomName) => dispatch(getComments(roomName))
     }
 }
 

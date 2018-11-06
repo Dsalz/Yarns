@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addReply, deleteReply, deleteComment, resetReplyAddedAction} from '../../actions/commentActions';
 import Reply from './Reply';
+import Modal from '../Modal';
 
 class Comment extends Component {
 
-    componentWillMount(){
-        this.props.resetReplyAdded();
-    }
 
     state = {
         showReplies : false,
@@ -52,10 +50,7 @@ class Comment extends Component {
     addReply = (e) =>{
         e.preventDefault();
         this.props.addReply(this.state.reply , this.props._id);
-        this.setState({
-            showReplies: true,
-            showaddReplyBox: false
-        })
+        
     }
 
     deleteComment = (id) =>{
@@ -66,15 +61,24 @@ class Comment extends Component {
         this.props.deleteReply(id, this.props._id)
     }
 
+    closeModal = () => {
+        this.setState({
+        showReplies: true,
+        showaddReplyBox: false
+        })
+        this.props.resetReplyAdded();
+        
+    }
 
 
     render(){
-        const { id, message , authorName, timeCreated, imageUrl, roomName, accolades, replies, isLoggedIn, currentusername} = this.props;
+        const { _id, message , authorName, timeCreated, imageUrl, roomName, accolades, replies, isLoggedIn, currentusername, replyAdded} = this.props;
         const timeCommented = new Date(timeCreated);
         const months = ["Jan", "Feb", "Mar", "Apr", "May" , "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
         return(
             <React.Fragment>
             <div className="comment" onMouseEnter = {this.showDeleteComment} onMouseLeave = {this.hideDeleteComment}>
+            {replyAdded && <Modal info="Reply Added Succesfully" title="Success" close={this.closeModal} />}
                 <div className="comment-details">
                 <Link className="comment-details-user" to={"/users/" + authorName}>
                     {authorName}
@@ -90,14 +94,24 @@ class Comment extends Component {
                     {imageUrl && <div className="comment-message-image" ><img src={imageUrl} alt={roomName + " Image"} /></div>}
                     {isLoggedIn && (<div className="comment-buttons">
                         <button className="comment-button-accolades">
-                            <img  className= "comment-button-img"  src="/images/generalImgmax.png" alt="reply" />                            
+                            {/* <img  className= "comment-button-img"  src="/images/generalImgmax.png" alt="reply" />*/}
+                            <svg className="comment-button-svg"  id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" ><g><g>
+                                <g>
+                                    <path d="M486.4,25.6h-76.8V0H102.4v25.6H25.6C10.24,25.6,0,35.84,0,51.2v61.44c0,58.88,43.52,107.52,102.4,115.2v2.56    c0,74.24,51.2,135.68,120.32,151.04L204.8,435.2h-58.88c-10.24,0-20.48,7.68-23.04,17.92L102.4,512h307.2l-20.48-58.88    c-2.56-10.24-12.8-17.92-23.04-17.92H307.2l-17.92-53.76c69.12-15.36,120.32-76.8,120.32-151.04v-2.56    c58.88-7.68,102.4-56.32,102.4-115.2V51.2C512,35.84,501.76,25.6,486.4,25.6z M102.4,176.64c-28.16-7.68-51.2-33.28-51.2-64V76.8    h51.2V176.64z M307.2,256L256,227.84L204.8,256l12.8-51.2l-38.4-51.2h53.76L256,102.4l23.04,51.2h53.76l-38.4,51.2L307.2,256z     M460.8,112.64c0,30.72-23.04,58.88-51.2,64V76.8h51.2V112.64z"/>
+                                </g>
+                            </g></g> </svg>
                         </button>
 
                         <button onClick={this.toggleAddReplyBox} className="comment-button-reply">
-                            <img  className= "comment-button-img"  src="/images/careerImgmax.png" alt="reply" />
+                            {/* <img  className= "comment-button-img"  src="/images/careerImgmax.png" alt="reply" /> */}
+                            <svg className="comment-button-svg" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" ><g><g>
+                                <g>
+                                    <path d="M511.563,434.259c-1.728-142.329-124.42-258.242-277.087-263.419V95.999c0-17.645-14.342-31.999-31.974-31.999    c-7.931,0-15.591,3.042-21.524,8.562c0,0-134.828,124.829-173.609,163.755C2.623,241.109,0,248.088,0,255.994    c0,7.906,2.623,14.885,7.369,19.687c38.781,38.915,173.609,163.745,173.609,163.745c5.933,5.521,13.593,8.562,21.524,8.562    c17.631,0,31.974-14.354,31.974-31.999v-74.591c153.479,2.156,255.792,50.603,255.792,95.924c0,5.896,4.767,10.666,10.658,10.666    c0.167,0.021,0.333,0.01,0.416,0c5.891,0,10.658-4.771,10.658-10.666C512,436.259,511.854,435.228,511.563,434.259z"/>
+                                </g>
+                            </g></g> </svg>
                         </button>
                     </div>)}
-                    {(currentusername === authorName && this.state.showDeleteComment) && <button onClick={() => this.deleteComment(id)} className="comment-button-delete">x</button>}
+                    {(currentusername === authorName && this.state.showDeleteComment) && <button onClick={() => this.deleteComment(_id)} className="comment-button-delete">x</button>}
                 </div>
             </div>
             {(replies.length > 0 && this.state.showReplies) && (<div className="comment-replies">

@@ -42,7 +42,7 @@ class LoginPage extends Component{
             <section className="loginsection">
                 {(userExists === false && this.state.submitted) && <Modal info="Invalid Credentials" title="Error" close={this.closeModal} />}
                 {loggingIn && (<div className="logging-in-svg">
-                                <span>Loading</span>
+                                <img src="/images/bigLoading.gif" alt="Logging In" />
                               </div>) }
                 <h2 className="loginsection-header">Login to <span className="loginsection-yarns">Yarns</span></h2>
 

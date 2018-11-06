@@ -17,7 +17,7 @@ module.exports = {
 
     verifyToken: (req, res, next)=>{
         const authorization = req.headers["authorization"] || null;
-
+        console.log(authorization);
         if(!authorization){
             return res.status(403).json({message: "not signed in"})
         }

@@ -1,6 +1,7 @@
 const initState={
     comments : [],
-    replyAdded : null
+    replyAdded : null,
+    commentAdded: null
 }
 
 const commentReducer = (state=initState , action) => {
@@ -17,6 +18,11 @@ const commentReducer = (state=initState , action) => {
     }
     switch(action.type){
 
+        case "RESET_COMMENT_ADDED":
+        return{
+            ...state,
+            commentAdded: null
+        }
         case "GOT_COMMENTS":
         return{
             ...state,
@@ -41,6 +47,22 @@ const commentReducer = (state=initState , action) => {
             ...state,
             comments : [...otherComments , updatedComment],
         }
+
+        case "ADD_COMMENT_SUCCESS":
+        console.log('got back');
+        console.log(action.payload);
+        console.log(state.comments);
+        return{
+            ...state,
+            comments : [...state.comments , action.payload],
+            commentAdded: true
+        }
+
+        case "DELETE_COMMENT_SUCCESS":
+        return{
+            ...state,
+            comments: state.comments.filter(comment => comment._id !== action.payload.id)
+        } 
 
         default:
         return state

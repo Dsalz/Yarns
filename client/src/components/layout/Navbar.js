@@ -31,8 +31,8 @@ class Navbar extends Component{
                 <Link to = "/" className="index-brand">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.89 349.46"><defs></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon className="cls-1" points="16.47 0.54 0 34.93 78.69 149.81 95.16 115.42 16.47 0.54"/><polygon className="cls-1" points="45.29 349.35 45.52 349.46 197.89 31.29 176.55 0.13 176.27 0 23.91 318.14 45.29 349.35"/></g></g></svg>
                 </Link>
-                    {!nightMode && <img src="/images/careerImg.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="night-mode" title="Night Mode" />}
-                    {nightMode && <img src="/images/generalImg.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="day-mode" title="Day Mode" />}
+                    {!nightMode && <img src="/images/lightsOut.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="lights-out" title="Lights Out" />}
+                    {nightMode && <img src="/images/lightsOn.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="lights-on" title="Lights On" />}
                 <section className = "index-navlinks">
                 {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks user = {user} logout = {logout} />}
                 
