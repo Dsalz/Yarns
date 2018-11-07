@@ -35,7 +35,6 @@ class RoomDetails extends Component{
 }
 
 const mapStateToProps = (state, ownProps) =>{
-    console.log(state.comment.comments);
     const comments = state.comment.comments.filter(comment => comment.roomName === ownProps.match.params.roomName).sort((a, b) => new Date(a.timeCreated) - new Date(b.timeCreated));
     return{
         comments

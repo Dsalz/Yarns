@@ -752,7 +752,7 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 .comment-button-svg{
   width: 75%;
   height: 70%;
-  margin-bottom: 25%;
+  margin-bottom: 40%;
   fill: var(--white-color , #fbfffe);
 }
 
@@ -762,6 +762,14 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 
 .roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades{
   margin-right: 10px;
+}
+
+.roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades-given{
+  margin-right: 10px;
+}
+
+.roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades-given .comment-button-svg {
+  fill: var(--black-color , #001514);
 }
 
 .roomdetails-section .comment .comment-message .comment-button-delete{

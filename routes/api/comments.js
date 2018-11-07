@@ -3,6 +3,7 @@ const tokenizer = require('../../middleware/tokenizer');
 
 const Comment = require('../../models/comment');
 const Room = require('../../models/room');
+const User = require('../../models/user');
 
 router.get('/room/:roomName', (req, res)=> {
     Comment.find({roomName : req.params.roomName , isActive: true})
@@ -22,8 +23,8 @@ router.post('/addReply', tokenizer.verifyToken, (req, res) => {
     })
 })
 
-router.delete('/' , tokenizer.verifyToken , (req, res)=>{
-    Comment.findById(req.body.id)
+router.delete('/:id' , tokenizer.verifyToken , (req, res)=>{
+    Comment.findById(req.params.id)
     .then(comment => {
         if(comment.authorId === req.user._id){
             comment.remove().then(() => {
@@ -34,6 +35,36 @@ router.delete('/' , tokenizer.verifyToken , (req, res)=>{
             return res.json({success : false})
         }
     }).catch(err => console.log(err))
+})
+
+router.post('/giveAccolade' , tokenizer.verifyToken, (req, res) => {
+        Comment.findById(req.body.commentId)
+        .then(comment => {
+            comment.accolades += 1;
+            comment.save().then( comment => {
+                User.findById(req.user._id)
+                .then(user => {
+                    (user.accolades) ? user.accolades.push(comment._id) : user.accolades = [].push(comment._id);
+
+                    user.save().then( user => res.json({ user, comment }) )
+                })
+            })
+        }).catch(err => res.json({ err }))
+})
+
+router.post('/removeAccolade' , tokenizer.verifyToken, (req, res) => {
+    Comment.findById(req.body.commentId)
+    .then(comment => {
+        comment.accolades -= 1;
+        comment.save().then( comment => {
+            User.findById(req.user._id)
+            .then(user => {
+                user.accolades = user.accolades.filter(commentId => commentId != req.body.commentId);
+
+                user.save().then( user => res.json({ user, comment }) )
+            })
+        })
+    }).catch(err => res.json({ err }))
 })
 
 router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
@@ -56,9 +87,9 @@ router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
 })
 
 router.delete('/deleteReply', tokenizer.verifyToken, (req, res) => {
-    Comment.findById(req.body.commentId)
+    Comment.findById(req.query.commentId)
     .then(comment => {
-        comment.replies = comment.replies.filter(reply => reply._id === req.body.id)
+        comment.replies = comment.replies.filter(reply => reply._id === req.query.id)
         comment.save().then(comment => res.json({ comment }))
     })
 })

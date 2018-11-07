@@ -11,6 +11,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    accolades : {
+        type: Array,
+        default: []
+    },
     age: {
         type: Number,
         required: true

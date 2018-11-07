@@ -77,6 +77,18 @@ const userReducer = (state = initState , action) => {
             token: ""
         }
 
+        case "USER_ACCOLADES_GIVEN":
+        return {
+            ...state,
+            user : action.payload.updatedUser
+        }
+
+        case "USER_ACCOLADES_REMOVED":
+        return {
+            ...state,
+            user : action.payload.updatedUser
+        }
+
         default: 
         return state;
 

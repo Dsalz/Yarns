@@ -49,9 +49,6 @@ const commentReducer = (state=initState , action) => {
         }
 
         case "ADD_COMMENT_SUCCESS":
-        console.log('got back');
-        console.log(action.payload);
-        console.log(state.comments);
         return{
             ...state,
             comments : [...state.comments , action.payload],
@@ -63,6 +60,18 @@ const commentReducer = (state=initState , action) => {
             ...state,
             comments: state.comments.filter(comment => comment._id !== action.payload.id)
         } 
+
+        case "COMMENT_ACCOLADES_GIVEN":
+        return{
+            ...state,
+            comments: [ ...otherComments , updatedComment]
+        }
+
+        case "COMMENT_ACCOLADES_REMOVED":
+        return{
+            ...state,
+            comments: [...otherComments , updatedComment]
+        }
 
         default:
         return state
