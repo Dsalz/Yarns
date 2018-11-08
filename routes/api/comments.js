@@ -28,7 +28,11 @@ router.delete('/:id' , tokenizer.verifyToken , (req, res)=>{
     .then(comment => {
         if(comment.authorId === req.user._id){
             comment.remove().then(() => {
-                return res.json ({ success : true});
+                Room.find({name : comment.roomName}).then(rooms =>{
+                    const room = rooms[0];
+                    room.commentNo -= 1;
+                    room.save().then(() => res.json({ success : true}))
+                })
             })
         }
         else{
@@ -86,10 +90,10 @@ router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
         })
 })
 
-router.delete('/deleteReply', tokenizer.verifyToken, (req, res) => {
-    Comment.findById(req.query.commentId)
+router.post('/deleteReply', tokenizer.verifyToken, (req, res) => {
+    Comment.findById(req.body.commentId)
     .then(comment => {
-        comment.replies = comment.replies.filter(reply => reply._id === req.query.id)
+        comment.replies = comment.replies.filter(reply => reply._id === req.body.id)
         comment.save().then(comment => res.json({ comment }))
     })
 })

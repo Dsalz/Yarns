@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setupToken } from './tokenActions';
 
 export const getComments = (roomName) =>{
     return(dispatch, getStore)=>{
@@ -10,9 +11,7 @@ export const getComments = (roomName) =>{
 
 export const addComment = (comment, roomName) => {
     return(dispatch, getStore) => {
-        const store = getStore();
-
-        axios.post('/api/v1/comments/addComment', { comment, roomName }, setupToken(store))
+        axios.post('/api/v1/comments/addComment', { comment, roomName }, setupToken())
         .then(resp => dispatch({type: "ADD_COMMENT_SUCCESS", payload: resp.data.savedComment }))
         .catch(err => dispatch({type: "ADD_COMMENT_FAILED"}))
     }
@@ -20,8 +19,7 @@ export const addComment = (comment, roomName) => {
 
 export const deleteComment = (id) => {
     return(dispatch,getStore) => {
-        const store = getStore();
-        axios.delete('/api/v1/comments/' + id, setupToken(store))
+        axios.delete('/api/v1/comments/' + id, setupToken())
         .then(resp => dispatch({type: "DELETE_COMMENT_SUCCESS", payload: { id }}))
         .catch(err => dispatch({type: "DELETE_COMMENT_FAILED"}))
     }
@@ -29,9 +27,8 @@ export const deleteComment = (id) => {
 
 export const addReply = (reply, commentId) => {
     return(dispatch, getStore)=>{
-        const store = getStore();
         
-        axios.post('/api/v1/comments/addReply', { reply , commentId }, setupToken(store))
+        axios.post('/api/v1/comments/addReply', { reply , commentId }, setupToken())
         .then(resp => dispatch({type: "ADD_REPLY_SUCCESS", payload: { updatedComment : resp.data.comment }}))
         .catch(err => dispatch({type: "ADD_REPLY_FAILED"}))
     }
@@ -39,8 +36,7 @@ export const addReply = (reply, commentId) => {
 
 export const deleteReply = (id, commentId) => {
     return (dispatch, getStore) => {
-        const store = getStore();
-        axios.delete('api/v1/comments/deleteReply?id='+ id + "&commentId=" + commentId, setupToken(store))
+        axios.post('/api/v1/comments/deleteReply' , { id , commentId } , setupToken())
         .then(resp => dispatch({type: "DELETE_REPLY_SUCCESS", payload: { updatedComment : resp.data.comment }}))
         .catch(err => dispatch({type: "DELETE_REPLY_FAILED"}))
     }
@@ -48,8 +44,7 @@ export const deleteReply = (id, commentId) => {
 
 export const giveAccolade = (commentId) => {
     return(dispatch, getStore) => {
-        const store = getStore();
-        axios.post("/api/v1/comments/giveAccolade", { commentId } , setupToken(store))
+        axios.post("/api/v1/comments/giveAccolade", { commentId } , setupToken())
         .then(resp => {
             dispatch({ type : "COMMENT_ACCOLADES_GIVEN", payload : { updatedComment : resp.data.comment }})
             dispatch({ type : "USER_ACCOLADES_GIVEN", payload : { updatedUser: resp.data.user }})            
@@ -60,11 +55,10 @@ export const giveAccolade = (commentId) => {
 
 export const removeAccolade = (commentId) => {
     return(dispatch, getStore) => {
-        const store = getStore();
-        axios.post("/api/v1/comments/removeAccolade", { commentId } , setupToken(store))
+        axios.post("/api/v1/comments/removeAccolade", { commentId } , setupToken())
         .then(resp => {
-            dispatch({ type : "COMMENT_ACCOLADES_REMOVED", payload : { commentId }})
-            dispatch({ type : "USER_ACCOLADES_REMOVED", payload : { commentId }})            
+            dispatch({ type : "COMMENT_ACCOLADES_REMOVED", payload : { updatedComment : resp.data.comment }})
+            dispatch({ type : "USER_ACCOLADES_REMOVED", payload : { updatedUser : resp.data.user }})            
         })
         .catch(err => dispatch({type: "COMMENT_ACCOLADES_NOT_REMOVED"}))
     }
@@ -80,13 +74,4 @@ export const resetCommentAddedAction = () => {
     return{
         type: "RESET_COMMENT_ADDED"
     }
-}
-
-const setupToken = (store) =>{
-    let token = store.user.token;
-        return {
-            headers:{
-                Authorization: "Bearer " + token
-            }
-        }
 }

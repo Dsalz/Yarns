@@ -40,7 +40,7 @@ class AddComment extends Component{
         document.title = "Add Comment | Yarns";
         const { roomName } = this.props.match.params;
         const {isLoggedIn , commentAdded } = this.props;
-        return(commentAdded) ? <Redirect to={"/room/" + roomName} /> : (
+        return(!isLoggedIn) ? <Redirect to="/login" /> : (commentAdded) ? <Redirect to={"/room/" + roomName} /> : (
             <section className="addroom-section">
                 <header>
                     <h2>New Comment</h2>

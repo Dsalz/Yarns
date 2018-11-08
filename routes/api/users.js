@@ -26,6 +26,10 @@ router.post('/CheckUsernameAvailability', (req, res) => {
     .catch(err => res.json({ err }) )
 })
 
+router.get('/checkLoginStatus' , tokenizer.verifyToken , (req, res) => {
+    return res.json({ user : req.user});
+})
+
 router.post('/Login', (req, res) =>{
     // TODO Add new token to response;
     User.find({email: req.body.email , password: req.body.password}).then( resp => {

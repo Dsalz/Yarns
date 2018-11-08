@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setupToken } from './tokenActions';
 
 export const getLatestRoomsAction = () =>{
     return(dispatch, getState)=>{
@@ -13,18 +14,14 @@ export const addRoom = (room, houseName) => {
         const state = getState();
         const roomDto = {
             name: room.name,
-            houseName: houseName,
-            creatorId: state.user.user._id,
-            creatorName: state.user.user.username
+            houseName: houseName
         }
         const comment = {
             message: room.commentText,
-            roomName: room.name,
-            authorId: state.user.user._id,
-            authorName: state.user.user.username
+            roomName: room.name
         }
         const data ={ roomDto , comment}
-        axios.post('/api/v1/rooms/add' , data)
+        axios.post('/api/v1/rooms/add' , data, setupToken())
         .then(resp => {
             dispatch({type: "ROOM_ADDED_SUCCESS", payload: resp.data.room})
         })

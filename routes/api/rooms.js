@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const tokenizer = require('../../middleware/tokenizer');
+
 const Room = require('../../models/room');
 const Comment = require('../../models/comment');
 
@@ -25,25 +27,25 @@ router.get('/:roomName', (req, res) => {
     .catch(err => console.log(err));
 })
 
-router.post('/add', (req, res) => {
+router.post('/add', tokenizer.verifyToken, (req, res) => {
     
-    const {name, houseName, creatorId, creatorName} = req.body.roomDto;
+    const {name, houseName } = req.body.roomDto;
 
     const room = new Room({
         name,
         houseName,
-        creatorId,
-        creatorName
+        creatorId : req.user._id,
+        creatorName : req.user.username
     });
 
     room.save().then((room) => {
-        const { message, roomName, authorId, authorName } = req.body.comment;
+        const { message, roomName } = req.body.comment;
 
         const comment = new Comment({
             message,
             roomName,
-            authorId,
-            authorName,
+            authorId : req.user._id,
+            authorName : req.user.username,
             replies: []
         })
 

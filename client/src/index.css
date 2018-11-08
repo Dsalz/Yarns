@@ -342,6 +342,10 @@ input, textarea{
   padding: 40px 0 0;
 }
 
+.loginsection form span{
+  position: relative;
+}
+
 .loginsection input{
   border: none;
   border-bottom: 2px solid var(--black-color , #001514);
@@ -365,10 +369,11 @@ input, textarea{
 }
 
 .loginsection-usernamecheckingimg{
-  position: relative;
-  left:-20px;
-  width:10px;
-  height: 10px;
+  position: absolute;
+  top:-8px;
+  left:-40px;
+  width:30px;
+  height: 30px;
 }
 
 .logging-in-svg{

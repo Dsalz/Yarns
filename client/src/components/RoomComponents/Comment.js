@@ -74,10 +74,12 @@ class Comment extends Component {
     render(){
         const { _id, message , authorName, timeCreated, imageUrl, roomName, accolades, replies, isLoggedIn, currentusername, replyAdded, giveAccolade , removeAccolade, userAccolades} = this.props;
         const timeCommented = new Date(timeCreated);
-        let accoladeGiven = false;
+        let accoladeGiven = null;
         if(isLoggedIn){
            accoladeGiven  = userAccolades.indexOf(_id) > 0; 
         }
+        console.log( message);
+        console.log(replies);
         const months = ["Jan", "Feb", "Mar", "Apr", "May" , "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
         return(
             <React.Fragment>

@@ -10,14 +10,16 @@ import HouseDetailsPage from './HouseDetailsComponents/HouseDetails';
 import RoomDetailsPage from './RoomComponents/RoomDetails';
 import AddRoomPage from'./RoomComponents/AddRoom';
 import AddCommentPage from './RoomComponents/AddComment';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import {  checkLoginStatusAction } from '../actions/userActions';
 
 
 class App extends Component {
 
-  // componentDidMount(){
-  //   this.props.checkLoginStatus()
-  // }
+  componentDidMount(){
+    alert('checking de ting');
+    this.props.checkLoginStatus()
+  }
 
   render() {
     return (
@@ -41,4 +43,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return{
+    checkLoginStatus: () => dispatch(checkLoginStatusAction())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

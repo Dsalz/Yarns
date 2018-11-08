@@ -46,12 +46,19 @@ const userReducer = (state = initState , action) => {
             usernameAvailable: null
         }
 
-        case "LOGGING_IN" :{
+        case "LOGGING_IN" :
             return{
                 ...state,
                 loggingIn: true,
                 userExists: null
             }
+        
+
+        case "CONFIRMED_LOGIN_STATUS":
+        return{
+            ...state,
+            user: action.payload.user,
+            isLoggedIn: true
         }
 
         case "LOGIN_USER":

@@ -20,7 +20,7 @@ class Reply extends Component {
     }
 
     render() {
-        const {id, message, authorName, currentusername, deleteReply} = this.props;
+        const {_id, message, authorName, currentusername, deleteReply} = this.props;
         return(
             <div className="reply" onMouseEnter={this.showDeleteReply} onMouseLeave={this.hideDeleteReply}>
                 <div className="reply-info">
@@ -28,7 +28,7 @@ class Reply extends Component {
                 </div>
                 <div className="reply-message">
                     {message}
-                {(currentusername === authorName && this.state.showDeleteReply) && <button onClick={() => deleteReply(id)} className="reply-delete">x</button>}
+                {(currentusername === authorName && this.state.showDeleteReply) && <button onClick={() => deleteReply(_id)} className="reply-delete">x</button>}
                 </div>
             </div>
         )
