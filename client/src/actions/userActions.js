@@ -9,7 +9,7 @@ export const toggleNightMode = () => {
 
 export const checkLoginStatusAction = () =>{
     return(dispatch) => {
-        axios.get('api/v1/users/checkLoginStatus' , setupToken())
+        axios.get('/api/v1/users/checkLoginStatus' , setupToken())
         .then(resp => dispatch({type: "CONFIRMED_LOGIN_STATUS" , payload: resp.data}))
         .catch(err => dispatch({type: "COULDNT_CONFIRM_LOGIN_STATUS"}))
     }
@@ -58,6 +58,7 @@ export const signUpAction = (user) => {
 }
 
 export const logoutUserAction = () => {
+    storeToken("");
     return{
         type: "LOGOUT_USER"
     }

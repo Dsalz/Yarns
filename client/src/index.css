@@ -139,6 +139,10 @@ input, textarea{
   margin-top: -5px;
 }
 
+.index-navlinks svg.newnotification {
+  fill: var(--black-color , #001514);
+}
+
 .index-navlinks a{
   padding: 10px;
   text-transform: uppercase;
@@ -662,6 +666,7 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 
 .roomdetails-section .comment{
   display: flex;
+  flex-wrap: wrap;
   width: 80%;
   margin: 10px auto;
   border-radius: 5px;
@@ -670,20 +675,22 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 
 .roomdetails-section .comment .comment-details{
   background: var(--orange-color, #ff7f00);
-  width: 20%;
+  width: 100%;
   color: var(--white-color , #fbfffe);
   padding: 10px;
   text-align: center;
   font-size:15px;
-  border-radius: 5px 0 0 5px;
   position: relative;
+  order: 2;
+  display: flex;
 }
 
 .roomdetails-section .comment .comment-details .comment-details-user{
   font-size: 20px;
-  margin-bottom: 10px;
   color: var(--white-color , #fbfffe);
   display: block;
+  width: 40%;
+  text-align: left;
 }
 
 .roomdetails-section .comment .comment-details .comment-accolades{
@@ -695,12 +702,10 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
 
 .roomdetails-section .comment .comment-details .comment-timecreated-time{
-  margin-bottom: 0px;
   display: block;
 }
 
 .roomdetails-section .comment .comment-details .comment-timecreated-date{
-  margin-bottom: 30px;
   display: block;
 }
 
@@ -715,12 +720,15 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
 
 .roomdetails-section .comment .comment-message{
-  width: 80%;
+  width: 100%;
+  order: 1;
+  min-height: 150px;
   background: var(--white-color , #fbfffe);
   color: var(--black-color , #001514);
   padding: 10px;
   font-size: 20px;
   position: relative;
+  border-radius: 5px;
 }
 
 .roomdetails-section .comment .comment-message .comment-message-image{
@@ -777,6 +785,10 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   fill: var(--black-color , #001514);
 }
 
+.roomdetails-section .comment .comment-message .comment-buttons .comment-button-reply-showing .comment-button-svg {
+  fill: var(--black-color , #001514);
+}
+
 .roomdetails-section .comment .comment-message .comment-button-delete{
   position: absolute;
   top: 0px;
@@ -791,14 +803,15 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
 
 .roomdetails-section .comment-replies{
-  width:90%;
-  margin-right: auto;
-  margin-top:10px;
+  width:80%;
+  margin: 10px auto 5px;
 }
 
 .roomdetails-section .comment-replies .reply{
   display:flex;
+  width: 90%;
   margin: 5px 0;
+  margin-right: auto;
   box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
@@ -836,7 +849,7 @@ color: var(--white-color , #fbfffe);
 }
 
 .comment-reply-form{
-  width: 100%;
+  width: 80%;
   background: var(--white-color , #fbfffe);
   box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
   margin: 0 auto;
@@ -854,9 +867,9 @@ color: var(--white-color , #fbfffe);
   font-size: 20px;
 }
 
-.comment-reply-textarea:focus{
+/* .comment-reply-textarea:focus{
   border: 1px solid var(--orange-color, #ff7f00);
-}
+} */
 
 .comment-reply-btn{
     background: var(--orange-color, #ff7f00);
@@ -971,6 +984,70 @@ color: var(--white-color , #fbfffe);
   text-align: right;
   width: 90%;
 }
+
+.notifications-section{
+  margin-top: 120px;
+}
+
+.notifications-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.notification-item{
+  width: 100%;
+  padding: 0 5%;
+  background-color: transparent;
+  transition: background-color 2s linear;
+}
+
+.notification-item .isNotRead{
+  background-color: rgba(255, 127, 0 , .3);
+}
+
+.notification-item hr{
+  width: 80%;
+  margin: 5px auto;
+  border: 2px solid var(--orange-color , #ff7f00);
+}
+
+.notification-item-core{
+  display: flex;
+}
+
+.notification-item-img{
+  width: 20%;
+  text-align: center;
+}
+
+.notification-item-img svg{
+  width: 50px;
+  height: 50px;
+  fill: var(--orange-color , #ff7f00);
+}
+
+.notification-item-msg{
+  width: 80%;
+  text-align: left;
+  color: var(--orange-color , #ff7f00);
+}
+
+.notifications-empty-state{
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notifications-empty-state h4{
+  color: var(--orange-color , #ff7f00);
+  opacity: 0.5;
+}
+
+
+
+
 
 
 

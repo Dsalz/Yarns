@@ -17,7 +17,6 @@ import {  checkLoginStatusAction } from '../actions/userActions';
 class App extends Component {
 
   componentDidMount(){
-    alert('checking de ting');
     this.props.checkLoginStatus()
   }
 
@@ -35,6 +34,7 @@ class App extends Component {
       <Route exact path = "/room/:roomName" component={RoomDetailsPage} />
       <Route path = "/house/:houseName/add" component={AddRoomPage} />
       <Route path = "/room/:roomName/add" component={AddCommentPage} />
+      <Route path= "/notifications" component={Notifications} />
       </Switch>
       <Footer />
       </React.Fragment>
