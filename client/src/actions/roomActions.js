@@ -11,7 +11,6 @@ export const getLatestRoomsAction = () =>{
 
 export const addRoom = (room, houseName) => {
     return(dispatch , getState) =>{
-        const state = getState();
         const roomDto = {
             name: room.name,
             houseName: houseName

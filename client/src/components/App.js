@@ -10,6 +10,7 @@ import HouseDetailsPage from './HouseDetailsComponents/HouseDetails';
 import RoomDetailsPage from './RoomComponents/RoomDetails';
 import AddRoomPage from'./RoomComponents/AddRoom';
 import AddCommentPage from './RoomComponents/AddComment';
+import NotificationsPage from './NotificationsComponents/Notifications';
 import { connect } from 'react-redux';
 import {  checkLoginStatusAction } from '../actions/userActions';
 
@@ -34,7 +35,7 @@ class App extends Component {
       <Route exact path = "/room/:roomName" component={RoomDetailsPage} />
       <Route path = "/house/:houseName/add" component={AddRoomPage} />
       <Route path = "/room/:roomName/add" component={AddCommentPage} />
-      <Route path= "/notifications" component={Notifications} />
+      <Route path= "/notifications" component={NotificationsPage} />
       </Switch>
       <Footer />
       </React.Fragment>

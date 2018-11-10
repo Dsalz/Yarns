@@ -15,7 +15,7 @@ const notificationSchema = new Schema({
         type: String,
         required: true
     },
-    creatoruserName : {
+    creatorUsername : {
         type: String,
         required: true
     },

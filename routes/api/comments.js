@@ -4,6 +4,7 @@ const tokenizer = require('../../middleware/tokenizer');
 const Comment = require('../../models/comment');
 const Room = require('../../models/room');
 const User = require('../../models/user');
+const Notification = require('../../models/notification');
 
 router.get('/room/:roomName', (req, res)=> {
     Comment.find({roomName : req.params.roomName , isActive: true})
@@ -19,7 +20,16 @@ router.post('/addReply', tokenizer.verifyToken, (req, res) => {
             authorName: req.user.username,
             authorId: req.user._id
         }) 
-        comment.save().then(comment => res.json({ comment }))
+        comment.save().then(updatedComment => {
+            const notification = new Notification({
+                type: "new_reply",
+                message: ` replied "${req.body.reply}" to your comment "${comment.message}" in the ${comment.roomName} room.`,
+                recipientId: comment.authorId,
+                creatorUsername: req.user.username
+            })
+
+            notification.save().then( () => res.json({ comment: updatedComment }) )
+        })
     })
 })
 
@@ -50,7 +60,16 @@ router.post('/giveAccolade' , tokenizer.verifyToken, (req, res) => {
                 .then(user => {
                     (user.accolades) ? user.accolades.push(comment._id) : user.accolades = [].push(comment._id);
 
-                    user.save().then( user => res.json({ user, comment }) )
+                    user.save().then( user => {
+                        const notification = new Notification({
+                            type: "accolade_given",
+                            recipientId: comment.authorId,
+                            creatorUsername: req.user.username,
+                            message: ` gave your comment "${comment.message}" in the ${comment.roomName} room an accolade`
+                        })
+
+                        notification.save().then(() => res.json({ user, comment }) )
+                    })
                 })
             })
         }).catch(err => res.json({ err }))
@@ -85,7 +104,16 @@ router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
             Room.find({name : req.body.roomName}).then(rooms =>{
                 const room = rooms[0];
                 room.commentNo += 1;
-                room.save().then(() => res.json({ savedComment }))
+                room.save().then(() => {
+                    const notification = new Notification({
+                        type: "new_comment_in_room",
+                        recipientId: room.creatorId,
+                        creatorUsername: req.user.username,
+                        message: ` commented "${req.body.comment.commentText}" in the ${req.body.roomName} room you created`
+                    });
+
+                    notification.save().then(() => res.json({ savedComment }))
+                })
             })
         })
 })

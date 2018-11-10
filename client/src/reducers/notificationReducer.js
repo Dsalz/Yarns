@@ -13,9 +13,12 @@ const notificationReducer = ( state = initState , action) => {
         }
 
         case "MARKED_ALL_AS_READ" :
+        let readNotifs = state.notifications.filter(notif => notif.isRead )
+        let unreadNotifs = state.notifications.filter(notif => !notif.isRead )
+        let updatedNotifs = unreadNotifs.map(notif => notif.isRead = true);
         return{
             ...state,
-            notifications : action.payload.notifications,
+            notifications : [...readNotifs , ...updatedNotifs],
             newNotification: false
         }
 
@@ -23,3 +26,5 @@ const notificationReducer = ( state = initState , action) => {
         return state
     }
 }
+
+export default notificationReducer;

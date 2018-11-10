@@ -20,6 +20,18 @@ class Navbar extends Component{
             document.body.style.setProperty('--black-color' , '#001514')
             document.body.style.setProperty('--large-box-shadow' , '0px 0px 15px 2px rgba(0,0,0, 0.2)')
             document.body.style.setProperty('--small-box-shadow' , '0px 0px 5px 1px rgba(0,0,0, 0.2)')
+        } 
+
+        let notificationChecker;
+
+        if(nextProps.isLoggedIn){
+            this.props.getNotifications();
+
+            notificationChecker = setInterval( () => {
+                this.props.getNotifications();
+            }, 10000)
+        }else{
+            clearInterval(notificationChecker);
         }
     }
     toggleNightMode = () =>{

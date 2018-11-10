@@ -4,7 +4,7 @@ import { setupToken } from './tokenActions';
 export const markAllAsReadAction = () => {
     return(dispatch) => {
         axios.get('/api/v1/notifications/markAllAsRead' , setupToken() )
-        .then(resp => dispatch({type: "MARKED_ALL_AS_READ" , payload: {notifications : resp.data.notifications}}))
+        .then(resp => dispatch({type: "MARKED_ALL_AS_READ" , payload: resp.data.success}))
         .catch(err => dispatch({type: "ERROR_MARKING_ALL_AS_READ"}))
     }
 }

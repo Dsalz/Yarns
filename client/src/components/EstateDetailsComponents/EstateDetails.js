@@ -43,7 +43,7 @@ class EstateDetails extends Component{
                     </div>
 
                     { rooms.map( room => (
-                        <Link className="estatedetails-section-room-item" to={"/room/" + room.id} key={room.id}>
+                        <Link className="estatedetails-section-room-item" to={"/room/" + room.id} key={room._id}>
                             {room.name}
                         </Link>
                     ))}
@@ -56,10 +56,10 @@ class EstateDetails extends Component{
 }
 
 const mapStateToProps = (state, ownProps) =>{
-    console.log(ownProps);
     const estate = state.estate.estates.find(estate => estate.name === ownProps.match.params.estateName);
     const houses = state.house.houses.filter(house => house.estateid === estate.id);
-    const rooms = state.room.rooms.filter(room => room.estateId === estate.id);
+    const housesArr = houses.reduce((a,b) => a.concat(b.name) , []);
+    const rooms = state.room.rooms.filter(room => housesArr.indexOf(room.houseName) >= 0);
 
     return{
         estate,
