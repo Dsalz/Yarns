@@ -21,14 +21,20 @@ router.post('/addReply', tokenizer.verifyToken, (req, res) => {
             authorId: req.user._id
         }) 
         comment.save().then(updatedComment => {
-            const notification = new Notification({
-                type: "new_reply",
-                message: ` replied "${req.body.reply}" to your comment "${comment.message}" in the ${comment.roomName} room.`,
-                recipientId: comment.authorId,
-                creatorUsername: req.user.username
-            })
 
-            notification.save().then( () => res.json({ comment: updatedComment }) )
+            if(req.user._id != comment.authorId){
+                const notification = new Notification({
+                    type: "new_reply",
+                    message: ` replied "${req.body.reply}" to your comment "${comment.message}" in the ${comment.roomName} room.`,
+                    recipientId: comment.authorId,
+                    creatorUsername: req.user.username
+                })
+    
+                notification.save().then( () => res.json({ comment: updatedComment }) )
+            }
+            else{
+                return res.json({ comment : updatedComment})
+            }
         })
     })
 })
@@ -61,14 +67,20 @@ router.post('/giveAccolade' , tokenizer.verifyToken, (req, res) => {
                     (user.accolades) ? user.accolades.push(comment._id) : user.accolades = [].push(comment._id);
 
                     user.save().then( user => {
-                        const notification = new Notification({
-                            type: "accolade_given",
-                            recipientId: comment.authorId,
-                            creatorUsername: req.user.username,
-                            message: ` gave your comment "${comment.message}" in the ${comment.roomName} room an accolade`
-                        })
 
-                        notification.save().then(() => res.json({ user, comment }) )
+                        if(req.user._id !== comment.authorId){
+                            const notification = new Notification({
+                                type: "accolade_given",
+                                recipientId: comment.authorId,
+                                creatorUsername: req.user.username,
+                                message: ` gave your comment "${comment.message}" in the ${comment.roomName} room an accolade`
+                            })
+    
+                            notification.save().then(() => res.json({ user, comment }) )
+                        }
+                        else{
+                            return res.json({ user, comment})
+                        }
                     })
                 })
             })
@@ -90,6 +102,16 @@ router.post('/removeAccolade' , tokenizer.verifyToken, (req, res) => {
     }).catch(err => res.json({ err }))
 })
 
+router.get('/mine' , tokenizer.verifyToken , (req, res) => {
+    Comment.find({ authorId : req.user._id})
+    .then(comments => res.json({ comments }))
+})
+
+router.get('/getUserComments/:username' , (req, res) => {
+    Comment.find({authorName : req.params.username})
+    .then(comments => res.json({ comments }))
+})
+
 router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
         var comment = new Comment ({
             message: req.body.comment.commentText,
@@ -105,14 +127,20 @@ router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
                 const room = rooms[0];
                 room.commentNo += 1;
                 room.save().then(() => {
-                    const notification = new Notification({
-                        type: "new_comment_in_room",
-                        recipientId: room.creatorId,
-                        creatorUsername: req.user.username,
-                        message: ` commented "${req.body.comment.commentText}" in the ${req.body.roomName} room you created`
-                    });
+                    if(req.user._id !== room.creatorId){
+                        const notification = new Notification({
+                            type: "new_comment_in_room",
+                            recipientId: room.creatorId,
+                            creatorUsername: req.user.username,
+                            message: ` commented "${req.body.comment.commentText}" in the ${req.body.roomName} room you created`
+                        });
 
-                    notification.save().then(() => res.json({ savedComment }))
+                        notification.save().then(() => res.json({ savedComment }))
+                    }
+                    else{
+                        return res.json({ savedComment });
+                    }
+
                 })
             })
         })

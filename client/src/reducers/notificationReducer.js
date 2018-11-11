@@ -1,6 +1,6 @@
 const initState = {
     notifications : [],
-    newNotification : false
+    newNotification : 'none'
 }
 
 const notificationReducer = ( state = initState , action) => {

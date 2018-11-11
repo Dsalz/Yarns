@@ -12,18 +12,31 @@ class Comment extends Component {
         showReplies : false,
         showaddReplyBox: false,
         reply: "",
-        showDeleteComment: false
+        showAltOptions: false,
+        showDeleteCommentModal: false
     }
 
-    showDeleteComment = () => {
+    showAltOptions = () => {
         this.setState({
-            showDeleteComment: true
+            showAltOptions: true
         })
     }
 
-    hideDeleteComment = () =>{
+    hideAltOptions = () =>{
         this.setState({
-            showDeleteComment: false
+            showAltOptions: false
+        })
+    }
+
+    showDeleteCommentModal = () => {
+        this.setState({
+            showDeleteCommentModal: true
+        })
+    }
+
+    hideDeleteCommentModal = () => {
+        this.setState({
+            showDeleteCommentModal: false
         })
     }
 
@@ -61,14 +74,15 @@ class Comment extends Component {
         this.props.deleteReply(id, this.props._id)
     }
 
-    closeModal = () => {
-        this.setState({
-        showReplies: true,
-        showaddReplyBox: false
-        })
+    closeReplyAddedModal = () => {
         this.props.resetReplyAdded();
-        
+        this.setState({
+            showReplies: true,
+            showaddReplyBox: false
+            })
     }
+
+
 
 
     render(){
@@ -81,22 +95,32 @@ class Comment extends Component {
         const months = ["Jan", "Feb", "Mar", "Apr", "May" , "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
         return(
             <React.Fragment>
-            <div className="comment" onMouseEnter = {this.showDeleteComment} onMouseLeave = {this.hideDeleteComment}>
-            {replyAdded && <Modal info="Reply Added Succesfully" title="Success" close={this.closeModal} />}
+            <div className="comment" onMouseEnter = {this.showAltOptions} onMouseLeave = {this.hideAltOptions}>
+            {replyAdded && <Modal info="Reply Added Succesfully" title="Success" close={this.closeReplyAddedModal} />}
+            {this.state.showDeleteCommentModal && <Modal info="Are you sure you want to delete this comment?" title="Delete Comment" close={this.hideDeleteCommentModal} options = {true} optionAFunc={this.hideDeleteCommentModal} optionAText = "Close" optionBFunc={() => this.deleteComment(_id)} optionBText = "Delete"/>}
                 <div className="comment-details">
-                <Link className="comment-details-user" to={"/users/" + authorName}>
+                <Link className="comment-details-user" to={"/user/" + authorName}>
                     {authorName}
                 </Link>
-               { accolades > 0 && <span className="comment-accolades">{(accolades !== 1) ? accolades + " accolades" : accolades + " accolade"}</span>} 
+               { accolades > 0 && <span className="comment-accolades">{accolades}{(<svg className="comment-accolades-svg" viewBox="0 0 512 512" ><g><g>
+                                <g>
+                                    <path d="M486.4,25.6h-76.8V0H102.4v25.6H25.6C10.24,25.6,0,35.84,0,51.2v61.44c0,58.88,43.52,107.52,102.4,115.2v2.56    c0,74.24,51.2,135.68,120.32,151.04L204.8,435.2h-58.88c-10.24,0-20.48,7.68-23.04,17.92L102.4,512h307.2l-20.48-58.88    c-2.56-10.24-12.8-17.92-23.04-17.92H307.2l-17.92-53.76c69.12-15.36,120.32-76.8,120.32-151.04v-2.56    c58.88-7.68,102.4-56.32,102.4-115.2V51.2C512,35.84,501.76,25.6,486.4,25.6z M102.4,176.64c-28.16-7.68-51.2-33.28-51.2-64V76.8    h51.2V176.64z M307.2,256L256,227.84L204.8,256l12.8-51.2l-38.4-51.2h53.76L256,102.4l23.04,51.2h53.76l-38.4,51.2L307.2,256z     M460.8,112.64c0,30.72-23.04,58.88-51.2,64V76.8h51.2V112.64z"/>
+                                </g>
+               </g></g> </svg>) }</span>} 
+                <div className = "comment-timecreated">
                 <span className="comment-timecreated-time">{timeCommented.toLocaleTimeString()}</span>                
                 <span className="comment-timecreated-date">{timeCommented.getDate() + '-' + months[timeCommented.getMonth()] + "-" + String(Number(timeCommented.getYear()) + 1900)}</span>
+                </div>
                 {(replies.length > 0 && !this.state.showReplies) && <a href="/" className="comment-repliestoggle" onClick={this.toggleReplies}>Show Replies</a>}
                 {(replies.length > 0 && this.state.showReplies) && <a href="/" className="comment-repliestoggle" onClick={this.toggleReplies}>Hide Replies</a>}
                 </div>
                 <div className="comment-message">
+                <Link className="comment-room" to = {`/room/${roomName}`}>
+                    {roomName}
+                </Link>
                     {message}
                     {imageUrl && <div className="comment-message-image" ><img src={imageUrl} alt={roomName + " Image"} /></div>}
-                    {isLoggedIn && (<div className="comment-buttons">
+                    {(isLoggedIn && this.state.showAltOptions)&& (<div className="comment-buttons">
                        { !accoladeGiven && <button onClick={() => giveAccolade(_id)} className="comment-button-accolades">
                             <svg className="comment-button-svg"  id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" ><g><g>
                                 <g>
@@ -122,7 +146,7 @@ class Comment extends Component {
                             </g></g> </svg>
                         </button>
                     </div>)}
-                    {(currentusername === authorName && this.state.showDeleteComment) && <button onClick={() => this.deleteComment(_id)} className="comment-button-delete">x</button>}
+                    {(currentusername === authorName && this.state.showAltOptions) && <button onClick={this.showDeleteCommentModal} className="comment-button-delete">x</button>}
                 </div>
             </div>
             {(replies.length > 0 && this.state.showReplies) && (<div className="comment-replies">

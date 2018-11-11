@@ -4,8 +4,9 @@ const initState = {
     usernameAvailable : null,
     token : "",
     loggingIn : false,
-    user: {},
-    nightMode: false
+    user: { accolades:[], followers:[], followings:[], roomsCreated:0 },
+    nightMode: false,
+    otherUser: {username: "", name:"", accolades:[], followers:[], followings:[], roomsCreated:0}
 };
 
 
@@ -87,13 +88,47 @@ const userReducer = (state = initState , action) => {
         case "USER_ACCOLADES_GIVEN":
         return {
             ...state,
-            user : action.payload.updatedUser
+            user : {...action.payload.updatedUser}
         }
 
         case "USER_ACCOLADES_REMOVED":
         return {
             ...state,
-            user : action.payload.updatedUser
+            user : {...action.payload.updatedUser}
+        }
+
+        case "UPDATED_USER":
+        return{
+            ...state,
+            user: action.payload.user
+        }
+
+        case "GOT_OTHER_USER":
+        return{
+            ...state,
+            otherUser: action.payload
+        }
+
+        case "FOLLOWED_USER":
+        console.log(action.payload.otherUser);
+        return{
+            ...state,
+            user : {
+                ...state.user,
+                followings: [...state.user.followings , action.payload.username],
+                otherUser: {...action.payload.otherUser}
+            }
+        }
+
+        case "UNFOLLOWED_USER":
+        console.log(action.payload.otherUser);
+        return {
+            ...state,
+            user : {
+                ...state.user,
+                followings: [...state.user.followings].filter(following => following !== action.payload.username),
+                otherUser: {...action.payload.otherUser}
+            }
         }
 
         default: 

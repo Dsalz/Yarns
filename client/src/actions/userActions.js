@@ -9,9 +9,41 @@ export const toggleNightMode = () => {
 
 export const checkLoginStatusAction = () =>{
     return(dispatch) => {
-        axios.get('/api/v1/users/checkLoginStatus' , setupToken())
+        axios.get('/api/v1/users/getUser' , setupToken())
         .then(resp => dispatch({type: "CONFIRMED_LOGIN_STATUS" , payload: resp.data}))
         .catch(err => dispatch({type: "COULDNT_CONFIRM_LOGIN_STATUS"}))
+    }
+}
+
+export const updateUserAction = () => {
+    return(dispatch) => {
+        axios.get('/api/v1/users/getUser' , setupToken())
+        .then(resp => dispatch({type: "UPDATED_USER" , payload: resp.data}))
+        .catch(err => dispatch({type: "COULDNT_UPDATE_USER"}))
+    }
+}
+
+export const getOtherUserAction =(username) =>{
+    return(dispatch) => {
+        axios.get('/api/v1/users/getOtherUser/' + username)
+        .then(resp => dispatch({type: "GOT_OTHER_USER" , payload:resp.data.user}))
+        .catch(err => dispatch({type :"DIDNT_GET_OTHER_USER"}))
+    }
+}
+
+export const followUserAction = (username) => {
+    return(dispatch)=> {
+        axios.post('/api/v1/users/followUser', {username} , setupToken())
+        .then(resp => dispatch({type: "FOLLOWED_USER" , payload: {username , otherUser: resp.data.user}}))
+        .catch(err => dispatch({type:"COULDNT_FOLLOW_USER"}))
+    }
+}
+
+export const unfollowUserAction = (username) => {
+    return(dispatch)=> {
+        axios.post('/api/v1/users/unfollowUser', {username} , setupToken())
+        .then(resp => dispatch({type: "UNFOLLOWED_USER" , payload:{ username , otherUser: resp.data.user}}))
+        .catch(err => dispatch({type:"COULDNT_UNFOLLOW_USER"}))
     }
 }
 

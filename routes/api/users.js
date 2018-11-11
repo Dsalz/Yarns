@@ -4,6 +4,7 @@ const tokenizer = require('../../middleware/tokenizer');
 const router = express.Router();
 
 const User = require('../../models/user');
+const Notification = require('../../models/notification');
 
 router.post('/SignUp', (req, res) =>{
     const user = new User({
@@ -26,12 +27,71 @@ router.post('/CheckUsernameAvailability', (req, res) => {
     .catch(err => res.json({ err }) )
 })
 
-router.get('/checkLoginStatus' , tokenizer.verifyToken , (req, res) => {
-    return res.json({ user : req.user});
+router.get('/getUser' , tokenizer.verifyToken , (req, res) => {
+    User.findById(req.user._id)
+    .then(user => res.json({ user }))
+    .catch(err => res.json({success: false}))
+})
+
+router.get('/getOtherUser/:username', (req, res) => {
+    User.find({username: req.params.username})
+    .then(user => {
+        let foundUser = user[0];
+        foundUser.password = "xxxxxxxxx";
+        return res.json({ user: foundUser })
+    })
+})
+
+router.post('/followUser', tokenizer.verifyToken, (req, res)=>{
+    User.findById(req.user._id)
+    .then(user => {
+        user.followings.push(req.body.username);
+        user.save().then(() => {
+            User.find({username : req.body.username})
+            .then( users => {
+                const followedUser = users[0];
+                followedUser.followers.push(req.user.username);
+                followedUser.save().then(updatedUser => {
+                    const notification = new Notification({
+                        type: "new_follow",
+                        recipientId: followedUser._id,
+                        creatorUsername: req.user.username,
+                        message: ` followed you`
+                    
+                    })
+
+                    notification.save().then( () => {
+                        updatedUser.password = "xxxxxxxxx";
+                        return res.json({user : updatedUser})
+                    })
+                })
+            })
+        })
+    })
+})
+
+router.post('/unfollowUser', tokenizer.verifyToken, (req, res)=>{
+    User.findById(req.user._id)
+    .then(user => {
+        user.followings = user.followings.filter(following => following != req.body.username);
+        user.save().then(() => {
+            User.find({username : req.body.username})
+            .then( users => {
+                const followedUser = users[0];
+                followedUser.followers = followedUser.followers.filter(follower => follower != req.user.username);
+                followedUser.save().then(updatedUser => {
+                    
+                    updatedUser.password = "xxxxxxxxx";
+
+                    res.json({user : updatedUser})
+                
+                })
+            })
+        })
+    })
 })
 
 router.post('/Login', (req, res) =>{
-    // TODO Add new token to response;
     User.find({email: req.body.email , password: req.body.password}).then( resp => {
          if(resp.length < 1){
             User.find({username: req.body.email , password: req.body.password}).then( resp => {

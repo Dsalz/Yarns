@@ -102,6 +102,34 @@ input, textarea{
   justify-content: center;  
   min-height: 200px;
   font-size: 25px;
+  text-align: center;
+  padding: 10px;
+}
+
+.yarns-actualmodal-footer{
+  display: flex;
+  width:100%;
+}
+
+.yarns-actualmodal-footer button{
+  cursor: pointer;
+  font-size: 20px;
+  width: 50%;
+  padding: 10px 0;
+  text-align: center;
+  outline: none;
+  border: none;
+}
+
+.yarns-actual-modal-less-serious-btn{
+  background: var(--white-color , #fbfffe) ;
+  color: var(--orange-color, #ff7f00);
+  border: 2px solid var(--orange-color, #ff7f00) !important;
+}
+
+.yarns-actual-modal-more-serious-btn{
+  background: var(--orange-color, #ff7f00);
+  color: var(--black-color, #001514);
 }
 
 .index-nav{
@@ -664,7 +692,7 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
     border: 1px solid var(--white-color , #fbfffe);
 }
 
-.roomdetails-section .comment{
+.comment{
   display: flex;
   flex-wrap: wrap;
   width: 80%;
@@ -673,7 +701,7 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
-.roomdetails-section .comment .comment-details{
+.comment .comment-details{
   background: var(--orange-color, #ff7f00);
   width: 100%;
   color: var(--white-color , #fbfffe);
@@ -683,33 +711,41 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   position: relative;
   order: 2;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.roomdetails-section .comment .comment-details .comment-details-user{
+.comment .comment-details .comment-details-user{
   font-size: 20px;
   color: var(--white-color , #fbfffe);
   display: block;
-  width: 40%;
   text-align: left;
 }
 
-.roomdetails-section .comment .comment-details .comment-accolades{
+.comment .comment-details .comment-accolades{
   color: var(--black-color , #001514);
-  background: var(--white-color , #fbfffe);
-  padding: 0 10px;
-  margin-bottom: 10px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
 }
 
-.roomdetails-section .comment .comment-details .comment-timecreated-time{
+.comment .comment-details .comment-accolades .comment-accolades-svg{
+  width:15px;
+  height: 15px;
+  margin-left: 3px;
+  fill: var(--black-color , #001514);
+}
+
+
+.comment .comment-details .comment-timecreated-time{
   display: block;
 }
 
-.roomdetails-section .comment .comment-details .comment-timecreated-date{
+.comment .comment-details .comment-timecreated-date{
   display: block;
 }
 
-.roomdetails-section .comment .comment-details .comment-repliestoggle{
+.comment .comment-details .comment-repliestoggle{
   color: var(--white-color , #fbfffe) !important;
   position: absolute;
   bottom: 10px;
@@ -719,33 +755,45 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   text-align: center;
 }
 
-.roomdetails-section .comment .comment-message{
+.comment .comment-message{
   width: 100%;
   order: 1;
   min-height: 150px;
   background: var(--white-color , #fbfffe);
   color: var(--black-color , #001514);
-  padding: 10px;
+  padding: 35px 10px 10px;
   font-size: 20px;
   position: relative;
   border-radius: 5px;
 }
 
-.roomdetails-section .comment .comment-message .comment-message-image{
+.comment .comment-message .comment-room{
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px 0 0 0;
+  background: var(--black-color , #001514);
+  color: var(--orange-color, #ff7f00) !important;
+  padding: 5px 10px;
+  font-size: 15px;
+}
+
+
+.comment .comment-message .comment-message-image{
   width: 80%;
   margin-top: 30px;
   max-height: 300px;
   text-align: center;
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons{
+.comment .comment-message .comment-buttons{
   position: absolute;
   bottom: 0px;
   right: 10px;
   font-size: 40px;
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons button{
+.comment .comment-message .comment-buttons button{
     border-radius: 50%;
     background: var(--orange-color, #ff7f00);
     color: var(--white-color , #fbfffe);
@@ -769,27 +817,27 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   fill: var(--white-color , #fbfffe);
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons button:hover{
+.comment .comment-message .comment-buttons button:hover{
   box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades{
+.comment .comment-message .comment-buttons .comment-button-accolades{
   margin-right: 10px;
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades-given{
+.comment .comment-message .comment-buttons .comment-button-accolades-given{
   margin-right: 10px;
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons .comment-button-accolades-given .comment-button-svg {
+.comment .comment-message .comment-buttons .comment-button-accolades-given .comment-button-svg {
   fill: var(--black-color , #001514);
 }
 
-.roomdetails-section .comment .comment-message .comment-buttons .comment-button-reply-showing .comment-button-svg {
+.comment .comment-message .comment-buttons .comment-button-reply-showing .comment-button-svg {
   fill: var(--black-color , #001514);
 }
 
-.roomdetails-section .comment .comment-message .comment-button-delete{
+.comment .comment-message .comment-button-delete{
   position: absolute;
   top: 0px;
   right: 0px;
@@ -800,14 +848,15 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   outline: none;
   border: none;
   width: 50px;
+  border-radius: 0 5px 0 0;
 }
 
-.roomdetails-section .comment-replies{
+.comment-replies{
   width:80%;
   margin: 10px auto 5px;
 }
 
-.roomdetails-section .comment-replies .reply{
+.comment-replies .reply{
   display:flex;
   width: 90%;
   margin: 5px 0;
@@ -815,7 +864,7 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
 }
 
-.roomdetails-section .comment-replies .reply-info{
+.comment-replies .reply-info{
   width: 20%;
   background: var(--orange-color, #ff7f00);
   text-align: center;
@@ -823,11 +872,11 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   padding: 10px;
 }
 
-.roomdetails-section .comment-replies .reply-info a{
+.comment-replies .reply-info a{
   color: var(--white-color , #fbfffe) !important;
 }
 
-.roomdetails-section .comment-replies .reply-message{
+.comment-replies .reply-message{
   color: var(--black-color , #001514);
   background: var(--white-color , #fbfffe);
   border-radius: 5px;
@@ -837,7 +886,7 @@ box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   width: 80%;
 }
 
-.roomdetails-section .comment-replies .reply-message .reply-delete{
+.comment-replies .reply-message .reply-delete{
 
 position: absolute;
 top: 0;
@@ -1060,6 +1109,110 @@ color: var(--white-color , #fbfffe);
 .notification-creator-link{
   color: var(--orange-color , #ff7f00) !important;
 }
+
+.user-profile-section{
+  margin-top: 100px;
+}
+
+.user-profile-section-header{
+  height: 200px;
+  background: transparent;
+  color: var(--orange-color , #ff7f00);
+  text-align: center;
+  padding:  30px;
+  margin-bottom: 30px;
+}
+
+.user-profile-section-header h2{
+  font-size: 50px;
+}
+
+.user-profile-section-header h4{
+  font-size: 20px;
+}
+
+.user-profile-section-header button{
+  width: 150px;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.user-profile-section-followbtn{
+  color: var(--white-color , #fbfffe);
+  background: var(--orange-color, #ff7f00);
+}
+
+.user-profile-section-unfollowbtn{
+  color: var(--orange-color, #ff7f00);
+  background: transparent;
+  border: 2px solid var(--orange-color, #ff7f00) !important; 
+}
+
+.user-profile-edit-btn{
+  background: var(--orange-color, #ff7f00);
+  color: var(--white-color, #fbfffe) !important;
+  position: fixed;
+  left: 10px;
+  bottom:10px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  border: none;
+  outline: none;
+  text-decoration: none !important;
+  display: flex;
+  box-shadow: var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2));
+  align-items: center;
+}
+
+.user-profile-edit-btn:hover {
+  box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
+}
+
+.user-profile-edit-btn svg{
+  width: 75%;
+  height: 70%;
+  margin: 0 auto;
+  fill: var(--white-color , #fbfffe);
+}
+
+.user-profile-section-stats{
+  width:80%;
+  display:flex;
+  border-top: 1px solid var(--orange-color , #ff7f00);
+  border-bottom: 1px solid var(--orange-color, #ff7f00);
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+.user-profile-section-stats a{
+  width: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--black-color , #001514) !important;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.user-profile-section-stats a:hover{
+  color: var(--orange-color , #ff7f00) !important;
+}
+
+.user-profile-section-stats a > span {
+  width: 100%;
+  font-size: 40px;
+  color: var(--orange-color, #ff7f00);
+}
+
+.user-profile-section-comments {
+  padding: 100px 0 20px;
+  width: 100%;
+} 
+
 
 
 

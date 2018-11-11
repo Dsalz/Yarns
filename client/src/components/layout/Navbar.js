@@ -25,11 +25,12 @@ class Navbar extends Component{
         let notificationChecker;
 
         if(nextProps.isLoggedIn){
+            if(this.props.newNotification === 'none'){
+                notificationChecker = setInterval( () => {
+                    this.props.getNotifications();
+                }, 10000)
+            }
             this.props.getNotifications();
-
-            notificationChecker = setInterval( () => {
-                this.props.getNotifications();
-            }, 10000)
         }else{
             clearInterval(notificationChecker);
         }

@@ -20,10 +20,14 @@ const NotificationItem = ({ type, message ,isRead, creatorUsername, timeCreated 
                                     <path d="M511.563,434.259c-1.728-142.329-124.42-258.242-277.087-263.419V95.999c0-17.645-14.342-31.999-31.974-31.999    c-7.931,0-15.591,3.042-21.524,8.562c0,0-134.828,124.829-173.609,163.755C2.623,241.109,0,248.088,0,255.994    c0,7.906,2.623,14.885,7.369,19.687c38.781,38.915,173.609,163.745,173.609,163.745c5.933,5.521,13.593,8.562,21.524,8.562    c17.631,0,31.974-14.354,31.974-31.999v-74.591c153.479,2.156,255.792,50.603,255.792,95.924c0,5.896,4.767,10.666,10.658,10.666    c0.167,0.021,0.333,0.01,0.416,0c5.891,0,10.658-4.771,10.658-10.666C512,436.259,511.854,435.228,511.563,434.259z"/>
                                 </g>
                             </g></g> </svg>)}
+                        {type === "new_follow" && (<svg id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75" ><g><g>
+                                <circle cx="129.375" cy="60" r="60" data-original="#000000" class="active-path" data-old_color="#ff7f00" fill="#ff7f00"/>
+                                <path d="M129.375,150c-60.061,0-108.75,48.689-108.75,108.75h217.5C238.125,198.689,189.436,150,129.375,150z" fill="#ff7f00"/>
+                            </g></g> </svg>)}
                     </div>
 
                     <div className = "notification-item-msg">
-                        <p> <Link className="notification-creator-link" to = {`/profile/${creatorUsername}`}> {creatorUsername} </Link> {message}</p>
+                        <p> <Link className="notification-creator-link" to = {`/user/${creatorUsername}`}> {creatorUsername} </Link> {message}</p>
                         <span className="notification-time">{ (timespanLength < 1) ? "Just now" : (timespanLength === 1)? `1 hour ago`  : (timespanLength < 24)? `${timespanLength} hours ago` : `${Math.round(timespanLength/24)} days ago` }</span>
                     </div>
                 

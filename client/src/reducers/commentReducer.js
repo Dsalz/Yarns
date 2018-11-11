@@ -73,6 +73,18 @@ const commentReducer = (state=initState , action) => {
             comments: [...otherComments , updatedComment]
         }
 
+        case "GOT_MY_COMMENTS":
+        return{
+            ...state,
+            comments: [...action.payload]
+        }
+
+        case "GOT_USER_COMMENTS":
+        return{
+            ...state,
+            comments: [...action.payload]
+        }
+
         default:
         return state
     }

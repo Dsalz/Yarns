@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({title, info, close }) =>{
+const Modal = ({title, info, close, options, optionAText, optionAFunc, optionBText, optionBFunc }) =>{
     return(
         <section className="yarns-modal-container">
 
@@ -12,12 +12,21 @@ const Modal = ({title, info, close }) =>{
 
                 <header className="yarns-actualmodal-header">
                     <h2>{title}</h2>
-                    <button onClick={close}>x</button>
+                    <button onClick={close}>&times;</button>
                 </header>
 
                 <main className="yarns-actualmodal-body">
                     <p>{info}</p>
                 </main>
+
+                { options && <footer className="yarns-actualmodal-footer">
+                    <button className="yarns-actual-modal-less-serious-btn" onClick={optionAFunc}>
+                        {optionAText}
+                    </button>
+                    <button className="yarns-actual-modal-more-serious-btn" onClick={optionBFunc}>
+                        {optionBText}
+                    </button>
+                </footer>}
 
             </div>
 

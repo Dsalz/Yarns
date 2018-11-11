@@ -38,13 +38,13 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    following: {
-        type: Number,
-        default: 0
+    followings: {
+        type: Array,
+        default: []
     },
     followers: {
-        type: Number,
-        default: 0
+        type: Array,
+        default: []
     },
     roomsCreated: {
         type: Number,

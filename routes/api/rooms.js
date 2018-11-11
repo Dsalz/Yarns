@@ -6,6 +6,7 @@ const tokenizer = require('../../middleware/tokenizer');
 
 const Room = require('../../models/room');
 const Comment = require('../../models/comment');
+const User = require('../../models/user');
 
 // router.get('house/:house_name', (req, res) => {
 
@@ -49,7 +50,16 @@ router.post('/add', tokenizer.verifyToken, (req, res) => {
             replies: []
         })
 
-        comment.save().then((comment) => res.json({room, comment}))
+        comment.save().then((comment) => {
+            User.findById(req.user._id)
+            .then( user => {
+                user.roomsCreated += 1;
+
+                user.save().then( () => res.json({room, comment}))
+
+            })
+        
+        })
         .catch((err) => res.json({success: false}))
     })
 

@@ -9,6 +9,22 @@ export const getComments = (roomName) =>{
     }
 }
 
+export const getMyCommentsAction = () => {
+    return(dispatch) => {
+        axios.get('/api/v1/comments/mine' , setupToken())
+        .then(resp => dispatch({type: "GOT_MY_COMMENTS" , payload: resp.data.comments}))
+        .catch(err => dispatch({type: "DIDNT_GET_MY_COMMENTS"}))
+    }
+}
+
+export const getUserCommentsAction = (username) =>{
+    return(dispatch)=>{
+        axios.get('/api/v1/comments/getUserComments/' + username)
+        .then(resp => dispatch({type: "GOT_USER_COMMENTS" ,payload: resp.data.comments}))
+        .catch(err => dispatch({type: "DIDNT_GET_USER_COMMENTS"}))
+    }
+}
+
 export const addComment = (comment, roomName) => {
     return(dispatch, getStore) => {
         axios.post('/api/v1/comments/addComment', { comment, roomName }, setupToken())
