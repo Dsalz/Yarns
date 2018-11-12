@@ -6,7 +6,9 @@ const initState = {
     loggingIn : false,
     user: { accolades:[], followers:[], followings:[], roomsCreated:0 },
     nightMode: false,
-    otherUser: {username: "", name:"", accolades:[], followers:[], followings:[], roomsCreated:0}
+    otherUser: {username: "", name:"", accolades:[], followers:[], followings:[], roomsCreated:0},
+    profileUpdated: null,
+    passwordUpdated: null
 };
 
 
@@ -100,7 +102,27 @@ const userReducer = (state = initState , action) => {
         case "UPDATED_USER":
         return{
             ...state,
+            user: action.payload.user,
+            profileUpdated: true
+        }
+
+        case "UPDATED_PASSWORD":
+        return{
+            ...state,
+            passwordUpdated: false,
             user: action.payload.user
+        }
+
+        case "RESET_PROFILE_UPDATED":
+        return{
+            ...state,
+            profileUpdated: null
+        }
+
+        case "RESET_PASSWORD_UPDATED":
+        return{
+            ...state,
+            passwordUpdated: null
         }
 
         case "GOT_OTHER_USER":

@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  } from '../actions/userActions'; 
+import { editProfileAction , resetprofileUpdatedAction, editPasswordAction , resetpasswordUpdatedAction} from '../../actions/userActions'; 
 import { Redirect } from 'react-router-dom';
-import Modal from './Modal';
+import Modal from '../Modal';
 
 class EditProfilePage extends Component{
 
-    state = {
-        email : "",
-        name : "",
-        username : "",
-        age: "",
-        dob: "",
-        password: "",
-        confirmpassword : "",
-        modalText : null
+    componentDidMount(){
+        this.props.resetprofileUpdated();
+        this.props.resetpasswordUpdated();
     }
 
-    componentDidMount(){
-        this.props.resetUsernameAvailability();
+    state = {
+        email : this.props.user.email,
+        name : this.props.user.name,
+        age: this.props.user.age,
+        dob: this.props.user.dob,
+        oldpassword: "",
+        newpassword: "",
+        confirmpassword : "",
+        modalText : null
     }
 
     handleChange = (e) =>{
@@ -27,35 +28,39 @@ class EditProfilePage extends Component{
         })
     }
 
-    checkUsernameAvailability = (e) =>{
-        if(e.target.value.trim().length > 0){
-            this.props.checkUsernameAvailability(this.state.username);
-        }else{
-            this.props.resetUsernameAvailability()
+    handleSubmitProfile = (e) =>{
+        e.preventDefault();
+        const { email, name, age, dob } = this.state;
+        const updatedUser = {
+            email,
+            name,
+            age,
+            dob
         }
+        this.props.editProfile(updatedUser);
+
+
     }
 
-    handleSubmit = (e) =>{
+    handleSubmitProfile = (e) =>{
         e.preventDefault();
+        const { oldpassword, newpassword, confirmpassword } = this.state;
+        if(oldpassword && oldpassword !== this.props.user.password){
 
-        const { password, confirmpassword} = this.state;
-        if(this.props.usernameAvailable){
+            this.setState({
+                modalText: "Password is incorrect"
+            })
+            return;
+        }
 
-            if(password === confirmpassword){
-                this.props.signUp(this.state);
+            if(newpassword === confirmpassword){
+                this.props.editPassword(newpassword);
             }
             else{
                 this.setState({
                     modalText: "Password and Confirm Password not equal"
                 })
             }
-        }else{
-            this.setState({
-                modalText: "UserName not Available"
-            })
-        }
-
-
     }
 
     closeModal = () => {
@@ -65,22 +70,35 @@ class EditProfilePage extends Component{
     }
 
     render(){
-        document.title = "Sign Up | Yarns";
-        const { isLoggedIn, usernameAvailable } = this.props;
-        return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
+        document.title = "Edit Profile | Yarns";
+        const { isLoggedIn , profileUpdated, resetprofileUpdated, passwordUpdated , resetpasswordUpdated} = this.props;
+        const { name, email, age, dob } = this.state;
+        return (!isLoggedIn) ? <Redirect to="/login"></Redirect> : (
             <section className="loginsection">
                 {this.state.modalText && <Modal info={this.state.modalText} title="Error" close={this.closeModal} />}
-                <h2 className="loginsection-header">Sign up for <span className="loginsection-yarns">Yarns</span></h2>
+                {profileUpdated && <Modal info="Profile Successfully Updated" title="Success" close={resetprofileUpdated} />}
+                {passwordUpdated && <Modal info="Password Successfully Updated" title="Success" close={resetpasswordUpdated} />}
+                <h2 className="loginsection-header"> Edit your Profile</h2>
 
-                <form onSubmit= {this.handleSubmit}>
-                    <input type="text" id="name" name="name" placeholder="Name" onChange = { this.handleChange } required/><br/>
-                    <input type="email" id="email" name="email" placeholder="Email" onChange = { this.handleChange } required/><br/>
-                    <input type="text" id="username" name="username" placeholder="Username" onChange = { this.handleChange } onKeyUp={ this.checkUsernameAvailability } required/>{(usernameAvailable === "loading") ? <span><img src="/images/smallLoading.gif" className="loginsection-usernamecheckingimg" title="Checking Username Availability" alt="Checking Username Availability"/></span> :(usernameAvailable === null)? <span></span> : (usernameAvailable === true)? <span><img src="/images/usernameAvailable.png" className="loginsection-usernamecheckingimg" title="Username Available" alt="Username Available"/></span> : <span><img src="/images/usernameNotAvailable.png" className="loginsection-usernamecheckingimg" alt="Username Not Available" title="Username Not Available"/></span> }<br/>
-                    <input type="number" id="age" name="age" placeholder="Age" onChange = { this.handleChange } required/><br/>
-                    <input type="text" id="dob" name="dob" placeholder="Date of Birth (format: dd/mmm/yyyy)" onChange = { this.handleChange }/><br/>                    
-                    <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange } required/><br />
-                    <input type="password" id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } required/><br />
-                    <button className="login-section-btn" type="submit">SIGN UP</button>
+                <form onSubmit= {this.handleSubmitProfile}>
+                    <section className="edit-profile-section">
+                    <input type="text" value={name} id="name" name="name" placeholder="Name" onChange = { this.handleChange } required/><br/>
+                    <input type="email" value={email} id="email" name="email" placeholder="Email" onChange = { this.handleChange } required/><br/>
+                    <input type="number" value={age} id="age" name="age" placeholder="Age" onChange = { this.handleChange } required/><br/>
+                    <input type="text"value={dob} id="dob" name="dob" placeholder="Date of Birth (format: dd/mmm/yyyy)" onChange = { this.handleChange }/><br/> 
+                    <button className="login-section-btn" type="submit">UPDATE PROFILE</button>
+                    </section>
+                </form>
+
+
+                    <h3 className="edit-password-section-header">Password Change</h3>
+                <form onSubmit= {this.handleSubmitPassword}>
+                    <section className="edit-password-section">
+                    <input type="password" id="oldpassword"  name="oldpassword" placeholder = "Old Password" onChange = { this.handleChange } /><br />
+                    <input type="password" id="newpassword"  name="newpassword" placeholder = "New Password" onChange = { this.handleChange } /><br />
+                    <input type="password" id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } /><br />
+                    <button className="login-section-btn" type="submit">CHANGE PASSWORD</button>
+                    </section>
                 </form>
             </section>
         )
@@ -88,19 +106,22 @@ class EditProfilePage extends Component{
 }
 
 const mapStateToProps = (state) =>{
-    const { isLoggedIn , usernameAvailable } = state.user;
+    const { isLoggedIn , user, profileUpdated, passwordUpdated } = state.user;
     return{
         isLoggedIn,
-        usernameAvailable
+        user,
+        profileUpdated,
+        passwordUpdated
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        signUp : (user) => dispatch(signUpAction(user)),
-        checkUsernameAvailability : (username) => dispatch(checkUsernameAvailability(username)),
-        resetUsernameAvailability: () => dispatch(resetUsernameAvailability())
+        editProfile : (user) => dispatch(editProfileAction(user)),
+        editPassword : (password) => dispatch(editPasswordAction(pasword)),
+        resetprofileUpdated: () => dispatch(resetprofileUpdatedAction()),
+        resetpasswordUpdated: () => dispatch(resetpasswordUpdatedAction())
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfilePage);

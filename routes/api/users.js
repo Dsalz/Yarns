@@ -105,10 +105,30 @@ router.post('/Login', (req, res) =>{
     }).catch( err => console.log(err))
 })
 
-// router.post('/EditProfile', (req, res) =>{
-//     User.find({name: req.body.name , password: req.body.password}).then( user => {
-//         // Update User Info then return user with new Token
-//     }).catch( err => res.json({ message: "user does not exist"}))    
-// })
+router.post('/editProfile', tokenizer.verifyToken ,(req, res) =>{
+
+    User.findById(req.user._id)
+    .then(user => {
+        const { name, age, dob, email } = req.body.updatedUser;
+        user.name = name;
+        user.age = age;
+        user.dob = dob;
+        user.email = email;
+
+        user.save().then(user => res.json({ user }) )
+    })
+    .catch( err => res.json({ err }))    
+})
+
+router.post('/editPassword', tokenizer.verifyToken ,(req, res) =>{
+
+    User.findById(req.user._id)
+    .then(user => {
+        user.password = req.body.password;
+
+        user.save().then(user => res.json({ user }) )
+    })
+    .catch( err => res.json({ err }))    
+})
 
 module.exports = router;

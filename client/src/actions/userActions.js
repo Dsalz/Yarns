@@ -47,6 +47,34 @@ export const unfollowUserAction = (username) => {
     }
 }
 
+export const editProfileAction = (updatedUser) => {
+    return(dispatch)=>{
+        axios.post('api/v1/users/editProfile', { updatedUser } , setupToken())
+        .then(resp => dispatch({type: "UPDATED_USER", payload: resp.data}))
+        .catch(err => dispatch({type: "COULDNT_UPDATE_USER"}))
+    }
+}
+
+export const editPasswordAction = (password) => {
+    return(dispatch)=>{
+        axios.post('api/v1/users/editPassword', { password } , setupToken())
+        .then(resp => dispatch({type: "UPDATED_PASSWORD", payload: resp.data}))
+        .catch(err => dispatch({type: "COULDNT_UPDATE_PASSWORD"}))
+    }
+}
+
+export const resetprofileUpdatedAction =() =>{
+    return{
+        type: "RESET_PROFILE_UPDATED"
+    }
+}
+
+export const resetpasswordUpdatedAction =() =>{
+    return{
+        type: "RESET_PASSWORD_UPDATED"
+    }
+}
+
 export const loginAction = (user) => {
     return(dispatch, getState)=> {
         dispatch({ type : "LOGGING_IN"});

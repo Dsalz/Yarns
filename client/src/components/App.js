@@ -13,6 +13,7 @@ import AddCommentPage from './RoomComponents/AddComment';
 import NotificationsPage from './NotificationsComponents/Notifications';
 import UserProfilePage from './ProfileComponents/UserProfile';
 import OtherUserProfilePage from './ProfileComponents/OtherProfiles';
+import EditProfilePage from './ProfileComponents/EditProfile';
 import { connect } from 'react-redux';
 import {  checkLoginStatusAction } from '../actions/userActions';
 
@@ -40,6 +41,7 @@ class App extends Component {
       <Route path= "/notifications" component={NotificationsPage} />
       <Route exact path = "/profile" component={UserProfilePage} />
       <Route path = "/user/:username" component={OtherUserProfilePage} />
+      <Route path = "/editprofile" component={EditProfilePage} />
       </Switch>
       <Footer />
       </React.Fragment>
