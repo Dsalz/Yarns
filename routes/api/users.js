@@ -106,7 +106,6 @@ router.post('/Login', (req, res) =>{
 })
 
 router.post('/editProfile', tokenizer.verifyToken ,(req, res) =>{
-
     User.findById(req.user._id)
     .then(user => {
         const { name, age, dob, email } = req.body.updatedUser;
@@ -115,7 +114,7 @@ router.post('/editProfile', tokenizer.verifyToken ,(req, res) =>{
         user.dob = dob;
         user.email = email;
 
-        user.save().then(user => res.json({ user }) )
+        user.save().then(newuser => res.json({ user: newuser }) )
     })
     .catch( err => res.json({ err }))    
 })

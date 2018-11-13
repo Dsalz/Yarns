@@ -9,6 +9,18 @@ export const getLatestRoomsAction = () =>{
     }
 }
 
+export const getUserRoomsAction = (username) => {
+    return (username) ? (dispatch)=>{
+        axios.get('/api/v1/rooms/getUserRoomsCreated/' + username)
+        .then(resp => dispatch({type:"GOT_USER_ROOMS_CREATED", payload: resp.data.rooms}))
+        .catch(err => dispatch({type: "DIDNT_GET_USER_ROOMS_CREATED"}))
+    }: (dispatch)=>{
+        axios.get('/api/v1/rooms/getRoomsICreated', setupToken())
+        .then(resp => dispatch({type: "GOT_ROOMS_I_CREATED", payload: resp.data.rooms}))
+        .catch(err=> dispatch({type: "DIDNT_GET_ROOMS_I_CREATED"}))
+    }
+}
+
 export const addRoom = (room, houseName) => {
     return(dispatch , getState) =>{
         const roomDto = {

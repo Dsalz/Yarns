@@ -17,8 +17,7 @@ class OtherProfiles extends Component {
     render(){
         document.title = `${this.props.match.params.username}'s Profile | Yarns`;
         
-        const { user, comments, isLoggedIn, currentusername ,followUser, unfollowUser, currentUserFollowings } = this.props;console.log("Fromm the gan gan");
-        console.log(user)
+        const { user, comments, isLoggedIn, currentusername ,followUser, unfollowUser, currentUserFollowings } = this.props;
         const { username, name, accolades, followers, followings, roomsCreated } = user;
         let isCurrentUser = false;
         let isFollowing = false;

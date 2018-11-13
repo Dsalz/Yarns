@@ -28,7 +28,7 @@ const NotificationItem = ({ type, message ,isRead, creatorUsername, timeCreated 
 
                     <div className = "notification-item-msg">
                         <p> <Link className="notification-creator-link" to = {`/user/${creatorUsername}`}> {creatorUsername} </Link> {message}</p>
-                        <span className="notification-time">{ (timespanLength < 1) ? "Just now" : (timespanLength === 1)? `1 hour ago`  : (timespanLength < 24)? `${timespanLength} hours ago` : `${Math.round(timespanLength/24)} days ago` }</span>
+                        <span className="notification-time">{ (timespanLength < 1) ? "Just now" : (timespanLength === 1)? `1 hour ago`  : (timespanLength < 24)? `${timespanLength} hours ago` :(Math.round(timespanLength/24) === 1) ? "1 day ago" : `${Math.round(timespanLength/24)} days ago` }</span>
                     </div>
                 
                 </div>

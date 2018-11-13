@@ -1,7 +1,9 @@
 const initState={
     comments : [],
     replyAdded : null,
-    commentAdded: null
+    commentAdded: null,
+    commentsIGaveAccolade : [],
+    commentsUserGaveAccolades: [],
 }
 
 const commentReducer = (state=initState , action) => {
@@ -83,6 +85,18 @@ const commentReducer = (state=initState , action) => {
         return{
             ...state,
             comments: [...action.payload]
+        }
+
+        case "GOT_COMMENTS_WITH_ACCOLADES":
+        return{
+            ...state,
+            commentsUserGaveAccolades: [...action.payload]
+        }
+
+        case "GOT_COMMENTS_WITH_MY_ACCOLADES":
+        return{
+            ...state,
+            commentsIGaveAccolade: [...action.payload]
         }
 
         default:

@@ -5,6 +5,8 @@ const initState = {
     ],
     latestrooms : [],
     newRoom : null,
+    myRoomsCreated: [],
+    userRoomsCreated: []
 }
 
 const roomReducer = (state=initState , action) => {
@@ -43,6 +45,18 @@ const roomReducer = (state=initState , action) => {
             ...state,
             rooms: [...action.payload],
             latestrooms: [...action.payload].sort((a,b) => new Date(b.dateCreated) - new Date(a.dateCreated))
+        }
+
+        case "GOT_USER_ROOMS_CREATED":
+        return{
+            ...state,
+            userRoomsCreated : [...action.payload]
+        }
+
+        case "GOT_ROOMS_I_CREATED":
+        return{
+            ...state,
+            myRoomsCreated: [...action.payload]
         }
 
         default:

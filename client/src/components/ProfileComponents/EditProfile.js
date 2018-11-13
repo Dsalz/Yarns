@@ -42,10 +42,10 @@ class EditProfilePage extends Component{
 
     }
 
-    handleSubmitProfile = (e) =>{
+    handleSubmitPassword = (e) =>{
         e.preventDefault();
         const { oldpassword, newpassword, confirmpassword } = this.state;
-        if(oldpassword && oldpassword !== this.props.user.password){
+        if( oldpassword !== this.props.user.password){
 
             this.setState({
                 modalText: "Password is incorrect"
@@ -63,6 +63,15 @@ class EditProfilePage extends Component{
             }
     }
 
+    resetpasswordUpdated = () => {
+        this.setState({
+            oldpassword: "",
+            newpassword: "",
+            confirmpassword: ""
+        })
+        this.props.resetpasswordUpdated();
+    }
+
     closeModal = () => {
         this.setState({
             modalText: null
@@ -71,13 +80,13 @@ class EditProfilePage extends Component{
 
     render(){
         document.title = "Edit Profile | Yarns";
-        const { isLoggedIn , profileUpdated, resetprofileUpdated, passwordUpdated , resetpasswordUpdated} = this.props;
-        const { name, email, age, dob } = this.state;
+        const { isLoggedIn , profileUpdated, resetprofileUpdated, passwordUpdated} = this.props;
+        const { name, email, age, dob , oldpassword, newpassword, confirmpassword} = this.state;
         return (!isLoggedIn) ? <Redirect to="/login"></Redirect> : (
             <section className="loginsection">
                 {this.state.modalText && <Modal info={this.state.modalText} title="Error" close={this.closeModal} />}
                 {profileUpdated && <Modal info="Profile Successfully Updated" title="Success" close={resetprofileUpdated} />}
-                {passwordUpdated && <Modal info="Password Successfully Updated" title="Success" close={resetpasswordUpdated} />}
+                {passwordUpdated && <Modal info="Password Successfully Updated" title="Success" close={this.resetpasswordUpdated} />}
                 <h2 className="loginsection-header"> Edit your Profile</h2>
 
                 <form onSubmit= {this.handleSubmitProfile}>
@@ -94,9 +103,9 @@ class EditProfilePage extends Component{
                     <h3 className="edit-password-section-header">Password Change</h3>
                 <form onSubmit= {this.handleSubmitPassword}>
                     <section className="edit-password-section">
-                    <input type="password" id="oldpassword"  name="oldpassword" placeholder = "Old Password" onChange = { this.handleChange } /><br />
-                    <input type="password" id="newpassword"  name="newpassword" placeholder = "New Password" onChange = { this.handleChange } /><br />
-                    <input type="password" id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } /><br />
+                    <input type="password" value={oldpassword} id="oldpassword"  name="oldpassword" placeholder = "Old Password" onChange = { this.handleChange } required/><br />
+                    <input type="password" value={newpassword} id="newpassword"  name="newpassword" placeholder = "New Password" onChange = { this.handleChange } required/><br />
+                    <input type="password" value={confirmpassword} id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } required/><br />
                     <button className="login-section-btn" type="submit">CHANGE PASSWORD</button>
                     </section>
                 </form>
@@ -118,7 +127,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
     return{
         editProfile : (user) => dispatch(editProfileAction(user)),
-        editPassword : (password) => dispatch(editPasswordAction(pasword)),
+        editPassword : (password) => dispatch(editPasswordAction(password)),
         resetprofileUpdated: () => dispatch(resetprofileUpdatedAction()),
         resetpasswordUpdated: () => dispatch(resetpasswordUpdatedAction())
     }

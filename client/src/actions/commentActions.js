@@ -9,19 +9,28 @@ export const getComments = (roomName) =>{
     }
 }
 
-export const getMyCommentsAction = () => {
-    return(dispatch) => {
+export const getUserCommentsAction = (username) =>{
+
+    return(username) ? (dispatch)=>{
+        axios.get('/api/v1/comments/getUserComments/' + username)
+        .then(resp => dispatch({type: "GOT_USER_COMMENTS" ,payload: resp.data.comments}))
+        .catch(err => dispatch({type: "DIDNT_GET_USER_COMMENTS"}))
+    } : (dispatch) => {
         axios.get('/api/v1/comments/mine' , setupToken())
         .then(resp => dispatch({type: "GOT_MY_COMMENTS" , payload: resp.data.comments}))
         .catch(err => dispatch({type: "DIDNT_GET_MY_COMMENTS"}))
     }
 }
 
-export const getUserCommentsAction = (username) =>{
-    return(dispatch)=>{
-        axios.get('/api/v1/comments/getUserComments/' + username)
-        .then(resp => dispatch({type: "GOT_USER_COMMENTS" ,payload: resp.data.comments}))
-        .catch(err => dispatch({type: "DIDNT_GET_USER_COMMENTS"}))
+export const getCommentsUserGaveAccoladeAction = (username) => {
+    return (username) ? (dispatch)=>{
+        axios.get('/api/v1/comments/CommentsWithUserAccolades/' + username)
+        .then(resp => dispatch({type: "GOT_COMMENTS_WITH_ACCOLADES" , payload: resp.data.comments}))
+        .catch(err => dispatch({type:"DIDNT_GET_COMMENTS_WITH_ACCOLADES"}))
+    } : (dispatch) => {
+        axios.get('/api/v1/comments/CommentsWithMyAccolades' , setupToken())
+        .then(resp => dispatch({type: "GOT_COMMENTS_WITH_MY_ACCOLADES", payload: resp.data.comments}))
+        .catch(err => dispatch({type: "DIDNT_GET_COMMENTS_WITH_MY_ACCOLADES"}))
     }
 }
 

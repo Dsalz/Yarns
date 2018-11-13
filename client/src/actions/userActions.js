@@ -49,6 +49,7 @@ export const unfollowUserAction = (username) => {
 
 export const editProfileAction = (updatedUser) => {
     return(dispatch)=>{
+        alert('right api')
         axios.post('api/v1/users/editProfile', { updatedUser } , setupToken())
         .then(resp => dispatch({type: "UPDATED_USER", payload: resp.data}))
         .catch(err => dispatch({type: "COULDNT_UPDATE_USER"}))

@@ -154,5 +154,49 @@ router.post('/deleteReply', tokenizer.verifyToken, (req, res) => {
     })
 })
 
+router.get('/CommentsWithUserAccolades/:username', (req, res)=>{
+    User.find({username : req.params.username})
+    .then( users => {
+        const user = users[0];
+        const commentsWithAccolades = [];
+
+        for(let i=0; i<user.accolades.length ; i++){
+            if(i == user.accolades.length - 1){
+                Comment.findById(user.accolades[i])
+                .then(comment => {
+                    commentsWithAccolades.push(comment)
+                    return res.json({ comments : commentsWithAccolades})
+                })
+            }else{
+                Comment.findById(user.accolades[i])
+                .then(comment => {
+                    commentsWithAccolades.push(comment)
+                })
+            }
+        }
+    })
+})
+
+router.get('/CommentsWithMyAccolades' , tokenizer.verifyToken , (req, res) => {
+        
+        const { user } = req;
+        const commentsWithAccolades = [];
+
+        for(let i=0; i<user.accolades.length ; i++){
+            if(i == user.accolades.length - 1){
+                Comment.findById(user.accolades[i])
+                .then(comment => {
+                    commentsWithAccolades.push(comment)
+                    return res.json({ comments : commentsWithAccolades})
+                })
+            }else{
+                Comment.findById(user.accolades[i])
+                .then(comment => {
+                    commentsWithAccolades.push(comment)
+                })
+            }
+        }
+})
+
  
 module.exports = router;

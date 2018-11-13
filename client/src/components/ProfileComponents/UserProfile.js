@@ -2,20 +2,36 @@ import React , { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import Comment from '../RoomComponents/Comment';
-import { getMyCommentsAction } from '../../actions/commentActions'
+import { getUserCommentsAction , getCommentsUserGaveAccoladeAction } from '../../actions/commentActions'
 import { updateUserAction } from '../../actions/userActions'
+import { getUserRoomsAction } from '../../actions/roomActions'
+import UserItem from './UserItem';
+import RoomItemWithHouse from '../RoomComponents/RoomItemWithHouse';
 
 class UserProfile extends Component {
 
     componentDidMount(){
         this.props.updateUser();
-        this.props.getMyComments();
+        this.props.getUserComments();
+        this.props.getUserRooms();
+        this.props.getCommentsUserGaveAccolade();
+    }
+
+    state = {
+        activeLink : "comments"
+    }
+
+    tabUpdate = (e) =>{
+        e.preventDefault();
+        this.setState({
+            activeLink : e.target.id
+        })
     }
 
     render(){
         document.title = "Your Profile | Yarns";
-        const { user, myComments, isLoggedIn } = this.props;
-        console.log(myComments);
+        const { user, myComments, isLoggedIn , myRoomsCreated, commentsIGaveAccolade} = this.props;
+        const { activeLink } = this.state;
         const { username, name, accolades, followers, followings, roomsCreated } = user;
         return (!isLoggedIn) ? <Redirect to="/login" /> : (
             <section className="user-profile-section">
@@ -33,30 +49,62 @@ class UserProfile extends Component {
                 </header>
                 <main>
                     <section className="user-profile-section-stats">
-                        <Link to="/followers" >
-                            <span> { followers.length }</span>
-                            Followers
-                        </Link>
-                        <Link to="/followings" >
-                            <span> { followings.length }</span>
-                            Followings
-                        </Link>
-                        <Link to="/roomscreated" >
-                            <span> { roomsCreated }</span>
-                            Rooms Created
-                        </Link>
-                        <a href = "#user-comments" >
+                        <a href = "#user-comments" className={activeLink === "comments" ? "active" : ""} id="comments" onClick={this.tabUpdate}>
                             <span> { myComments.length }</span>
                            { myComments.length === 1 ? "Comment" : "Comments"}
                         </a>
-                        <Link to="/accolades" >
+                        <a href="/followers" className={activeLink === "followers" ? "active" : ""} id="followers" onClick={this.tabUpdate}>
+                            <span> { followers.length }</span>
+                            Followers
+                        </a>
+                        <a href="/followings" className={activeLink === "followings" ? "active" : ""} id="followings" onClick={this.tabUpdate}>
+                            <span> { followings.length }</span>
+                            Followings
+                        </a>
+                        <a href="/roomscreated" className={activeLink === "roomsCreated" ? "active" : ""} id="roomsCreated" onClick={this.tabUpdate}>
+                            <span> { roomsCreated }</span>
+                            Rooms Created
+                        </a>
+                        <a href="/accolades" className={activeLink === "accoladesGiven"  ? "active" : ""} id="accoladesGiven" onClick={this.tabUpdate}>
                             <span> { accolades.length }</span>
                             Accolades Given
-                        </Link>
+                        </a>
                     </section>
 
-                    <section className = "user-profile-section-comments" id="user-comments">
-                        { myComments.map(comment => <Comment {...comment} key={comment._id} />) }
+                    <section className = "user-profile-section-tabs">
+                        { activeLink === "comments" && (
+                            <React.Fragment>
+                            <h3>Your Comments</h3>
+                            {myComments.map(comment => <Comment {...comment} key={comment._id} />)} 
+                            </React.Fragment>
+                            )}
+
+                        { activeLink === "followers" && (
+                            <React.Fragment>
+                            <h3>Your Followers</h3>
+                            {followers.map(username=> <UserItem username={username} key={username} />)} 
+                            </React.Fragment>
+                            )}
+                        { activeLink === "followings" && (
+                            <React.Fragment>
+                            <h3>Your Followings</h3>
+                            {followings.map(username=> <UserItem username={username} key={username} />)} 
+                            </React.Fragment>
+                            )}
+
+                        { activeLink === "roomsCreated" && (
+                            <React.Fragment>
+                            <h3>Rooms You've Created</h3>
+                            {myRoomsCreated.map(room => <RoomItemWithHouse {...room} key={room._id} />)} 
+                            </React.Fragment>
+                            )}
+
+                        { activeLink === "accoladesGiven" && (
+                            <React.Fragment>
+                            <h3>Comments You've Given Accolades To</h3>
+                            {commentsIGaveAccolade.map(comment => <Comment {...comment} key={comment._id} />)} 
+                            </React.Fragment>
+                            )}
                     </section>
                 </main>
             </section>
@@ -70,14 +118,18 @@ const mapStateToProps = (state) => {
     return{
         isLoggedIn : state.user.isLoggedIn,
         user: state.user.user,
-        myComments: state.comment.comments.filter(comment => comment.authorId === userId).sort((a,b) => new Date(b.timeCreated) - new Date(a.timeCreated))
+        myComments: state.comment.comments.filter(comment => comment.authorId === userId).sort((a,b) => new Date(b.timeCreated) - new Date(a.timeCreated)),
+        myRoomsCreated: state.room.myRoomsCreated,
+        commentsIGaveAccolade: state.comment.commentsIGaveAccolade
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
         updateUser: () =>  dispatch(updateUserAction()),
-        getMyComments: () => dispatch(getMyCommentsAction())
+        getUserComments: () => dispatch(getUserCommentsAction()),
+        getUserRooms: () => dispatch(getUserRoomsAction()),
+        getCommentsUserGaveAccolade: () => dispatch(getCommentsUserGaveAccoladeAction()),
     }
 }
 

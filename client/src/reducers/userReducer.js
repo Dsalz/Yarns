@@ -109,7 +109,7 @@ const userReducer = (state = initState , action) => {
         case "UPDATED_PASSWORD":
         return{
             ...state,
-            passwordUpdated: false,
+            passwordUpdated: true,
             user: action.payload.user
         }
 

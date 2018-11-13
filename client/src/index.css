@@ -305,7 +305,7 @@ input, textarea{
   padding: 15px 0 2px;
 }
 
-.index-latestrooms-item {
+.roomwithhouse-item {
   display: flex;
   box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
   font-size: 15px;
@@ -313,14 +313,14 @@ input, textarea{
   margin: 30px auto;
 }
 
-.index-latestrooms-house{
+.roomwithhouse-house{
   background: var(--black-color , #001514);
   width: 25%;
   padding: 10px 0;
   color: var(--orange-color, #ff7f00) !important;
 }
 
-.index-latestrooms-room{
+.roomwithhouse-room{
   background: var(--white-color , #fbfffe);
   width: 75%;
   padding: 10px 0;
@@ -1198,7 +1198,7 @@ color: var(--white-color , #fbfffe);
   text-decoration: none !important;
 }
 
-.user-profile-section-stats a:hover{
+.user-profile-section-stats a:hover , .user-profile-section-stats a.active{
   color: var(--orange-color , #ff7f00) !important;
 }
 
@@ -1208,10 +1208,16 @@ color: var(--white-color , #fbfffe);
   color: var(--orange-color, #ff7f00);
 }
 
-.user-profile-section-comments {
-  padding: 100px 0 20px;
+.user-profile-section-tabs {
+  padding: 60px 0 20px;
   width: 100%;
 } 
+
+.user-profile-section-tabs h3{
+  color: var(--black-color , #001514);
+  text-align: center;
+  margin: 20px 0;
+}
 
 .edit-profile-section{
   margin-bottom: 50px;
@@ -1220,7 +1226,26 @@ color: var(--white-color , #fbfffe);
 .edit-password-section-header{
   text-align: center;
   color: var(--black-color, #001514);
+  margin-bottom: 30px;
 }
+
+.user-item{
+  width: 100%;
+}
+
+.user-item-link{
+  text-decoration: none !important;
+  color: var(--orange-color, #ff7f00) !important;
+  margin: 0 auto;
+  display: flex;
+}
+
+.user-item-link svg{
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
 
 
 
