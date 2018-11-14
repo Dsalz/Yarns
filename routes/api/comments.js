@@ -164,13 +164,17 @@ router.get('/CommentsWithUserAccolades/:username', (req, res)=>{
             if(i == user.accolades.length - 1){
                 Comment.findById(user.accolades[i])
                 .then(comment => {
-                    commentsWithAccolades.push(comment)
+                    if(comment){
+                        commentsWithAccolades.push(comment);
+                    }
                     return res.json({ comments : commentsWithAccolades})
                 })
             }else{
                 Comment.findById(user.accolades[i])
                 .then(comment => {
-                    commentsWithAccolades.push(comment)
+                    if(comment){
+                        commentsWithAccolades.push(comment);
+                    }
                 })
             }
         }

@@ -16,7 +16,7 @@ export const getUserRoomsAction = (username) => {
         .catch(err => dispatch({type: "DIDNT_GET_USER_ROOMS_CREATED"}))
     }: (dispatch)=>{
         axios.get('/api/v1/rooms/getRoomsICreated', setupToken())
-        .then(resp => dispatch({type: "GOT_ROOMS_I_CREATED", payload: resp.data.rooms}))
+        .then(resp => console.log(resp) || dispatch({type: "GOT_ROOMS_I_CREATED", payload: resp.data.rooms}))
         .catch(err=> dispatch({type: "DIDNT_GET_ROOMS_I_CREATED"}))
     }
 }

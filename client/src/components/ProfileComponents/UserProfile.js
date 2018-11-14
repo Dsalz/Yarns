@@ -23,6 +23,7 @@ class UserProfile extends Component {
 
     tabUpdate = (e) =>{
         e.preventDefault();
+        console.log(e.target);
         this.setState({
             activeLink : e.target.id
         })
@@ -31,8 +32,10 @@ class UserProfile extends Component {
     render(){
         document.title = "Your Profile | Yarns";
         const { user, myComments, isLoggedIn , myRoomsCreated, commentsIGaveAccolade} = this.props;
+        console.log("commentsIGaveAccolade");
+        console.log(commentsIGaveAccolade);
         const { activeLink } = this.state;
-        const { username, name, accolades, followers, followings, roomsCreated } = user;
+        const { username, name, followers, followings } = user;
         return (!isLoggedIn) ? <Redirect to="/login" /> : (
             <section className="user-profile-section">
                 <header className="user-profile-section-header">
@@ -50,23 +53,23 @@ class UserProfile extends Component {
                 <main>
                     <section className="user-profile-section-stats">
                         <a href = "#user-comments" className={activeLink === "comments" ? "active" : ""} id="comments" onClick={this.tabUpdate}>
-                            <span> { myComments.length }</span>
+                            <span id="comments" onClick={this.tabUpdate}> { myComments.length }</span>
                            { myComments.length === 1 ? "Comment" : "Comments"}
                         </a>
                         <a href="/followers" className={activeLink === "followers" ? "active" : ""} id="followers" onClick={this.tabUpdate}>
-                            <span> { followers.length }</span>
+                            <span id="followers" onClick={this.tabUpdate}> { followers.length }</span>
                             Followers
                         </a>
                         <a href="/followings" className={activeLink === "followings" ? "active" : ""} id="followings" onClick={this.tabUpdate}>
-                            <span> { followings.length }</span>
+                            <span id="followings" onClick={this.tabUpdate}> { followings.length }</span>
                             Followings
                         </a>
                         <a href="/roomscreated" className={activeLink === "roomsCreated" ? "active" : ""} id="roomsCreated" onClick={this.tabUpdate}>
-                            <span> { roomsCreated }</span>
+                            <span id="roomsCreated" onClick={this.tabUpdate}> { myRoomsCreated.length }</span>
                             Rooms Created
                         </a>
                         <a href="/accolades" className={activeLink === "accoladesGiven"  ? "active" : ""} id="accoladesGiven" onClick={this.tabUpdate}>
-                            <span> { accolades.length }</span>
+                            <span id="accoladesGiven" onClick={this.tabUpdate}> { commentsIGaveAccolade.length }</span>
                             Accolades Given
                         </a>
                     </section>
@@ -120,7 +123,7 @@ const mapStateToProps = (state) => {
         user: state.user.user,
         myComments: state.comment.comments.filter(comment => comment.authorId === userId).sort((a,b) => new Date(b.timeCreated) - new Date(a.timeCreated)),
         myRoomsCreated: state.room.myRoomsCreated,
-        commentsIGaveAccolade: state.comment.commentsIGaveAccolade
+        commentsIGaveAccolade: state.comment.commentsIGaveAccolade.sort((a,b) => new Date(b.timeCreated) - new Date(a.timeCreated))
     }
 }
 

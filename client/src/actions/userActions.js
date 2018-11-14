@@ -10,7 +10,7 @@ export const toggleNightMode = () => {
 export const checkLoginStatusAction = () =>{
     return(dispatch) => {
         axios.get('/api/v1/users/getUser' , setupToken())
-        .then(resp => dispatch({type: "CONFIRMED_LOGIN_STATUS" , payload: resp.data}))
+        .then(resp =>  console.log(resp) || dispatch({type: "CONFIRMED_LOGIN_STATUS" , payload: resp.data}))
         .catch(err => dispatch({type: "COULDNT_CONFIRM_LOGIN_STATUS"}))
     }
 }

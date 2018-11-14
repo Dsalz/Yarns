@@ -5,9 +5,14 @@ import SignedOutLinks from './SignedOutLinks';
 import SignedInLinks from './SignedInLinks';
 import { logoutUserAction, toggleNightMode } from '../../actions/userActions';
 import { getNotificationsAction } from '../../actions/notificationActions';
+import '../../css/Layout/Navbar.css';
 
 
 class Navbar extends Component{
+
+    state = {
+        showLinks : false
+    }
 
     componentWillUpdate(nextProps){
         if(nextProps.nightMode){
@@ -22,24 +27,30 @@ class Navbar extends Component{
             document.body.style.setProperty('--small-box-shadow' , '0px 0px 5px 1px rgba(0,0,0, 0.2)')
         } 
 
-        let notificationChecker;
-
         if(nextProps.isLoggedIn){
             if(this.props.newNotification === 'none'){
-                notificationChecker = setInterval( () => {
+                this.interval = setInterval( () => {
                     this.props.getNotifications();
                 }, 10000)
             }
             this.props.getNotifications();
         }else{
-            clearInterval(notificationChecker);
+            clearInterval(this.interval);
         }
     }
     toggleNightMode = () =>{
         this.props.toggleNightMode();
     }
+
+
+    toggleLinks = () =>{
+        this.setState({
+            showLinks : !this.state.showLinks
+        })
+    }
     render(){
         const { isLoggedIn, user, logout, nightMode, newNotification } = this.props; 
+        const { showLinks } = this.state;
         return(
             <nav className="index-nav">
                 <Link to = "/" className="index-brand">
@@ -48,10 +59,19 @@ class Navbar extends Component{
                     {!nightMode && <img src="/images/lightsOut.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="lights-out" title="Lights Out" />}
                     {nightMode && <img src="/images/lightsOn.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="lights-on" title="Lights On" />}
                 <section className = "index-navlinks">
-                {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {logout} />}
-                
+                <section className="index-navlinks-largelinks">
+                {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {logout} />}                
+                </section>
+                <div className={ showLinks ? "index-nav-responsive-toggle index-nav-responsive-toggle-dropped" : "index-nav-responsive-toggle" } onClick={this.toggleLinks}>
+                <hr />
+                <hr />
+                <hr />
+                </div>
 
                 </section>
+                {showLinks && <section className="index-navlinks-smalllinks">
+                {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {logout} />}                
+                </section>}
             </nav>
         )
     }

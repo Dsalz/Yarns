@@ -22,6 +22,13 @@ router.get('/getLatest', (req, res) => {
     .catch(err => res.json({success: false , err}))
 })
 
+router.get('/getRoomsICreated', tokenizer.verifyToken , (req, res) => {
+
+    Room.find({creatorName : req.user.username})
+    .then(rooms => res.json({ rooms }))
+    .catch(err => res.json({success : false, err}))
+})
+
 router.get('/:roomName', (req, res) => {
     Room.find({name: req.params.roomName})
     .then(room => res.json({ room }))
@@ -32,12 +39,6 @@ router.get('/getUserRoomsCreated/:username', (req,res)=>{
     Room.find({creatorName : req.params.username})
     .then(rooms => res.json({ rooms }))
     .catch(err => res.json({success: false , err}))
-})
-
-router.get('/getRoomsICreated', tokenizer.verifyToken , (req, res) => {
-    Room.find({creatorName : req.user.username})
-    .then(rooms => res.json({ rooms }))
-    .catch(err => res.json({success : false, err}))
 })
 
 router.post('/add', tokenizer.verifyToken, (req, res) => {
