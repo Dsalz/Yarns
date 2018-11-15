@@ -1,0 +1,9 @@
+.edit-profile-section{
+    margin-bottom: 50px;
+  }
+  
+  .edit-password-section-header{
+    text-align: center;
+    color: var(--black-color, #001514);
+    margin-bottom: 30px;
+  }

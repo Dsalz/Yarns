@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { signUpAction , checkUsernameAvailability, resetUsernameAvailability } from '../actions/userActions'; 
 import { Redirect } from 'react-router-dom';
 import Modal from './Modal';
+import LoadingScreen from './LoadingScreen';
 
 class SignUpPage extends Component{
 
@@ -66,9 +67,10 @@ class SignUpPage extends Component{
 
     render(){
         document.title = "Sign Up | Yarns";
-        const { isLoggedIn, usernameAvailable } = this.props;
+        const { isLoggedIn, usernameAvailable, loading } = this.props;
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">
+                {loading && <LoadingScreen />}
                 {this.state.modalText && <Modal info={this.state.modalText} title="Error" close={this.closeModal} />}
                 <h2 className="loginsection-header">Sign up for <span className="loginsection-yarns">Yarns</span></h2>
 
@@ -88,10 +90,11 @@ class SignUpPage extends Component{
 }
 
 const mapStateToProps = (state) =>{
-    const { isLoggedIn , usernameAvailable } = state.user;
+    const { isLoggedIn , usernameAvailable, loading } = state.user;
     return{
         isLoggedIn,
-        usernameAvailable
+        usernameAvailable,
+        loading
     }
 }
 

@@ -4,6 +4,8 @@ import { editProfileAction , resetprofileUpdatedAction, editPasswordAction , res
 import { Redirect } from 'react-router-dom';
 import Modal from '../Modal';
 
+import '../../css/ProfileComponents/EditProfile.css';
+
 class EditProfilePage extends Component{
 
     componentDidMount(){

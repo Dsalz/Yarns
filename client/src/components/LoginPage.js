@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginAction } from '../actions/userActions';
 import { Redirect } from 'react-router-dom';
+import LoadingScreen from './LoadingScreen';
 
 import Modal from './Modal';
 
@@ -36,14 +37,12 @@ class LoginPage extends Component{
 
     render(){
         document.title = "Login | Yarns";
-        const {isLoggedIn , userExists , loggingIn} = this.props;
+        const {isLoggedIn , userExists , loading} = this.props;
 
         return (isLoggedIn) ? <Redirect to="/"></Redirect> : (
             <section className="loginsection">
                 {(userExists === false && this.state.submitted) && <Modal info="Invalid Credentials" title="Error" close={this.closeModal} />}
-                {loggingIn && (<div className="logging-in-svg">
-                                <img src="/images/bigLoading.gif" alt="Logging In" />
-                              </div>) }
+                {loading && <LoadingScreen/> }
                 <h2 className="loginsection-header">Login to <span className="loginsection-yarns">Yarns</span></h2>
 
                 <form onSubmit= {this.handleSubmit}>
@@ -58,12 +57,12 @@ class LoginPage extends Component{
 
 const mapStateToProps = (state) => {
 
-    const { isLoggedIn , userExists , loggingIn} = state.user;
+    const { isLoggedIn , userExists , loading} = state.user;
 
     return {
         isLoggedIn,
         userExists,
-        loggingIn
+        loading
     }
 }
 

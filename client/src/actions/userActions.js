@@ -78,7 +78,7 @@ export const resetpasswordUpdatedAction =() =>{
 
 export const loginAction = (user) => {
     return(dispatch, getState)=> {
-        dispatch({ type : "LOGGING_IN"});
+        dispatch({ type : "LOADING"});
 
         axios.post('/api/v1/users/Login', user)
         .then(resp => { 
@@ -108,6 +108,7 @@ export const resetUsernameAvailability = () => {
 
 export const signUpAction = (user) => {
     return (dispatch, getStore) => {
+         dispatch({ type : "LOADING"});
           axios.post('/api/v1/users/SignUp', user)
           .then( resp => {
             storeToken(resp.data.token)

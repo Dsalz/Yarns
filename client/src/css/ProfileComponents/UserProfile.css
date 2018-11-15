@@ -1,0 +1,138 @@
+.user-profile-section{
+    margin-top: 100px;
+  }
+  
+  .user-profile-section-header{
+    height: 200px;
+    background: transparent;
+    color: var(--orange-color , #ff7f00);
+    text-align: center;
+    padding:  30px;
+    margin-bottom: 30px;
+  }
+  
+  .user-profile-section-header h2{
+    font-size: 50px;
+  }
+  
+  .user-profile-section-header h4{
+    font-size: 20px;
+  }
+  
+  .user-profile-section-header button{
+    width: 150px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  .user-profile-section-followbtn{
+    color: var(--white-color , #fbfffe);
+    background: var(--orange-color, #ff7f00);
+  }
+  
+  .user-profile-section-unfollowbtn{
+    color: var(--orange-color, #ff7f00);
+    background: transparent;
+    border: 2px solid var(--orange-color, #ff7f00) !important; 
+  }
+  
+  .user-profile-edit-btn{
+    background: var(--orange-color, #ff7f00);
+    color: var(--white-color, #fbfffe) !important;
+    margin: 20px auto 0;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border: none;
+    outline: none;
+    text-decoration: none !important;
+    display: flex;
+    box-shadow: var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2));
+    align-items: center;
+  }
+  
+  .user-profile-edit-btn:hover {
+    box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
+  }
+  
+  .user-profile-edit-btn svg{
+    width: 75%;
+    height: 70%;
+    margin: 0 auto;
+    fill: var(--white-color , #fbfffe);
+  }
+  
+  .user-profile-section-stats{
+    width:80%;
+    font-size: 16px;
+    display:flex;
+    border-top: 1px solid var(--orange-color , #ff7f00);
+    border-bottom: 1px solid var(--orange-color, #ff7f00);
+    margin: 0 auto;
+    background-color: transparent;
+  }
+  
+  .user-profile-section-stats a{
+    width: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--black-color , #001514) !important;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+  
+  .user-profile-section-stats a:hover , .user-profile-section-stats a.active{
+    color: var(--orange-color , #ff7f00) !important;
+  }
+  
+  .user-profile-section-stats a > span {
+    width: 100%;
+    font-size: 40px;
+    color: var(--orange-color, #ff7f00);
+  }
+  
+  .user-profile-section-tabs {
+    padding: 60px 0 20px;
+    width: 100%;
+  } 
+  
+  .user-profile-section-tabs h3{
+    color: var(--black-color , #001514);
+    text-align: center;
+    margin: 20px 0;
+  }
+
+
+  @media screen and (max-width: 750px){
+    .user-profile-section-stats{
+        width: 90%;
+        justify-content: space-between;
+    }
+  }
+
+  @media screen and (max-width: 650px){
+    .user-profile-section-stats{
+        font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 500px){
+    .user-profile-section-stats a{
+        width: fit-content;
+    }
+  }
+
+  @media screen and (max-width: 400px){
+    .user-profile-section-stats{
+        font-size: 10px
+    }
+
+    .user-profile-section-stats a > span{
+        font-size: 30px;
+
+    }
+  }

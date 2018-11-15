@@ -226,13 +226,13 @@ input, textarea{
   font-size: 15px;
   width: 70%;
   margin: 30px auto;
+  justify-content: center;
 }
 
 .roomwithhouse-house{
   background: var(--black-color , #001514);
   width: 25%;
   padding: 10px 0;
-  text-align: center;
   color: var(--orange-color, #ff7f00) !important;
 }
 
@@ -241,14 +241,14 @@ input, textarea{
   width: 75%;
   padding: 10px 0;
   color: var(--orange-color, #ff7f00) !important;
-  text-align: center;
 }
 
 
-
 .loginsection{
-  width: 50%;
+  width: 70%;
   margin: 170px auto 70px;
+  min-width: 300px;
+  max-width: 500px;
 }
 
 .loginsection-header{
@@ -314,6 +314,7 @@ input, textarea{
   align-items: center;
 }
 
+ 
 .estatedetails-section {
   padding-top: 150px;
 }
@@ -526,306 +527,8 @@ input, textarea{
 box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
 }
 
-.roomdetails-section{
-  margin-top: 100px;
-}
-
-.roomdetails-section-header{
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background: var(--orange-color, #ff7f00);
-  height:200px;
-}
-
-.roomdetails-section-commenttitle{
-  font-size: 50px;
-  color:var(--white-color , #fbfffe);
-  width: 100%;
-  text-align: center;
-}
-
-.roomdetails-section-commentno{
-  color: var(--black-color , #001514);
-  background: var(--white-color , #fbfffe);
-  border-radius: 30px;
-  padding: 5px;
-  margin-top: -90px;
-}
-
-.roomdetails-section main {
-  width: 100%;
-  padding: 30px 0;
-  position: relative;
-  z-index: 200;
-}
-
-.roomdetails-section .roomDetails-addcommenttop{
-    text-decoration: none !important;
-    color: var(--white-color , #fbfffe) !important;
-    background: var(--orange-color, #ff7f00);
-    border: none;
-    position: absolute;
-    top: -27px;
-    right: 0;
-    left: 0;
-    z-index: 201;
-    margin: 0 auto;
-    border-radius: 50%;
-    font-size: 33px;
-    font-family: monospace;
-    height: 50px;
-    width: 50px;
-    transform: scale(1.5);
-    text-align: center;
-    cursor:pointer;
-    border: 1px solid var(--white-color , #fbfffe);
-}
-
-.comment{
-  display: flex;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: 10px auto;
-  border-radius: 5px;
-  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
-}
-
-.comment .comment-details{
-  background: var(--orange-color, #ff7f00);
-  width: 100%;
-  color: var(--white-color , #fbfffe);
-  padding: 10px;
-  text-align: center;
-  font-size:15px;
-  position: relative;
-  order: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.comment .comment-details .comment-details-user{
-  font-size: 20px;
-  color: var(--white-color , #fbfffe);
-  display: block;
-  text-align: left;
-}
-
-.comment .comment-details .comment-accolades{
-  color: var(--black-color , #001514);
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-}
-
-.comment .comment-details .comment-accolades .comment-accolades-svg{
-  width:15px;
-  height: 15px;
-  margin-left: 3px;
-  fill: var(--black-color , #001514);
-}
 
 
-.comment .comment-details .comment-timecreated-time{
-  display: block;
-}
-
-.comment .comment-details .comment-timecreated-date{
-  display: block;
-}
-
-.comment .comment-details .comment-repliestoggle{
-  color: var(--white-color , #fbfffe) !important;
-  position: absolute;
-  bottom: 10px;
-  left:0;
-  width: 100%;
-  display: block;
-  text-align: center;
-}
-
-.comment .comment-message{
-  width: 100%;
-  order: 1;
-  min-height: 150px;
-  background: var(--white-color , #fbfffe);
-  color: var(--black-color , #001514);
-  padding: 35px 10px 10px;
-  font-size: 20px;
-  position: relative;
-  border-radius: 5px;
-}
-
-.comment .comment-message .comment-room{
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 5px 0 0 0;
-  background: var(--black-color , #001514);
-  color: var(--orange-color, #ff7f00) !important;
-  padding: 5px 10px;
-  font-size: 15px;
-}
-
-
-.comment .comment-message .comment-message-image{
-  width: 80%;
-  margin-top: 30px;
-  max-height: 300px;
-  text-align: center;
-}
-
-.comment .comment-message .comment-buttons{
-  position: absolute;
-  bottom: 0px;
-  right: 10px;
-  font-size: 40px;
-}
-
-.comment .comment-message .comment-buttons button{
-    border-radius: 50%;
-    background: var(--orange-color, #ff7f00);
-    color: var(--white-color , #fbfffe);
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    border: none;
-    outline: none;
-}
-
-.comment-button-img{
-  width: 75%;
-  height: 70%;
-  margin-bottom: 25%;
-}
-
-.comment-button-svg{
-  width: 75%;
-  height: 70%;
-  margin-bottom: 40%;
-  fill: var(--white-color , #fbfffe);
-}
-
-.comment .comment-message .comment-buttons button:hover{
-  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
-}
-
-.comment .comment-message .comment-buttons .comment-button-accolades{
-  margin-right: 10px;
-}
-
-.comment .comment-message .comment-buttons .comment-button-accolades-given{
-  margin-right: 10px;
-}
-
-.comment .comment-message .comment-buttons .comment-button-accolades-given .comment-button-svg {
-  fill: var(--black-color , #001514);
-}
-
-.comment .comment-message .comment-buttons .comment-button-reply-showing .comment-button-svg {
-  fill: var(--black-color , #001514);
-}
-
-.comment .comment-message .comment-button-delete{
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  font-size: 20px;
-  background: var(--orange-color, #ff7f00);
-  color: var(--white-color , #fbfffe);
-  cursor: pointer;
-  outline: none;
-  border: none;
-  width: 50px;
-  border-radius: 0 5px 0 0;
-}
-
-.comment-replies{
-  width:80%;
-  margin: 10px auto 5px;
-}
-
-.comment-replies .reply{
-  display:flex;
-  width: 90%;
-  margin: 5px 0;
-  margin-right: auto;
-  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
-}
-
-.comment-replies .reply-info{
-  width: 20%;
-  background: var(--orange-color, #ff7f00);
-  text-align: center;
-  border-radius: 5px 0 0 5px;
-  padding: 10px;
-}
-
-.comment-replies .reply-info a{
-  color: var(--white-color , #fbfffe) !important;
-}
-
-.comment-replies .reply-message{
-  color: var(--black-color , #001514);
-  background: var(--white-color , #fbfffe);
-  border-radius: 5px;
-  font-size: 18px;
-  padding: 10px;
-  position: relative;
-  width: 80%;
-}
-
-.comment-replies .reply-message .reply-delete{
-
-position: absolute;
-top: 0;
-right: 0;
-background: var(--orange-color, #ff7f00);
-border: none;
-padding: 0 15px;
-color: var(--white-color , #fbfffe);
-}
-
-.comment-reply-form{
-  width: 80%;
-  background: var(--white-color , #fbfffe);
-  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
-  margin: 0 auto;
-  margin-top: 10px;
-  padding:  0;
-  text-align: center;
-}
-
-.comment-reply-textarea{
-  width: 100%;
-  height: 100px;
-  border: none;
-  outline: none;
-  padding: 10px;
-  font-size: 20px;
-}
-
-/* .comment-reply-textarea:focus{
-  border: 1px solid var(--orange-color, #ff7f00);
-} */
-
-.comment-reply-btn{
-    background: var(--orange-color, #ff7f00);
-    color: var(--white-color , #fbfffe);
-    cursor: pointer;
-    padding: 10px;
-    border: none;
-    width:100%;
-    font-size: 25px;
-}
-
-.comment-reply-btn:hover{
-  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
-}
 
 
 
@@ -1112,15 +815,7 @@ color: var(--white-color , #fbfffe);
   margin: 20px 0;
 }
 
-.edit-profile-section{
-  margin-bottom: 50px;
-}
 
-.edit-password-section-header{
-  text-align: center;
-  color: var(--black-color, #001514);
-  margin-bottom: 30px;
-}
 
 .user-item{
   width: 100%;

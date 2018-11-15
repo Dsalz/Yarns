@@ -3,8 +3,8 @@ const initState = {
     userExists : null,
     usernameAvailable : null,
     token : "",
-    loggingIn : false,
-    user: { accolades:[], followers:[], followings:[], roomsCreated:0 },
+    loading : false,
+    user: {username: "", name:"", accolades:[], followers:[], followings:[], roomsCreated:0 },
     nightMode: false,
     otherUser: {username: "", name:"", accolades:[], followers:[], followings:[], roomsCreated:0},
     profileUpdated: null,
@@ -21,11 +21,11 @@ const userReducer = (state = initState , action) => {
             ...state,
             user: action.payload.user,
             token: action.payload.token,
-            isLoggedIn: true
+            isLoggedIn: true,
+            loading: false
         }
 
         case "CHECKING_USERNAME_AVAILABILITY":
-        console.log(state)
         return{
             ...state,
             usernameAvailable: "loading"
@@ -49,10 +49,10 @@ const userReducer = (state = initState , action) => {
             usernameAvailable: null
         }
 
-        case "LOGGING_IN" :
+        case "LOADING" :
             return{
                 ...state,
-                loggingIn: true,
+                loading: true,
                 userExists: null
             }
         
@@ -72,10 +72,10 @@ const userReducer = (state = initState , action) => {
             userExists : true,
             token: action.payload.token,
             isLoggedIn : true,
-            loggingIn : false
+            loading : false
         } : {
             ...state,
-            loggingIn : false,
+            loading: false,
             userExists : false
         }
 
@@ -128,11 +128,11 @@ const userReducer = (state = initState , action) => {
         case "GOT_OTHER_USER":
         return{
             ...state,
-            otherUser: action.payload
+            otherUser: action.payload,
+            loading: false
         }
 
         case "FOLLOWED_USER":
-        console.log(action.payload.otherUser);
         return{
             ...state,
             user : {
@@ -143,7 +143,6 @@ const userReducer = (state = initState , action) => {
         }
 
         case "UNFOLLOWED_USER":
-        console.log(action.payload.otherUser);
         return {
             ...state,
             user : {

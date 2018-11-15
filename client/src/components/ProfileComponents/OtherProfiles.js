@@ -103,7 +103,7 @@ class OtherProfiles extends Component {
 
                         { activeLink === "accoladesGiven" && (
                             <React.Fragment>
-                            <h3>Comments ${username} has given Accolades To</h3>
+                            <h3>Comments {username} has given Accolades To</h3>
                             {commentsUserGaveAccolades.map(comment => <Comment {...comment} key={comment._id} />)} 
                             </React.Fragment>
                             )}

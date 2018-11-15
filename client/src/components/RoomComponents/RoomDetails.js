@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { getRoom } from '../../actions/roomActions';
 import { getComments } from '../../actions/commentActions';
 
+import '../../css/RoomComponents/RoomDetails.css';
+
 class RoomDetails extends Component{
 
     componentDidMount(){
@@ -20,7 +22,9 @@ class RoomDetails extends Component{
         return(
             <section className="roomdetails-section">
             <header className="roomdetails-section-header">
+                <div className="roomdetails-section-commenttitle-wrapper">
                 <h2 className="roomdetails-section-commenttitle" tabIndex="0">{roomName}</h2>
+                </div>
                 <span className="roomdetails-section-commentno" tabIndex="0">{comments.length === 1 ? "1 Comment" : comments.length + " Comments"}</span>
             </header>
             <main>

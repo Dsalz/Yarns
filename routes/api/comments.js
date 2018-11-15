@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const tokenizer = require('../../middleware/tokenizer');
+const mongoose = require('mongoose');
 
 const Comment = require('../../models/comment');
 const Room = require('../../models/room');
@@ -158,48 +159,33 @@ router.get('/CommentsWithUserAccolades/:username', (req, res)=>{
     User.find({username : req.params.username})
     .then( users => {
         const user = users[0];
-        const commentsWithAccolades = [];
+        const commentIds = [];
 
         for(let i=0; i<user.accolades.length ; i++){
-            if(i == user.accolades.length - 1){
-                Comment.findById(user.accolades[i])
-                .then(comment => {
-                    if(comment){
-                        commentsWithAccolades.push(comment);
-                    }
-                    return res.json({ comments : commentsWithAccolades})
-                })
-            }else{
-                Comment.findById(user.accolades[i])
-                .then(comment => {
-                    if(comment){
-                        commentsWithAccolades.push(comment);
-                    }
-                })
-            }
+            commentIds.push(new mongoose.Types.ObjectId(user.accolades[i]));
         }
+
+        Comment.find( { _id : { $in : commentIds}})
+        .then(comments => res.json({ comments }))
+        .catch(err => res.json({ success: false , err}))
     })
+    
 })
 
 router.get('/CommentsWithMyAccolades' , tokenizer.verifyToken , (req, res) => {
         
-        const { user } = req;
-        const commentsWithAccolades = [];
+    User.findById(req.user._id)
+    .then(user => {
+        const commentIds = [];
 
         for(let i=0; i<user.accolades.length ; i++){
-            if(i == user.accolades.length - 1){
-                Comment.findById(user.accolades[i])
-                .then(comment => {
-                    commentsWithAccolades.push(comment)
-                    return res.json({ comments : commentsWithAccolades})
-                })
-            }else{
-                Comment.findById(user.accolades[i])
-                .then(comment => {
-                    commentsWithAccolades.push(comment)
-                })
-            }
+            commentIds.push(new mongoose.Types.ObjectId(user.accolades[i]));
         }
+
+        Comment.find( { _id : { $in : commentIds}})
+        .then(comments => res.json({ comments }))
+        .catch(err => res.json({ success: false , err}))
+    })
 })
 
  
