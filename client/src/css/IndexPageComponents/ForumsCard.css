@@ -1,0 +1,76 @@
+.index-forumscard{
+    width: 70%;
+    min-width: 650px;
+    background: var(--white-color , #fbfffe);
+    box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
+    margin: 10px auto;
+  }
+  
+  .index-forumscard h3{
+    color: var(--orange-color, #ff7f00);
+    border-bottom: 3px solid var(--orange-color, #ff7f00);
+    width:fit-content;
+    margin: 10px auto 5px;
+    padding: 15px 0 2px;
+  }
+  
+  .index-forumscard-estate{
+    display: flex;
+    /* margin: 20px 0px; */
+  }
+  
+  .index-forumscard-estate-item{
+    padding: 20px 0;
+    background: var(--black-color , #001514);
+    color: var(--orange-color, #ff7f00) !important ;
+    /* height: 60px; */
+    width: 180px;
+    text-align: center;
+  }
+  
+  .index-forumscard-estate-item img{
+    margin: 0 10px 0 -15px;
+    width: 25px;
+  }
+  
+  .index-forumscard-houses{
+    width: calc(100% - 180px);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  
+  }
+  
+  .index-forumscard-house{
+    color: var(--orange-color, #ff7f00) !important;
+    text-align: center;
+    padding: 20px 10px;
+  }
+
+  @media screen and (max-width: 700px){
+    .index-forumscard{
+        width: 80vw;
+        min-width: 300px;
+    }
+
+    .index-forumscard h3{
+       margin: 10px auto 25px; 
+    }
+
+    .index-forumscard-estate{
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 10px 0px;
+    }
+
+    .index-forumscard-estate-item{
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    .index-forumscard-houses{
+        width: fit-content;
+        justify-content: center;
+    }
+
+  }

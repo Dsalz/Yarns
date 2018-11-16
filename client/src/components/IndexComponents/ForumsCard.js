@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../../css/IndexPageComponents/ForumsCard.css';
 
 class ForumsCard extends Component {
 
