@@ -1,0 +1,119 @@
+.houseDetails{
+    margin-top: 100px;
+    position: relative;
+  }
+  
+  .houseDetails-Header{
+    background: var(--orange-color, #ff7f00);
+    width: 100%;
+    height: 300px;
+    color: var(--white-color , #fbfffe);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 70px 0;
+  }
+  
+  .houseDetails-Header-Name{
+    position: relative;
+    width:fit-content;
+  }
+  
+  .houseDetails-Header-Name hr{
+    position: absolute;
+    width:100%;
+    border: 2px solid var(--white-color , #fbfffe);
+    left: 0;
+  }
+  
+  .houseDetails-Header-Name h2{
+    font-size: 50px;
+  }
+  
+  .houseDetails-Header-Name-FirstLine{
+    top: -20px;
+  }
+  
+  .houseDetails-Header-Name-SecondLine{
+    bottom: -7px;
+  }
+  
+  .houseDetails-Main{
+    position: relative;
+    width: 100%;
+  }
+  
+  .houseDetails-Rooms{
+    padding: 60px 0;
+    height: 290px;
+    min-width: 300px;
+    position: relative;
+    top: -50px;
+    width: 70%;
+    margin: 0 auto;
+    background: var(--white-color , #fbfffe);
+    box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2)); 
+    z-index: 200; 
+  }
+  
+  .houseDetails-Rooms-Item{
+    display: inline-block;
+    position: relative;
+    width: 90%;
+    margin: 8px 5%;
+    padding: 5px 70px 5px 0;
+    box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
+    text-align: center;
+  }
+  
+  .houseDetails-Rooms-Item-Title{
+    background: var(--white-color , #fbfffe);
+    color:var(--orange-color, #ff7f00);
+  }
+  
+  .houseDetails-Rooms-Item-Comments{
+      width: 50px;
+      padding: 5px;
+      color: white;
+      background: var(--orange-color, #ff7f00);
+      position: absolute;
+      right: 0;
+      top:0;
+      height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .houseDetails-addroom{
+      text-decoration: none !important;
+      color: var(--white-color , #fbfffe) !important;
+      background: var(--orange-color, #ff7f00);
+      border: none;
+      position: absolute;
+      top: -75px;
+      right: 0;
+      left: 0;
+      z-index: 201;
+      margin: 0 auto;
+      border-radius: 50%;
+      font-size: 33px;
+      font-family: monospace;
+      height: 50px;
+      width: 50px;
+      transform: scale(1.5);
+      text-align: center;
+      cursor:pointer;
+      border: 1px solid var(--white-color , #fbfffe);
+  }
+  
+  .houseDetails-addroom:hover {
+  box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
+  }
+
+  @media screen and (max-width: 800px){
+    .houseDetails-Rooms{
+        font-size: 12px;
+        width: 90%;
+    }
+  }

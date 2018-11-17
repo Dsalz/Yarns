@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addRoom } from '../../actions/roomActions';
+import { storeImgAction , resetImgUrlAction } from '../../actions/commentActions';
+
+import LoadingScreen from '../LoadingScreen';
+
+import '../../css/RoomComponents/AddRoom.css';
 
 class AddRoom extends Component{
 
@@ -19,7 +24,11 @@ class AddRoom extends Component{
     }
 
     addImage = (e) =>{
-        console.log(e.target.files);
+        const file = new FormData();
+
+        file.append('file', e.target.files[0])
+
+        this.props.storeImg(file);
     }
 
     showImageDialog = (e) =>{
@@ -37,9 +46,10 @@ class AddRoom extends Component{
     render(){
         document.title = "Add Room | Yarns";
         const { houseName } = this.props.match.params;
-        const {isLoggedIn , newRoom } = this.props;
+        const {isLoggedIn , newRoom, loading } = this.props;
         return(!isLoggedIn) ? <Redirect to="/login"/> : (newRoom && this.state.submitted) ? <Redirect to= {"/room/" + newRoom}/> : (
             <section className="addroom-section">
+                {loading && <LoadingScreen />}
                 <header>
                     <h2>Add New Room</h2>
                     <p>Start up a conversation by creating a new room in the { houseName } house for people to discuss in</p>
@@ -68,13 +78,17 @@ class AddRoom extends Component{
 const mapStateToProps = (state)=>{
     return{
         isLoggedIn: state.user.isLoggedIn,
-        newRoom: state.room.newRoom
+        newRoom: state.room.newRoom,
+        newCommentImgUrl : state.comment.newCommentImgUrl,
+        loading: state.user.loading
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addRoom : (room, houseName) => dispatch(addRoom(room, houseName))
+        addRoom : (room, houseName) => dispatch(addRoom(room, houseName)),
+        storeImg : (file) => dispatch(storeImgAction(file)),
+        resetImgUrl : () => dispatch(resetImgUrlAction())
     }
 }
 

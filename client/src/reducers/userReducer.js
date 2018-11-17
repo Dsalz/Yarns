@@ -152,6 +152,12 @@ const userReducer = (state = initState , action) => {
             }
         }
 
+        case "STOP_LOADING":
+        return{
+            ...state,
+            loading: false
+        }
+
         default: 
         return state;
 

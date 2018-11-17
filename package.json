@@ -13,9 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "cloudinary": "^1.13.2",
     "concurrently": "^4.0.1",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.3.4"
+    "mongoose": "^5.3.4",
+    "multer": "^1.4.1"
   }
 }

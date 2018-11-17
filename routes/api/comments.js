@@ -1,16 +1,25 @@
 const router = require('express').Router();
 const tokenizer = require('../../middleware/tokenizer');
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 const Comment = require('../../models/comment');
 const Room = require('../../models/room');
 const User = require('../../models/user');
 const Notification = require('../../models/notification');
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+const storeImg = require('../../middleware/fileStorage').storeImage;
+
 router.get('/room/:roomName', (req, res)=> {
     Comment.find({roomName : req.params.roomName , isActive: true})
     .then(comments => res.json({ comments }))
     .catch(err => console.log(err))
+})
+
+router.post('/storeImg', tokenizer.verifyToken, (req, res)=>{
+    console.log(req);
 })
 
 router.post('/addReply', tokenizer.verifyToken, (req, res) => {

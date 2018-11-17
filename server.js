@@ -1,10 +1,15 @@
 const express = require('express');
 const mongoose = require ('mongoose');
 const app = express();
+const cloudinary = require('cloudinary');
 
 //parsing json data
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
+
+//Initializing Cloudinary
+const cloudinaryConfig = require('./config/keys').cloudinaryConfig;
+cloudinary.config(cloudinaryConfig);
 
 
 //Connecting to database

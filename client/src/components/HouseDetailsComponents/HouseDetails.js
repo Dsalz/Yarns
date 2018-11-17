@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { getLatestRoomsAction } from '../../actions/roomActions';
 
+import '../../css/HouseComponents/HouseDetails.css';
+
 class HouseDetails extends Component{
     state = {
 

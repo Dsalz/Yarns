@@ -1,11 +1,19 @@
 
-export const setupToken = () =>{
+export const setupToken = (key = null , value = null) =>{
     let token = localStorage.YarnsToken;
-        return {
-            headers:{
-                Authorization: "Bearer " + token
-            }
+    const tokenHeader = {
+        headers:{
+            Authorization: "Bearer " + token
         }
+    };
+
+     if(!key){
+        return tokenHeader
+     }
+
+     tokenHeader[key] = value;
+     return tokenHeader;
+        
 }
 
 export const storeToken = (token) =>{

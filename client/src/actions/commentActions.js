@@ -89,6 +89,21 @@ export const removeAccolade = (commentId) => {
     }
 }
 
+export const storeImgAction = (file) => {
+    return(dispatch)=>{
+        dispatch({ type: "LOADING" })
+        axios.post('/api/v1/comments/storeImg' ,  file  , setupToken('content-type', 'multipart/form-data'))
+        .then(resp => {
+            dispatch({type: "IMAGE_STORED", payload: resp.data})
+            dispatch({type: "STOP_LOADING"})
+        })
+        .catch(err => {
+            dispatch({type: "IMAGE_NOT_STORED"})
+            dispatch({type: "STOP_LOADING"})        
+        })
+    }
+}
+
 export const resetReplyAddedAction = () => {
     return{
         type: "RESET_REPLY_ADDED"
@@ -98,5 +113,11 @@ export const resetReplyAddedAction = () => {
 export const resetCommentAddedAction = () => {
     return{
         type: "RESET_COMMENT_ADDED"
+    }
+}
+
+export const resetImgUrlAction = () =>{
+    return{
+        type: "RESET_IMG_URL"
     }
 }
