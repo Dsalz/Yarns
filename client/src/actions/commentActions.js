@@ -34,9 +34,15 @@ export const getCommentsUserGaveAccoladeAction = (username) => {
     }
 }
 
-export const addComment = (comment, roomName) => {
+export const addComment = (comment, roomName, imgInfo) => {
     return(dispatch, getStore) => {
-        axios.post('/api/v1/comments/addComment', { comment, roomName }, setupToken())
+            const newComment = {
+                message: comment.commentText,
+                roomName,
+                imageUrl: imgInfo.url,
+                imageName: imgInfo.name
+            }
+        axios.post('/api/v1/comments/addComment', { comment : newComment }, setupToken())
         .then(resp => dispatch({type: "ADD_COMMENT_SUCCESS", payload: resp.data.savedComment }))
         .catch(err => dispatch({type: "ADD_COMMENT_FAILED"}))
     }
@@ -89,10 +95,10 @@ export const removeAccolade = (commentId) => {
     }
 }
 
-export const storeImgAction = (file) => {
+export const storeImgAction = (fileForm) => {
     return(dispatch)=>{
         dispatch({ type: "LOADING" })
-        axios.post('/api/v1/comments/storeImg' ,  file  , setupToken('content-type', 'multipart/form-data'))
+        axios.post('/api/v1/comments/storeImg' ,  fileForm  , setupToken('Content-Type', `multipart/form-data; boundary=${fileForm._boundary}`))
         .then(resp => {
             dispatch({type: "IMAGE_STORED", payload: resp.data})
             dispatch({type: "STOP_LOADING"})

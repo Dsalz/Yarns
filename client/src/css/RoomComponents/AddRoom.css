@@ -80,6 +80,7 @@
       border: none;
       outline: none;
       margin-bottom: 5px;
+      margin-right: 5%;
   }
   
   .addroom-section-form-addImageBtn-svg{
@@ -94,9 +95,36 @@
   
   .addroom-section-form-addImageBtn-wrapper{
     text-align: right;
-    width: 90%;
+    width: 100%;
   }
 
+  .newcommentimg-div{
+    margin: 10px auto;
+    max-height: 300px;
+    max-width: 300px;
+    position: relative;
+  }
+
+  .newcommentimg-div span{
+    position: absolute;
+    top:-10px;
+    right:-10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px 3px;
+    border-radius: 50%;
+    background: var(--orange-color, #ff7f00);
+    color: var(--white-color , #fbfffe);
+  }
+
+  .newcommentimg{
+    max-width: inherit;
+    max-height: inherit;
+    border-radius: 5px;
+  }
 
   @media screen and (max-width: 700px){
     .addroom-section p{
@@ -120,5 +148,10 @@
 
     .addroom-section textarea{
         width: 90%;
+    }
+
+    .newcommentimg-div{
+      max-height: 200px;
+      max-width: 200px;
     }
   }

@@ -11,7 +11,7 @@
     background: var(--orange-color, #ff7f00);
     width: 100%;
     color: var(--white-color , #fbfffe);
-    padding: 10px;
+    padding: 3px 10px;
     text-align: center;
     font-size:15px;
     position: relative;
@@ -63,13 +63,14 @@
   .comment .comment-message{
     width: 100%;
     order: 1;
-    min-height: 150px;
     background: var(--white-color , #fbfffe);
     color: var(--black-color , #001514);
-    padding: 35px 10px 30px;
-    font-size: 20px;
+    padding: 35px 60px 30px 10px;
+    font-size: 16px;
     position: relative;
     border-radius: 5px;
+    min-height: 150px;
+
   }
   
   .comment .comment-message .comment-room{
@@ -85,17 +86,25 @@
   
   
   .comment .comment-message .comment-message-image{
-    width: 80%;
-    margin-top: 30px;
-    max-height: 300px;
-    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    max-height: 250px;
+    text-align: left;
+  }
+
+  .comment .comment-message .comment-message-image img{
+    max-width: 100%;
+    max-height: inherit;
+    border-radius: 5px;
   }
   
   .comment .comment-message .comment-buttons{
     position: absolute;
     bottom: 0px;
-    right: 10px;
+    right: 5px;
     font-size: 40px;
+    display: flex;
+    flex-direction: column;
   }
   
   .comment .comment-message .comment-buttons button{
@@ -107,6 +116,10 @@
       height: 50px;
       border: none;
       outline: none;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
   
   .comment-button-img{
@@ -118,16 +131,11 @@
   .comment-button-svg{
     width: 75%;
     height: 70%;
-    margin-bottom: 40%;
     fill: var(--white-color , #fbfffe);
   }
   
   .comment .comment-message .comment-buttons button:hover{
     box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ; 
-  }
-  
-  .comment .comment-message .comment-buttons .comment-button-accolades{
-    margin-right: 10px;
   }
   
   .comment .comment-message .comment-buttons .comment-button-accolades-given{
@@ -185,7 +193,7 @@
     color: var(--black-color , #001514);
     background: var(--white-color , #fbfffe);
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 14px;
     padding: 10px;
     position: relative;
     width: 80%;
@@ -232,21 +240,52 @@
       padding: 10px;
       border: none;
       width:100%;
-      font-size: 25px;
+      font-size: 18px;
   }
   
   .comment-reply-btn:hover{
     box-shadow:  var(--small-box-shadow, 0px 0px 5px 1px rgba(0,0,0, 0.2)) ;
   }
 
-  @media screen and (max-width: 600px){
-    .comment .comment-details{
+  @media screen and (max-width: 800px){
+    .comment .comment-details, .comment-replies .reply-message{
         font-size: 12px;
 
     }
 
-    .comment .comment-details .comment-details-user{
-        font-size: 16px;
+    .comment .comment-details .comment-details-user , .comment .comment-message{
+        font-size: 14px;
     }
+
+    .comment{
+      width: 90%;
+    }
+
+    .comment .comment-message .comment-room{
+      font-size: 12px;
+    }
+
+    .comment .comment-message .comment-button-delete{
+      font-size: 15px;
+      width: 35px;
+    }
+
+    .comment .comment-message .comment-buttons button{
+      width: 35px;
+      height: 35px;
+    }
+
+    .comment .comment-message{
+      padding: 35px 45px 30px 10px;
+      min-height: 100px;
+    }
+
+    .comment-reply-form{
+      width: 90%;
+    }
+
+      .comment-reply-textarea , .comment-reply-form{
+        font-size: 14px;
+      }
   }
   

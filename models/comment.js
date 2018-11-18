@@ -32,6 +32,10 @@ const commentSchema = new Schema({
         type: String,
         required: false
     },
+    imageName : {
+        type: String,
+        required: false
+    },
     accolades : {
         type: Number,
         default: 0

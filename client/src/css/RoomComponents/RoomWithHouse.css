@@ -1,0 +1,81 @@
+.roomwithhouse-item {
+    display: flex;
+    box-shadow: var(--large-box-shadow, 0px 0px 15px 2px rgba(0,0,0, 0.2));
+    font-size: 15px;
+    width: 70%;
+    margin: 30px auto;
+    justify-content: center;
+  }
+  
+  .roomwithhouse-house{
+    background: var(--black-color , #001514);
+    width: 25%;
+    padding: 10px 0;
+    color: var(--orange-color, #ff7f00) !important;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .roomwithhouse-room{
+    background: var(--white-color , #fbfffe);
+    width: 75%;
+    padding: 10px 45px 10px 5px;
+    color: var(--orange-color, #ff7f00) !important;
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .roomwithhouse-room span{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--orange-color, #ff7f00);
+    color: var(--white-color , #fbfffe);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 40px;
+  }
+
+  @media screen and (max-width: 1000px){
+    .roomwithhouse-item{
+        width: 90%;
+    }
+  }
+
+  @media screen and (max-width: 800px){
+    .roomwithhouse-item{
+        flex-wrap: wrap;
+        font-size: 13px;
+        justify-content: flex-start;
+    }
+
+    .roomwithhouse-house{
+        width: 60%;
+        order: 2;
+        padding: 5px 0;
+    }
+
+    .roomwithhouse-room{
+        width: 100%;
+        order: 1;
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .roomwithhouse-room span{
+        top: auto;
+        bottom: -29px;
+        height: fit-content;
+        width: 40%;
+        padding: 5px 0px;
+        font-size: 13px;
+    }
+  }

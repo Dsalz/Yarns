@@ -20,11 +20,13 @@ class Navbar extends Component{
             document.body.style.setProperty('--black-color' , '#fbfffe')
             document.body.style.setProperty('--large-box-shadow' , '0px 0px 15px 2px rgba(255,127,0, 0.4)')
             document.body.style.setProperty('--small-box-shadow' , '0px 0px 5px 1px rgba(255,127,0, 0.4)')
+            document.body.style.setProperty('--dropdown-box-shadow' , '0px 5px 5px -5px rgba(255,127,0, 0.4)')
         }else{
             document.body.style.setProperty('--white-color' , '#fbfffe')
             document.body.style.setProperty('--black-color' , '#001514')
             document.body.style.setProperty('--large-box-shadow' , '0px 0px 15px 2px rgba(0,0,0, 0.2)')
             document.body.style.setProperty('--small-box-shadow' , '0px 0px 5px 1px rgba(0,0,0, 0.2)')
+            document.body.style.setProperty('--dropdown-box-shadow' , '0px 5px 5px -5px rgba(0,0,0, 0.2)')
         } 
 
         if(nextProps.isLoggedIn){

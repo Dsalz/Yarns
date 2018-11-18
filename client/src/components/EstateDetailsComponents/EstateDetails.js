@@ -2,13 +2,26 @@ import React, { Component } from 'react';
 import{ Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import RoomWithHouse from '../RoomComponents/RoomItemWithHouse';
+
 import '../../css/EstateComponents/EstateDetails.css';
 
 
 class EstateDetails extends Component{
 
+    state={
+        activeroomsfilter : "trending"
+    }
+
+    changeFilter = (e) =>{
+        this.setState({
+            activeroomsfilter : e.target.id
+        })
+    }
+
     render(){
-        const { estate , houses, rooms} = this.props;
+        const { estate , houses, rooms } = this.props;
+        const { activeroomsfilter } = this.state;
         document.title = `${estate.name} Estate | Yarns`;
         return(
             <section className="estatedetails-section">
@@ -36,19 +49,16 @@ class EstateDetails extends Component{
                     <h2>Rooms</h2> 
 
                     <div className="estatedetails-section-rooms-toggle">
-                        <button className="estatedetails-section-room-toggle-btn-active">
+                        <button className={(activeroomsfilter === "trending") ? "estatedetails-section-room-toggle-btn-active" : "estatedetails-section-room-toggle-btn"} id="trending" onClick={this.changeFilter}>
                             Trending
                         </button>
-                        <button className="estatedetails-section-room-toggle-btn">
+                        <button className={(activeroomsfilter === "latest") ? "estatedetails-section-room-toggle-btn-active" : "estatedetails-section-room-toggle-btn"} id="latest" onClick={this.changeFilter}>
                             Latest
                         </button>
                     </div>
 
-                    { rooms.map( room => (
-                        <Link className="estatedetails-section-room-item" to={"/room/" + room.id} key={room._id}>
-                            {room.name}
-                        </Link>
-                    ))}
+                    {activeroomsfilter === "trending" && rooms.sort((a,b)=> b.commentNo - a.commentNo).map( room => <RoomWithHouse {...room} key={room._id} />)}
+                    {activeroomsfilter === "latest" && rooms.sort((a,b)=> new Date(b.dateCreated) - new Date(a.dateCreated)).map( room => <RoomWithHouse {...room} key={room._id} />)}
 
 
                 </div>

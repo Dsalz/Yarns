@@ -26,7 +26,7 @@ class HouseDetails extends Component{
                 <header className="houseDetails-Header">
                     <div className ="houseDetails-Header-Name">
                         <hr className ="houseDetails-Header-Name-FirstLine"/>
-                        <h2>{name}</h2>
+                        <h2>{name} House</h2>
                         <hr className ="houseDetails-Header-Name-SecondLine"/>
                     </div>
 
@@ -39,6 +39,7 @@ class HouseDetails extends Component{
                     </Link>
 
                     <div className="houseDetails-Rooms">
+                    <h3>Rooms</h3>
                     {rooms.map( room => (
                         <Link to={"/room/" + room.name} className="houseDetails-Rooms-Item" key={room._id}>
                         <span className="houseDetails-Rooms-Item-Title">{room.name}</span>

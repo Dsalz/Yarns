@@ -1,0 +1,14 @@
+.index-latestrooms{
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  .index-latestrooms h3{
+    color: var(--orange-color, #ff7f00);
+    border-bottom: 3px solid var(--orange-color, #ff7f00);
+    width:fit-content;
+    margin: 10px auto 5px;
+    padding: 15px 0 2px;
+  }

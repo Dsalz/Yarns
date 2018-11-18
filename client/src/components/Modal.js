@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/Modal.css';
+
 const Modal = ({title, info, close, options, optionAText, optionAFunc, optionBText, optionBFunc }) =>{
     return(
         <section className="yarns-modal-container">

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const RoomItemWithHouse = ({ houseName, name}) =>{
+import '../../css/RoomComponents/RoomWithHouse.css';
+
+const RoomItemWithHouse = ({ houseName, name, commentNo }) =>{
     return(
         <section className = "roomwithhouse-item">
                     <Link to= { "/house/" + houseName } className = "roomwithhouse-house">
@@ -9,6 +11,7 @@ const RoomItemWithHouse = ({ houseName, name}) =>{
                     </Link>
                     <Link to = {"/room/" + name} className = "roomwithhouse-room">
                      {name}
+                     <span>{commentNo}</span>
                     </Link>
         </section>
     )

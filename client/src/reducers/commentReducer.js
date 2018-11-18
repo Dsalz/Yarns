@@ -4,7 +4,7 @@ const initState={
     commentAdded: null,
     commentsIGaveAccolade : [],
     commentsUserGaveAccolades: [],
-    newCommentImgUrl: null
+    newCommentImg: null
 }
 
 const commentReducer = (state=initState , action) => {
@@ -100,9 +100,16 @@ const commentReducer = (state=initState , action) => {
             commentsIGaveAccolade: [...action.payload]
         }
 
+        case "IMAGE_STORED":
+        return{
+            ...state,
+            newCommentImg : action.payload
+        }
+
         case "RESET_IMG_URL":
         return{
-            newCommentImgUrl : null
+            ...state,
+            newCommentImg : null
         }
 
         default:

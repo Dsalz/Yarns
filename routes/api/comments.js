@@ -2,24 +2,38 @@ const router = require('express').Router();
 const tokenizer = require('../../middleware/tokenizer');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const cloudinary = require('cloudinary');
+const cloudinaryStore = require('multer-storage-cloudinary');
 
 const Comment = require('../../models/comment');
 const Room = require('../../models/room');
 const User = require('../../models/user');
 const Notification = require('../../models/notification');
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-const storeImg = require('../../middleware/fileStorage').storeImage;
+//Initializing Cloudinary
+const cloudinaryConfig = require('../../config/keys').cloudinaryConfig;
+cloudinary.config(cloudinaryConfig);
+
+const storage = cloudinaryStore({
+    cloudinary,
+    folder: "YarnsImgs",
+    transformation: [
+        { width : 300 },
+        { height : 300 },
+        { crop : "limit" },
+    ]
+});
+
+const parser = multer({ storage: storage});
 
 router.get('/room/:roomName', (req, res)=> {
     Comment.find({roomName : req.params.roomName , isActive: true})
     .then(comments => res.json({ comments }))
-    .catch(err => console.log(err))
+    .catch(err => res.json({ success: false, err }))
 })
 
-router.post('/storeImg', tokenizer.verifyToken, (req, res)=>{
-    console.log(req);
+router.post('/storeImg', tokenizer.verifyToken, parser.single('file') ,(req, res)=>{
+    return res.json({ url : req.file.secure_url , name : req.file.originalname})
 })
 
 router.post('/addReply', tokenizer.verifyToken, (req, res) => {
@@ -40,13 +54,17 @@ router.post('/addReply', tokenizer.verifyToken, (req, res) => {
                     creatorUsername: req.user.username
                 })
     
-                notification.save().then( () => res.json({ comment: updatedComment }) )
+                notification.save()
+                .then( () => res.json({ comment: updatedComment }))
+                .catch(err => res.json({ success: false, err }))
             }
             else{
                 return res.json({ comment : updatedComment})
             }
-        })
-    })
+
+        }).catch(err => res.json({ success: false, err }))
+
+    }).catch(err => res.json({ success: false, err }))
 })
 
 router.delete('/:id' , tokenizer.verifyToken , (req, res)=>{
@@ -57,7 +75,9 @@ router.delete('/:id' , tokenizer.verifyToken , (req, res)=>{
                 Room.find({name : comment.roomName}).then(rooms =>{
                     const room = rooms[0];
                     room.commentNo -= 1;
-                    room.save().then(() => res.json({ success : true}))
+                    room.save()
+                    .then(() => res.json({ success : true}))
+                    .catch(err => res.json({ success: false, err }))
                 })
             })
         }
@@ -91,10 +111,13 @@ router.post('/giveAccolade' , tokenizer.verifyToken, (req, res) => {
                         else{
                             return res.json({ user, comment})
                         }
-                    })
-                })
+                    }).catch(err => res.json({ success: false, err }))
+
+                }).catch(err => res.json({ success: false, err }))
+
             })
-        }).catch(err => res.json({ err }))
+
+        }).catch(err => res.json({ success: false, err }))
 })
 
 router.post('/removeAccolade' , tokenizer.verifyToken, (req, res) => {
@@ -106,34 +129,46 @@ router.post('/removeAccolade' , tokenizer.verifyToken, (req, res) => {
             .then(user => {
                 user.accolades = user.accolades.filter(commentId => commentId != req.body.commentId);
 
-                user.save().then( user => res.json({ user, comment }) )
-            })
+                user.save()
+                .then( user => res.json({ user, comment }))
+                .catch(err => res.json({ success: false, err }))
+
+            }).catch(err => res.json({ success: false, err }))
+
         })
-    }).catch(err => res.json({ err }))
+
+    }).catch(err => res.json({ success: false, err }))
+
 })
 
 router.get('/mine' , tokenizer.verifyToken , (req, res) => {
     Comment.find({ authorId : req.user._id})
     .then(comments => res.json({ comments }))
+    .catch(err => res.json({ success: false, err }))
 })
 
 router.get('/getUserComments/:username' , (req, res) => {
     Comment.find({authorName : req.params.username})
     .then(comments => res.json({ comments }))
+    .catch(err => res.json({ success: false, err }))
 })
 
 router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
+    const { message , roomName, imageUrl, imageName } = req.body.comment;
+
         var comment = new Comment ({
-            message: req.body.comment.commentText,
-            roomName: req.body.roomName,
+            message,
+            roomName,
             authorId: req.user._id,
             authorName: req.user.username,
-            replies: []
+            replies: [],
+            imageUrl,
+            imageName
         });
 
         comment.save().then(savedComment => {
             
-            Room.find({name : req.body.roomName}).then(rooms =>{
+            Room.find({name : roomName}).then(rooms =>{
                 const room = rooms[0];
                 room.commentNo += 1;
                 room.save().then(() => {
@@ -145,23 +180,31 @@ router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
                             message: ` commented "${req.body.comment.commentText}" in the ${req.body.roomName} room you created`
                         });
 
-                        notification.save().then(() => res.json({ savedComment }))
+                        notification.save()
+                        .then(() => res.json({ savedComment }))
+                        .catch(err => res.json({ success: false, err }))
                     }
                     else{
                         return res.json({ savedComment });
                     }
 
                 })
-            })
-        })
+
+            }).catch(err => res.json({ success: false, err }))
+
+        }).catch(err => res.json({ success: false, err }))
 })
 
 router.post('/deleteReply', tokenizer.verifyToken, (req, res) => {
     Comment.findById(req.body.commentId)
     .then(comment => {
-        comment.replies = comment.replies.filter(reply => reply._id === req.body.id)
-        comment.save().then(comment => res.json({ comment }))
-    })
+        comment.replies = comment.replies.filter(reply => reply._id === req.body.id);
+
+        comment.save()
+        .then(comment => res.json({ comment }))
+        .catch(err => res.json({ success: false, err }))
+
+    }).catch(err => res.json({ success: false, err }))
 })
 
 router.get('/CommentsWithUserAccolades/:username', (req, res)=>{
@@ -177,7 +220,8 @@ router.get('/CommentsWithUserAccolades/:username', (req, res)=>{
         Comment.find( { _id : { $in : commentIds}})
         .then(comments => res.json({ comments }))
         .catch(err => res.json({ success: false , err}))
-    })
+    
+    }).catch(err => res.json({ success: false, err }))
     
 })
 
@@ -194,7 +238,8 @@ router.get('/CommentsWithMyAccolades' , tokenizer.verifyToken , (req, res) => {
         Comment.find( { _id : { $in : commentIds}})
         .then(comments => res.json({ comments }))
         .catch(err => res.json({ success: false , err}))
-    })
+    
+    }).catch(err => res.json({ success: false, err }))
 })
 
  

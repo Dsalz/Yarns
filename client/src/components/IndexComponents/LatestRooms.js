@@ -1,5 +1,6 @@
 import React from 'react';
 import RoomItemWithHouse from '../RoomComponents/RoomItemWithHouse';
+import '../../css/IndexPageComponents/LatestRooms.css';
 
 const LatestRooms = ({rooms}) =>{
     return(

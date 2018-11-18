@@ -88,7 +88,7 @@ class Comment extends Component {
 
 
     render(){
-        const { _id, message , authorName, timeCreated, imageUrl, roomName, accolades, replies, isLoggedIn, currentusername, replyAdded, giveAccolade , removeAccolade, userAccolades} = this.props;
+        const { _id, message , authorName, timeCreated, imageUrl, imageName, roomName, accolades, replies, isLoggedIn, currentusername, replyAdded, giveAccolade , removeAccolade, userAccolades} = this.props;
         const timeCommented = new Date(timeCreated);
         let accoladeGiven = null;
         if(isLoggedIn){
@@ -121,8 +121,8 @@ class Comment extends Component {
                     {roomName}
                 </Link>
                     {message}
-                    {imageUrl && <div className="comment-message-image" ><img src={imageUrl} alt={roomName + " Image"} /></div>}
-                    {(isLoggedIn && this.state.showAltOptions)&& (<div className="comment-buttons">
+                    {imageUrl && <div className="comment-message-image" ><img src={imageUrl} alt={imageName} /></div>}
+                    {isLoggedIn && (<div className="comment-buttons">
                        { !accoladeGiven && <button onClick={() => giveAccolade(_id)} className="comment-button-accolades">
                             <svg className="comment-button-svg"  id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" ><g><g>
                                 <g>

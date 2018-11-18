@@ -1,62 +1,82 @@
 const initState = {
     
-    rooms : [
-        {name:"jj" , commentNo : 1 , _id : "jj", houseName: "Politics"}
-    ],
+    rooms : [],
     latestrooms : [],
     newRoom : null,
     myRoomsCreated: [],
-    userRoomsCreated: []
+    userRoomsCreated: [],
+    currentRoom : { isActive: true }
 }
 
 const roomReducer = (state=initState , action) => {
+
+    // const errRegex = /["DIDNT" , "COULDNT" , "NOT" , "FAILED"]/gi;
+
+    // if(action.payload.success === false || errRegex.test(action.type)){
+    //     return {
+    //         ...state,
+    //         error: action.payload.err
+    //     }
+    // }
     switch(action.type){
         case "ADD_ROOM":
         return{
             ...state,
-            rooms: [...state.rooms , action.payload]
+            rooms: [...state.rooms , action.payload.room]
         };
 
         case "ROOM_ADDED_SUCCESS":
+        const newRoomAdded = action.payload.room;
         return{
             ...state,
-            rooms: [...state.rooms, action.payload],
-            newRoom: action.payload.name
-        }
-
-        case "ROOM_ADDED_FAILED":
-        return{
-            ...state
+            rooms: [...state.rooms, newRoomAdded ],
+            newRoom: newRoomAdded.name
         }
 
         case "GOT_ROOM":
-        return{
+        const roomGotten = action.payload.room;
+        return(roomGotten) ? {
             ...state,
-            rooms: [...state.rooms, action.payload]
-        }
+            rooms: [...state.rooms.filter(room => room._id !== roomGotten._id), roomGotten],
+            currentRoom: roomGotten
+        } : {
+            ...state,
+            currentRoom: { isActive : false}
+        } 
 
-        case "DIDNT_GET_ROOM": 
-        return {
-            ...state
-            //TO DO : add property for loading failed
-        }
         case "GET_LATEST_ROOMS":
+        const roomsGotten = action.payload.rooms
         return{
             ...state,
-            rooms: [...action.payload],
-            latestrooms: [...action.payload].sort((a,b) => new Date(b.dateCreated) - new Date(a.dateCreated))
+            rooms: [...roomsGotten],
+            latestrooms: [...roomsGotten].sort((a,b) => new Date(b.dateCreated) - new Date(a.dateCreated))
         }
 
         case "GOT_USER_ROOMS_CREATED":
         return{
             ...state,
-            userRoomsCreated : [...action.payload]
+            userRoomsCreated : [...action.payload.rooms]
         }
 
         case "GOT_ROOMS_I_CREATED":
         return{
             ...state,
-            myRoomsCreated: [...action.payload]
+            myRoomsCreated: [...action.payload.rooms]
+        }
+
+        case "DELETED_ROOM":
+        const deletedRoomId = action.payload.id;
+        return{
+            ...state,
+            rooms : state.rooms.filter(room => room._id !== deletedRoomId),
+            myRoomsCreated : state.myRoomsCreated.filter(room => room._id !== deletedRoomId),
+            currentRoom : {...state.currentRoom , isActive: false}
+        }
+
+        case "RESET_CURRENT_ROOM":
+        return{
+            ...state,
+            currentRoom : { isActive : true }
         }
 
         default:
