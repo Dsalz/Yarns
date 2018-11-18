@@ -1,8 +1,8 @@
 {
   "name": "Yarns",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Your new favorite forums website",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",

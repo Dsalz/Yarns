@@ -29,7 +29,7 @@ app.use('/api/v1/notifications' , notificationRouter);
 if (process.env.NODE_ENV === "production"){
 
     //Serving Static Files
-    app.use(express.static(client/build));
+    app.use(express.static('client/build'));
 
     //Responding to all requests that arent to an api with the index page
     app.get('*', (req,res) => {
