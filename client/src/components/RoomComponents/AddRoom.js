@@ -17,9 +17,13 @@ class AddRoom extends Component{
     }
 
     handleChange =(e) => {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
+        let value = e.target.value;
+
+        if(value.indexOf('?') === -1){
+            this.setState({
+                [e.target.name] : value
+            })
+        }
     }
 
     addImage = (e) =>{
@@ -38,6 +42,8 @@ class AddRoom extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         const imageInfo = this.props.newCommentImg || {};
+        this.state.name.trim();
+        this.state.commentText.trim();
         this.props.addRoom(this.state, this.props.match.params.houseName ,imageInfo);
         this.setState({
             submitted: true
