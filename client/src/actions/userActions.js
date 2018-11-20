@@ -11,7 +11,7 @@ export const checkLoginStatusAction = () =>{
     return(dispatch) => {
         axios.get('/api/v1/users/getUser' , setupToken())
         .then(resp =>  console.log(resp) || dispatch({type: "CONFIRMED_LOGIN_STATUS" , payload: resp.data}))
-        .catch(err => dispatch({type: "COULDNT_CONFIRM_LOGIN_STATUS"}))
+        .catch(err => dispatch({type: "COULDNT_CONFIRM_LOGIN_STATUS", payload: { err }}))
     }
 }
 
@@ -19,7 +19,7 @@ export const updateUserAction = () => {
     return(dispatch) => {
         axios.get('/api/v1/users/getUser' , setupToken())
         .then(resp => dispatch({type: "UPDATED_USER" , payload: resp.data}))
-        .catch(err => dispatch({type: "COULDNT_UPDATE_USER"}))
+        .catch(err => dispatch({type: "COULDNT_UPDATE_USER", payload: { err }}))
     }
 }
 
@@ -27,7 +27,7 @@ export const getOtherUserAction =(username) =>{
     return(dispatch) => {
         axios.get('/api/v1/users/getOtherUser/' + username)
         .then(resp => dispatch({type: "GOT_OTHER_USER" , payload:resp.data.user}))
-        .catch(err => dispatch({type :"DIDNT_GET_OTHER_USER"}))
+        .catch(err => dispatch({type :"DIDNT_GET_OTHER_USER", payload: { err }}))
     }
 }
 
@@ -35,7 +35,7 @@ export const followUserAction = (username) => {
     return(dispatch)=> {
         axios.post('/api/v1/users/followUser', {username} , setupToken())
         .then(resp => dispatch({type: "FOLLOWED_USER" , payload: {username , otherUser: resp.data.user}}))
-        .catch(err => dispatch({type:"COULDNT_FOLLOW_USER"}))
+        .catch(err => dispatch({type:"COULDNT_FOLLOW_USER", payload: { err }}))
     }
 }
 
@@ -43,7 +43,7 @@ export const unfollowUserAction = (username) => {
     return(dispatch)=> {
         axios.post('/api/v1/users/unfollowUser', {username} , setupToken())
         .then(resp => dispatch({type: "UNFOLLOWED_USER" , payload:{ username , otherUser: resp.data.user}}))
-        .catch(err => dispatch({type:"COULDNT_UNFOLLOW_USER"}))
+        .catch(err => dispatch({type:"COULDNT_UNFOLLOW_USER", payload: { err }}))
     }
 }
 
@@ -52,7 +52,7 @@ export const editProfileAction = (updatedUser) => {
         alert('right api')
         axios.post('api/v1/users/editProfile', { updatedUser } , setupToken())
         .then(resp => dispatch({type: "UPDATED_USER", payload: resp.data}))
-        .catch(err => dispatch({type: "COULDNT_UPDATE_USER"}))
+        .catch(err => dispatch({type: "COULDNT_UPDATE_USER", payload: { err }}))
     }
 }
 
@@ -60,7 +60,7 @@ export const editPasswordAction = (password) => {
     return(dispatch)=>{
         axios.post('api/v1/users/editPassword', { password } , setupToken())
         .then(resp => dispatch({type: "UPDATED_PASSWORD", payload: resp.data}))
-        .catch(err => dispatch({type: "COULDNT_UPDATE_PASSWORD"}))
+        .catch(err => dispatch({type: "COULDNT_UPDATE_PASSWORD", payload: { err }}))
     }
 }
 
@@ -85,7 +85,7 @@ export const loginAction = (user) => {
             if(resp.data.validUser)storeToken(resp.data.token);
             dispatch({type: "LOGIN_USER" , payload: resp.data})
         })
-        .catch(err => console.log(err))
+        .catch(err => dispatch({type: "COULDNT_LOGIN_USER", payload: { err }}))
 
     }
 }
@@ -96,7 +96,7 @@ export const checkUsernameAvailability = (username) => {
 
         axios.post('/api/v1/users/CheckUsernameAvailability' , { username })
         .then( resp => dispatch({type: "USERNAME_AVAILABILITY", payload: resp.data.status}))
-        .catch(err => console.log(err))
+        .catch(err => dispatch({type: "COULDNT_CHECK_USERNAME_AVAILABILITY", payload: { err }}))
     }
 }
 
@@ -115,7 +115,7 @@ export const signUpAction = (user) => {
             dispatch({type: "SIGNUP_USER" , payload: { user : resp.data.user , token : resp.data.token } })
         
         })
-          .catch(err => console.log(err))  
+        .catch(err => dispatch({type: "COULDNT_SIGN_USER_UP" , payload: { err }}))        
     }
 }
 
