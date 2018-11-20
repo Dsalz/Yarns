@@ -31,11 +31,16 @@
   .roomdetails-section-commentno{
     color: var(--orange-color , #ff7f00);
     background: var(--white-color , #fbfffe);
-    border-radius: 30px;
-    padding: 5px;
+    border-radius: 2px;
+    padding: 3px;
     position: absolute;
-    bottom: 30px;
-    font-size: 15px;
+    text-align: center;
+    bottom: 20px;
+    font-size: 10px;
+  }
+
+  .roomdetails-section-commentno > span{
+    font-size: 1.4em;
   }
   
   .roomdetails-section main {
@@ -97,7 +102,7 @@
     }
 
     .roomdetails-section-commentno{
-      font-size: 12px;
+      font-size: 9px;
     }
   .roomdetails-section .roomDetails-addcommenttop{
     transform: scale(1.1);
@@ -117,7 +122,7 @@
     }
 
     .roomdetails-section-commentno{
-      font-size: 10px;
+      font-size: 8px;
     }
     
   }

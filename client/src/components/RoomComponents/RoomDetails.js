@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getRoomAction , resetCurrentRoomAction} from '../../actions/roomActions';
+import { getRoomAction , resetCurrentRoomAction } from '../../actions/roomActions';
 import { getComments } from '../../actions/commentActions';
 
 
@@ -44,7 +44,7 @@ class RoomDetails extends Component{
                 <div className="roomdetails-section-commenttitle-wrapper">
                 <h2 className="roomdetails-section-commenttitle" tabIndex="0">{roomName}</h2>
                 </div>
-                <span className="roomdetails-section-commentno" tabIndex="0">{comments.length === 1 ? "1 Comment" : comments.length + " Comments"}</span>
+                <span className="roomdetails-section-commentno" tabIndex="0"><span>{comments.length}</span> <br/> {comments.length === 1 ? "Comment" : " Comments"}</span>
             </header>
             <main>
                 <Link to={"/room/" + roomName + "/add"} className="roomDetails-addcommenttop">
