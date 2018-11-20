@@ -91,12 +91,12 @@ router.post('/giveAccolade' , tokenizer.verifyToken, (req, res) => {
         Comment.findById(req.body.commentId)
         .then(comment => {
             comment.accolades += 1;
-            comment.save().then( comment => {
+            comment.save().then( updatedComment => {
                 User.findById(req.user._id)
                 .then(user => {
-                    (user.accolades) ? user.accolades.push(comment._id) : user.accolades = [].push(comment._id);
+                    (user.accolades) ? user.accolades.push(updatedComment._id) : user.accolades = [].push(updatedComment._id);
 
-                    user.save().then( user => {
+                    user.save().then( updatedUser => {
 
                         if(req.user._id !== comment.authorId){
                             const notification = new Notification({
@@ -105,11 +105,11 @@ router.post('/giveAccolade' , tokenizer.verifyToken, (req, res) => {
                                 creatorUsername: req.user.username,
                                 message: ` gave your comment "${comment.message}" in the ${comment.roomName} room an accolade`
                             })
-    
-                            notification.save().then(() => res.json({ user, comment }) )
+                            
+                            notification.save().then(() => res.json({ updatedUser, updatedComment }) )
                         }
                         else{
-                            return res.json({ user, comment})
+                            return res.json({ updatedUser, updatedComment })
                         }
                     }).catch(err => res.json({ success: false, err }))
 
@@ -239,7 +239,7 @@ router.get('/CommentsWithMyAccolades' , tokenizer.verifyToken , (req, res) => {
         .then(comments => res.json({ comments }))
         .catch(err => res.json({ success: false , err}))
     
-    }).catch(err => res.json({ success: false, err }))
+    }).catch(err => res.json({ success: false, err })) 
 })
 
  
