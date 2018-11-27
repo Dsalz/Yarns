@@ -57,6 +57,12 @@ export const deleteRoomAction = (id) => {
     }
 }
 
+export const resetNewRoomAction = () => {
+    return {
+        type : "RESET_NEW_ROOM"
+    }
+}
+
 export const resetCurrentRoomAction = () => {
     return {
         type : "RESET_CURRENT_ROOM"

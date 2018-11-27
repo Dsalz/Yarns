@@ -33,6 +33,12 @@ const roomReducer = (state=initState , action) => {
             newRoom: newRoomAdded.name
         }
 
+        case "RESET_NEW_ROOM":
+        return{
+            ...state,
+            newRoom: null
+        }
+        
         case "GOT_ROOM":
         const roomGotten = action.payload.room;
         return(roomGotten) ? {
