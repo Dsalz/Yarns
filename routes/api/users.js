@@ -13,7 +13,6 @@ router.post('/SignUp', (req, res) =>{
         age: req.body.age,
         password: req.body.password,
         username: req.body.username,
-        dob: req.body.dob
     });
 
     user.save().then( savedUser => tokenizer.createSignUpToken(savedUser , res));

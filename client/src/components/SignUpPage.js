@@ -12,7 +12,6 @@ class SignUpPage extends Component{
         name : "",
         username : "",
         age: "",
-        dob: "",
         password: "",
         confirmpassword : "",
         modalText : null
@@ -79,7 +78,6 @@ class SignUpPage extends Component{
                     <input type="email" id="email" name="email" placeholder="Email" onChange = { this.handleChange } required/><br/>
                     <input type="text" id="username" name="username" placeholder="Username" onChange = { this.handleChange } onKeyUp={ this.checkUsernameAvailability } required/>{(usernameAvailable === "loading") ? <span><img src="/images/smallLoading.gif" className="loginsection-usernamecheckingimg" title="Checking Username Availability" alt="Checking Username Availability"/></span> :(usernameAvailable === null)? <span></span> : (usernameAvailable === true)? <span><img src="/images/usernameAvailable.png" className="loginsection-usernamecheckingimg" title="Username Available" alt="Username Available"/></span> : <span><img src="/images/usernameNotAvailable.png" className="loginsection-usernamecheckingimg" alt="Username Not Available" title="Username Not Available"/></span> }<br/>
                     <input type="number" id="age" name="age" placeholder="Age" onChange = { this.handleChange } required/><br/>
-                    <input type="text" id="dob" name="dob" placeholder="Date of Birth (format: dd/mmm/yyyy)" onChange = { this.handleChange }/><br/>                    
                     <input type="password" id="password"  name="password" placeholder = "Password" onChange = { this.handleChange } required/><br />
                     <input type="password" id="confirmpassword"  name="confirmpassword" placeholder = "Confirm Password" onChange = { this.handleChange } required/><br />
                     <button className="login-section-btn" type="submit">SIGN UP</button>
