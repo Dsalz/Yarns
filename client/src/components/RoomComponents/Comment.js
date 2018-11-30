@@ -15,7 +15,7 @@ class Comment extends Component {
         showaddReplyBox: false,
         reply: "",
         showAltOptions: false,
-        showDeleteCommentModal: false
+        showDeleteCommentModal: false,
     }
 
     showAltOptions = () => {
@@ -92,7 +92,7 @@ class Comment extends Component {
         const timeCommented = new Date(timeCreated);
         let accoladeGiven = null;
         if(isLoggedIn){
-           accoladeGiven  = userAccolades.indexOf(_id) > 0; 
+           accoladeGiven  = userAccolades.indexOf(_id) >= 0; 
         }
         const months = ["Jan", "Feb", "Mar", "Apr", "May" , "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
         return(
