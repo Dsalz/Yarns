@@ -44,14 +44,25 @@ class Navbar extends Component{
         this.props.toggleNightMode();
     }
 
+    hideLinks = () => {
+        this.setState({
+            showLinks : false
+        })
+    }
 
+    LogOut = () => {
+        this.props.logout();
+        this.setState({
+            showLinks : false
+        })
+    }
     toggleLinks = () =>{
         this.setState({
             showLinks : !this.state.showLinks
         })
     }
     render(){
-        const { isLoggedIn, user, logout, nightMode, newNotification } = this.props; 
+        const { isLoggedIn, user, nightMode, newNotification } = this.props; 
         const { showLinks } = this.state;
         return(
             <nav className="index-nav">
@@ -62,7 +73,7 @@ class Navbar extends Component{
                     {nightMode && <img src="/images/lightsOn.png" onClick={this.toggleNightMode} className="index-nav-night-toggle" alt="lights-on" title="Lights On" />}
                 <section className = "index-navlinks">
                 <section className="index-navlinks-largelinks">
-                {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {logout} />}                
+                {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {this.LogOut} />}                
                 </section>
                 <div className={ showLinks ? "index-nav-responsive-toggle index-nav-responsive-toggle-dropped" : "index-nav-responsive-toggle" } onClick={this.toggleLinks}>
                 <hr />
@@ -72,7 +83,7 @@ class Navbar extends Component{
 
                 </section>
                 {showLinks && <section className="index-navlinks-smalllinks">
-                {(!isLoggedIn) ? <SignedOutLinks /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {logout} />}                
+                {(!isLoggedIn) ? <SignedOutLinks hideLinks = {this.hideLinks} /> : <SignedInLinks newNotification = {newNotification} user = {user} logout = {this.LogOut} hideLinks = {this.hideLinks}/>}                
                 </section>}
             </nav>
         )

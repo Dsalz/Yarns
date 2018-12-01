@@ -26,6 +26,8 @@ class RoomDetails extends Component{
             <header className="roomdetails-section-header">
                 <div className="roomdetails-section-commenttitle-wrapper">
                 <h2 className="roomdetails-section-commenttitle" tabIndex="0"> I'm afraid this room doesn't exist or has been deleted :(</h2>
+                <br/>
+                <h2 className="roomdetails-section-commenttitle" tabIndex="0"> However you can head on over to an appropriate house and create it! :) </h2>
                 </div>
             </header>
             </section>

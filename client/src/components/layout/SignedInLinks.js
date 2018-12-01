@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SignedInLinks = ({ user, logout, newNotification }) =>{
+const SignedInLinks = ({ user, logout, newNotification, hideLinks }) =>{
     return(
         <React.Fragment>
-            <button className = "index-notifications">      
+            <button className = "index-notifications" onClick={hideLinks}>      
                         <Link to = '/notifications'>
                         {!newNotification && <svg version="1.1" id="Capa_1" x="0px" y="0px" width="22px" height="22px" viewBox="0 0 510 510"><g><g>
                             <g id="notifications">
@@ -22,7 +22,7 @@ const SignedInLinks = ({ user, logout, newNotification }) =>{
                         </Link>
             </button>
 
-            <button className = "index-profile">
+            <button className = "index-profile" onClick={hideLinks}>
                         <Link to = '/profile'>
                         <svg id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75"  width="22px" height="22px"><g><g>
                             <circle cx="129.375" cy="60" r="60" data-original="#000000" fill="#ff7f00"></circle>

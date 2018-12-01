@@ -9,6 +9,8 @@ const Footer = () => {
 
             <p>Coded by <a href="http://www.damola.cf" target="_blank" rel="noopener noreferrer">Damola Salisu</a></p>
 
+            <p>Please feel free to share any ideas for improvement :)</p>
+
             <p className = "footer-copyright">&copy; 2018</p>
             
         </footer>

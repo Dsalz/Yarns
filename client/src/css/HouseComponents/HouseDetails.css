@@ -126,4 +126,12 @@
         bottom: 25px;
         right: 25px;
     }
+
+    .houseDetails-Header-Name h2 {
+      font-size: 40px;
+    }
+
+    .houseDetails-Header-Name hr{
+      border-width: 1.5px;
+    }
   }

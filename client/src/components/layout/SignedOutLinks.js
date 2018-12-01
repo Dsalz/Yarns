@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SignedOutLinks = () =>{
+const SignedOutLinks = ({hideLinks}) =>{
     return(
         <React.Fragment>
-            <button className = "index-login">
+            <button className = "index-login" onClick={hideLinks}>
                         <Link to = '/login'>
                                 LOGIN
                         </Link>
             </button>
 
-            <button className = "index-signup">      
+            <button className = "index-signup" onClick={hideLinks}>      
                         <Link to = '/signup'>
                                 SIGN UP
                         </Link>

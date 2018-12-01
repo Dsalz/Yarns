@@ -19,7 +19,6 @@ class Notifications extends Component {
     render(){
         document.title = "Notifications | Yarns";
         const { notifications, isLoggedIn } = this.props;
-        console.log(notifications)
         return(!isLoggedIn) ? <Redirect to="/login" /> :(
             <section className = "notifications-section">
                 <h2> Notifications </h2>
