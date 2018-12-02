@@ -33,11 +33,11 @@
     margin-top: -5px;
   }
   
-  .index-navlinks a.newnotif{
+  a.newnotif{
     position: relative;
   }
 
-  .index-navlinks a.newnotif::after{
+  a.newnotif::after{
     content: "";
     position: absolute;
     content: "";
@@ -184,9 +184,9 @@
         display: none;
     }
 
-    .index-navlinks a.newnotif::after{
+    a.newnotif::after{
       top: 5px;
-      right: 10px;
+      right: 9px;
     }
   }
 

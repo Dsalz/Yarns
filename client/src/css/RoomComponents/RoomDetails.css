@@ -100,6 +100,9 @@
   @media screen and (max-width: 800px){
     .roomdetails-section-commenttitle, .roomdetails-section-commentno{
       font-size: 25px;
+    }
+
+    .roomdetails-section-commenttitle{
       margin: 15px 0 20px;
     }
 
