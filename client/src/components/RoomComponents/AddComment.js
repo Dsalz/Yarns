@@ -37,7 +37,8 @@ class AddComment extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addComment(this.state, this.props.match.params.roomName, this.props.newCommentImg);
+        const imageInfo = this.props.newCommentImg || {};
+        this.props.addComment(this.state, this.props.match.params.roomName, imageInfo);
         this.setState({
             submitted: true
         })

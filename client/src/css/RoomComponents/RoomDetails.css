@@ -18,6 +18,7 @@
   
   .roomdetails-section-commenttitle{
     font-size: 30px;
+    margin: 20px 0 30px;
     color:var(--white-color , #fbfffe);
     width: 100%;
     text-align: center;
@@ -99,6 +100,7 @@
   @media screen and (max-width: 800px){
     .roomdetails-section-commenttitle, .roomdetails-section-commentno{
       font-size: 25px;
+      margin: 15px 0 20px;
     }
 
     .roomdetails-section-commentno{
