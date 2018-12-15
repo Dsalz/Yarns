@@ -177,7 +177,7 @@ router.post('/addComment', tokenizer.verifyToken, (req, res)=>{
                             type: "new_comment_in_room",
                             recipientId: room.creatorId,
                             creatorUsername: req.user.username,
-                            message: ` commented "${req.body.comment.commentText}" in the ${req.body.roomName} room you created`
+                            message: ` commented "${ message }" in the ${ roomName } room you created`
                         });
 
                         notification.save()
