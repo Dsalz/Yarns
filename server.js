@@ -19,11 +19,13 @@ const userRouter = require('./routes/api/users');
 const roomRouter = require('./routes/api/rooms');
 const commentRouter = require('./routes/api/comments');
 const notificationRouter = require('./routes/api/notifications');
+const mailRouter = require('./routes/api/notifications');
 
 app.use('/api/v1/users' , userRouter);
 app.use('/api/v1/rooms' , roomRouter);
 app.use('/api/v1/comments' , commentRouter);
 app.use('/api/v1/notifications' , notificationRouter);
+app.use('/api/v1/mail' , mailRouter);
 
 //code to be run only in production
 if (process.env.NODE_ENV === "production"){
