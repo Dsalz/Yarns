@@ -1,11 +1,16 @@
 const express = require('express');
 const mongoose = require ('mongoose');
+const cors = require('cors');
 const path = require('path');
 const app = express();
+
+//allowing cross origin requests
+app.use(cors());
 
 //parsing json data
 app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
+
 
 //Connecting to database
 const db = require('./config/keys').mongoURI; 
