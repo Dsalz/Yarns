@@ -19,7 +19,7 @@ const userRouter = require('./routes/api/users');
 const roomRouter = require('./routes/api/rooms');
 const commentRouter = require('./routes/api/comments');
 const notificationRouter = require('./routes/api/notifications');
-const mailRouter = require('./routes/api/notifications');
+const mailRouter = require('./routes/api/mail');
 
 app.use('/api/v1/users' , userRouter);
 app.use('/api/v1/rooms' , roomRouter);
